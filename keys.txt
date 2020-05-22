@@ -1,0 +1,3 @@
+Token-generate: dolibarr: dolibarr: 749f1e799eec93ae58e39ae4f6bfb5494c126be7
+project-key, display-name: dolibarr
+provided token: dolibarr
