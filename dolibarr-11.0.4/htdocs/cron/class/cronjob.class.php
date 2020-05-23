@@ -33,12 +33,12 @@ class Cronjob extends CommonObject
 	/**
 	 * @var string ID to identify managed object
 	 */
-	public $element = 'cronjob';
+	public $element =' cronjob';
 
 	/**
 	 * @var string Name of table without prefix where object is stored
 	 */
-	public $table_element = 'cronjob';
+	public $table_element ='cronjob';
 
     /**
 	 * @var string String with name of icon for myobject. Must be the part after the 'object_' into object_myobject.png
@@ -159,7 +159,7 @@ class Cronjob extends CommonObject
 		// Check parameters
 		// Put here code to add a control on parameters values
 		if (dol_strlen($this->datestart) == 0) {
-			$this->errors[] = $langs->trans('CronFieldMandatory', $langs->transnoentitiesnoconv('CronDtStart'));
+			$this->errors[] = $langs->trans($langs->transnoentitiesnoconv('CronDtStart'));
 			$error++;
 		}
 		if (empty($this->label)) {
