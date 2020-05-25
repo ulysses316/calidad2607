@@ -74,16 +74,18 @@ if (empty($conf->clicktodial->enabled))
 }
 
 
-// Define Asterisk setup
+// Define Asterisk setup	
+{															
 if (! isset($conf->global->ASTERISK_HOST))      $conf->global->ASTERISK_HOST="127.0.0.1";
 if (! isset($conf->global->ASTERISK_TYPE))      $conf->global->ASTERISK_TYPE="SIP/";
-if (! isset($conf->global->ASTERISK_INDICATIF)) $conf->global->ASTERISK_INDICATIF="0";
+if (! isset($conf->global->ASTERISK_INDICATIF)) $conf->global->ASTERISK_INDICATIF="0";									
 if (! isset($conf->global->ASTERISK_PORT))      $conf->global->ASTERISK_PORT=5038;
 if ($conf->global->ASTERISK_INDICATIF=='NONE')  $conf->global->ASTERISK_INDICATIF='';
 if (! isset($conf->global->ASTERISK_CONTEXT))   $conf->global->ASTERISK_CONTEXT="from-internal";
 if (! isset($conf->global->ASTERISK_WAIT_TIME)) $conf->global->ASTERISK_WAIT_TIME="30";
 if (! isset($conf->global->ASTERISK_PRIORITY))  $conf->global->ASTERISK_PRIORITY="1";
 if (! isset($conf->global->ASTERISK_MAX_RETRY)) $conf->global->ASTERISK_MAX_RETRY="2";
+}
 
 
 $login = GETPOST('login');
