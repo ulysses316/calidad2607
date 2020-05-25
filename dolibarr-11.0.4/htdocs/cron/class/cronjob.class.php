@@ -136,25 +136,25 @@ class Cronjob extends CommonObject
 
 		// Clean parameters
 
-		if (isset($this->label)) $this->label = trim($this->label);
-		if (isset($this->jobtype)) $this->jobtype = trim($this->jobtype);
-		if (isset($this->command)) $this->command = trim($this->command);
-		if (isset($this->classesname)) $this->classesname = trim($this->classesname);
-		if (isset($this->objectname)) $this->objectname = trim($this->objectname);
-		if (isset($this->methodename)) $this->methodename = trim($this->methodename);
-		if (isset($this->params)) $this->params = trim($this->params);
-		if (isset($this->md5params)) $this->md5params = trim($this->md5params);
-		if (isset($this->module_name)) $this->module_name = trim($this->module_name);
-		if (isset($this->priority)) $this->priority = trim($this->priority);
-		if (isset($this->lastoutput)) $this->lastoutput = trim($this->lastoutput);
-		if (isset($this->lastresult)) $this->lastresult = trim($this->lastresult);
-		if (isset($this->unitfrequency)) $this->unitfrequency = trim($this->unitfrequency);
-		if (isset($this->frequency)) $this->frequency = trim($this->frequency);
-		if (isset($this->status)) $this->status = trim($this->status);
-		if (isset($this->note)) $this->note = trim($this->note);
-		if (isset($this->nbrun)) $this->nbrun = trim($this->nbrun);
-		if (isset($this->libname)) $this->libname = trim($this->libname);
-		if (isset($this->test)) $this->test = trim($this->test);
+		if (isset($this->label)) {$this->label = trim($this->label)};
+		if (isset($this->jobtype)) {$this->jobtype = trim($this->jobtype)};
+		if (isset($this->command)) {$this->command = trim($this->command)};
+		if (isset($this->classesname)) {$this->classesname = trim($this->classesname)};
+		if (isset($this->objectname)) {$this->objectname = trim($this->objectname)};
+		if (isset($this->methodename)) {$this->methodename = trim($this->methodename)};
+		if (isset($this->params)) {$this->params = trim($this->params)};
+		if (isset($this->md5params)) {$this->md5params = trim($this->md5params)};
+		if (isset($this->module_name)) {$this->module_name = trim($this->module_name)};
+		if (isset($this->priority)) {$this->priority = trim($this->priority)};
+		if (isset($this->lastoutput)) {$this->lastoutput = trim($this->lastoutput)};
+		if (isset($this->lastresult)) {$this->lastresult = trim($this->lastresult)};
+		if (isset($this->unitfrequency)) {$this->unitfrequency = trim($this->unitfrequency)};
+		if (isset($this->frequency)) {$this->frequency = trim($this->frequency)};
+		if (isset($this->status)) {$this->status = trim($this->status)};
+		if (isset($this->note)) {$this->note = trim($this->note)};
+		if (isset($this->nbrun)) {$this->nbrun = trim($this->nbrun)};
+		if (isset($this->libname)) {$this->libname = trim($this->libname)};
+		if (isset($this->test)) {$this->test = trim($this->test)};
 
 		// Check parameters
 		// Put here code to add a control on parameters values
@@ -268,20 +268,20 @@ class Cronjob extends CommonObject
         {
             $this->id = $this->db->last_insert_id(MAIN_DB_PREFIX."cronjob");
 
-			//if (! $notrigger)
-			//{
-	            // Uncomment this and change MYOBJECT to your own tag if you
-	            // want this action calls a trigger.
-
-	            //// Call triggers
-	            //include_once DOL_DOCUMENT_ROOT . '/core/class/interfaces.class.php';
-	            //$interface=new Interfaces($this->db);
-	            //$result=$interface->run_triggers('MYOBJECT_CREATE',$this,$user,$langs,$conf);
-	            //if ($result < 0) { $error++; $this->errors=$interface->errors; }
-	            //// End call triggers
-			//}
         }
 
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
         // Commit or rollback
         if ($error)
 		{
@@ -452,15 +452,15 @@ class Cronjob extends CommonObject
     	$sql .= " t.test";
     	$sql .= " FROM ".MAIN_DB_PREFIX."cronjob as t";
     	$sql .= " WHERE 1 = 1";
-    	if ($processing >= 0) $sql .= " AND t.processing = ".(empty($processing) ? '0' : '1');
-    	if ($status >= 0 && $status < 2) $sql .= " AND t.status = ".(empty($status) ? '0' : '1');
-    	elseif ($status == 2) $sql .= " AND t.status = 2";
+    	if ($processing >= 0){ $sql .= " AND t.processing = ".(empty($processing) ? '0' : '1')};
+    	if ($status >= 0 && $status < 2) {$sql .= " AND t.status = ".(empty($status) ? '0' : '1')};
+    	elseif ($status == 2) {$sql .= " AND t.status = 2"};
     	//Manage filter
     	if (is_array($filter) && count($filter) > 0) {
     		foreach ($filter as $key => $value)
     		{
-    		    if ($key == 't.rowid') $sql .= ' AND '.$key.' = '.$this->db->escape($value);
-   				else $sql .= ' AND '.$key.' LIKE \'%'.$this->db->escape($value).'%\'';
+    		    if ($key == 't.rowid') {$sql .= ' AND '.$key.' = '.$this->db->escape($value)};
+   				else {$sql .= ' AND '.$key.' LIKE \'%'.$this->db->escape($value).'%\''};
     		}
     	}
 
