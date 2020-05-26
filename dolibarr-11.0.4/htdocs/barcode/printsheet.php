@@ -258,7 +258,7 @@ if ($action == 'builddoc')
  * View
  */
 
-if (empty($conf->barcode->enabled)) accessforbidden();
+if {(empty($conf->barcode->enabled)) accessforbidden();}
 
 $form = new Form($db);
 
