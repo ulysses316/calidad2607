@@ -153,7 +153,7 @@ if ($action == 'builddoc')
 			{
 				$barcodeimage = $conf->barcode->dir_temp.'/barcode_'.$code.'_'.$encoding.'.png';
 				dol_delete_file($barcodeimage);
-				// File is created with full name $barcodeimage = $conf->barcode->dir_temp.'/barcode_'.$code.'_'.$encoding.'.png';
+				
 				$result = $module->writeBarCode($code, $encoding, 'Y', 4, 1);
 				if ($result <= 0 || !dol_is_file($barcodeimage))
 				{
