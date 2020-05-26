@@ -312,7 +312,7 @@ class ExpenseReport extends CommonObject
     	            	else {
     	            		$newndfline = $line;
     	            	}
-    	                //$newndfline=new ExpenseReportLine($this->db);
+			    
     	                $newndfline->fk_expensereport = $this->id;
     	                $result = $newndfline->insert();
         	            if ($result < 0)
@@ -398,9 +398,9 @@ class ExpenseReport extends CommonObject
         $this->db->begin();
 
         // get extrafields so they will be clone
-        //foreach($this->lines as $line)
-            //$line->fetch_optionals($line->rowid);
+        //foreach($this->lines as $line
 
+	    
         // Load source object
         $objFrom = clone $this;
 
@@ -542,7 +542,7 @@ class ExpenseReport extends CommonObject
         $sql .= " FROM ".MAIN_DB_PREFIX.$this->table_element." as d";
         if ($ref) $sql .= " WHERE d.ref = '".$this->db->escape($ref)."'";
         else $sql .= " WHERE d.rowid = ".$id;
-        //$sql.= $restrict;
+        
 
         dol_syslog(get_class($this)."::fetch sql=".$sql, LOG_DEBUG);
         $resql = $this->db->query($sql);
@@ -928,7 +928,7 @@ class ExpenseReport extends CommonObject
                             break;
                     }
                     /*
-                     if ($status==4) return img_picto($langs->trans('StatusOrderCanceled'),'statut5');
+                     
                     if ($status==1) return img_picto($langs->trans('StatusOrderDraft'),'statut0');
                     if ($status==2) return img_picto($langs->trans('StatusOrderValidated'),'statut1');
                     if ($status==2) return img_picto($langs->trans('StatusOrderOnProcess'),'statut3');
@@ -1601,7 +1601,7 @@ class ExpenseReport extends CommonObject
 			{
 				$this->error = $obj->error;
 				$this->errors = $obj->errors;
-            	//dol_print_error($this->db,get_class($this)."::getNextNumRef ".$obj->error);
+            	
             	return -1;
             }
         }
@@ -1634,14 +1634,14 @@ class ExpenseReport extends CommonObject
         if ($short) return $url;
 
         $label = '<u>'.$langs->trans("ShowExpenseReport").'</u>';
-        if (!empty($this->ref))
-            $label .= '<br><b>'.$langs->trans('Ref').':</b> '.$this->ref;
-        if (!empty($this->total_ht))
-            $label .= '<br><b>'.$langs->trans('AmountHT').':</b> '.price($this->total_ht, 0, $langs, 0, -1, -1, $conf->currency);
-        if (!empty($this->total_tva))
-            $label .= '<br><b>'.$langs->trans('VAT').':</b> '.price($this->total_tva, 0, $langs, 0, -1, -1, $conf->currency);
-        if (!empty($this->total_ttc))
-            $label .= '<br><b>'.$langs->trans('AmountTTC').':</b> '.price($this->total_ttc, 0, $langs, 0, -1, -1, $conf->currency);
+        if (!empty($this->ref)){
+            $label .= '<br><b>'.$langs->trans('Ref').':</b> '.$this->ref;}
+        if (!empty($this->total_ht)){
+            $label .= '<br><b>'.$langs->trans('AmountHT').':</b> '.price($this->total_ht, 0, $langs, 0, -1, -1, $conf->currency);}
+        if (!empty($this->total_tva)){
+            $label .= '<br><b>'.$langs->trans('VAT').':</b> '.price($this->total_tva, 0, $langs, 0, -1, -1, $conf->currency);}
+        if (!empty($this->total_ttc)){
+            $label .= '<br><b>'.$langs->trans('AmountTTC').':</b> '.price($this->total_ttc, 0, $langs, 0, -1, -1, $conf->currency);}
         if ($moretitle) $label .= ' - '.$moretitle;
 
         //if ($option != 'nolink')
