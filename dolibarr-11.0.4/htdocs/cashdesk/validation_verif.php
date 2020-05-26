@@ -61,9 +61,9 @@ switch ($action)
 			$conf->global->FACTURE_ADDON = $conf->global->POS_ADDON;
 
 			// To force prefix only for POS with terre module
-			if (! empty($conf->global->POS_NUMBERING_TERRE_FORCE_PREFIX)) $conf->global->INVOICE_NUMBERING_TERRE_FORCE_PREFIX = $conf->global->POS_NUMBERING_TERRE_FORCE_PREFIX;
+			if (! empty($conf->global->POS_NUMBERING_TERRE_FORCE_PREFIX)) {$conf->global->INVOICE_NUMBERING_TERRE_FORCE_PREFIX = $conf->global->POS_NUMBERING_TERRE_FORCE_PREFIX;}
 			// To force prefix only for POS with mars module
-			if (! empty($conf->global->POS_NUMBERING_MARS_FORCE_PREFIX)) $conf->global->INVOICE_NUMBERING_MARS_FORCE_PREFIX = $conf->global->POS_NUMBERING_MARS_FORCE_PREFIX;
+			if (! empty($conf->global->POS_NUMBERING_MARS_FORCE_PREFIX)) {$conf->global->INVOICE_NUMBERING_MARS_FORCE_PREFIX = $conf->global->POS_NUMBERING_MARS_FORCE_PREFIX;}
 			// To force rule only for POS with mercure
 			//...
 		}
@@ -99,7 +99,7 @@ switch ($action)
 		}
 		else
 		{
-		    //$txtDatePaiement=$_POST['txtDatePaiement'];
+		    
 		    $datePaiement=dol_mktime(0, 0, 0, $_POST['txtDatePaiementmonth'], $_POST['txtDatePaiementday'], $_POST['txtDatePaiementyear']);
 		    $txtDatePaiement=dol_print_date($datePaiement, 'dayrfc');
 			$obj_facturation->paiementLe($txtDatePaiement);
@@ -153,8 +153,8 @@ switch ($action)
 				$cond_reglement_id = 0;
 				break;
 		}
-		if (empty($mode_reglement_id)) $mode_reglement_id=0;	// If mode_reglement_id not found
-		if (empty($cond_reglement_id)) $cond_reglement_id=0;	// If cond_reglement_id not found
+		if (empty($mode_reglement_id)) {$mode_reglement_id=0;}	// If mode_reglement_id not found
+		if (empty($cond_reglement_id)) {$cond_reglement_id=0;}	// If cond_reglement_id not found
 		$note .= $_POST['txtaNotes'];
 		dol_syslog("obj_facturation->getSetPaymentMode()=".$obj_facturation->getSetPaymentMode()." mode_reglement_id=".$mode_reglement_id." cond_reglement_id=".$cond_reglement_id);
 
@@ -217,7 +217,7 @@ switch ($action)
 		$invoice->mode_reglement_id=$mode_reglement_id;
 		$invoice->module_source = 'cashdesk';
 		$invoice->pos_source = '0';
-		//print "c=".$invoice->cond_reglement_id." m=".$invoice->mode_reglement_id; exit;
+		
 
 		// Si paiement differe ...
 		if ( $obj_facturation->getSetPaymentMode() == 'DIF' )
@@ -226,7 +226,7 @@ switch ($action)
 			if ($resultcreate > 0)
 			{
 				$warehouseidtodecrease=(isset($_SESSION["CASHDESK_ID_WAREHOUSE"])?$_SESSION["CASHDESK_ID_WAREHOUSE"]:0);
-				if (! empty($conf->global->CASHDESK_NO_DECREASE_STOCK)) $warehouseidtodecrease=0;	// If a particular stock is defined, we disable choice
+				if (! empty($conf->global->CASHDESK_NO_DECREASE_STOCK)) {$warehouseidtodecrease=0;}	// If a particular stock is defined, we disable choice
 
 				$resultvalid=$invoice->validate($user, $obj_facturation->numInvoice(), 0);
 
@@ -244,8 +244,8 @@ switch ($action)
 							$mouvP = new MouvementStock($db);
 							$mouvP->origin = &$invoice;
 							// We decrease stock for product
-							if ($invoice->type == $invoice::TYPE_CREDIT_NOTE) $result=$mouvP->reception($user, $invoice->lines[$i]->fk_product, $warehouseidtodecrease, $invoice->lines[$i]->qty, $invoice->lines[$i]->subprice, $langs->trans("InvoiceValidatedInDolibarrFromPos", $invoice->newref));
-							else $result=$mouvP->livraison($user, $invoice->lines[$i]->fk_product, $warehouseidtodecrease, $invoice->lines[$i]->qty, $invoice->lines[$i]->subprice, $langs->trans("InvoiceValidatedInDolibarrFromPos", $invoice->newref));
+							if ($invoice->type == $invoice::TYPE_CREDIT_NOTE) {$result=$mouvP->reception($user, $invoice->lines[$i]->fk_product, $warehouseidtodecrease, $invoice->lines[$i]->qty, $invoice->lines[$i]->subprice, $langs->trans("InvoiceValidatedInDolibarrFromPos", $invoice->newref));}
+							else {$result=$mouvP->livraison($user, $invoice->lines[$i]->fk_product, $warehouseidtodecrease, $invoice->lines[$i]->qty, $invoice->lines[$i]->subprice, $langs->trans("InvoiceValidatedInDolibarrFromPos", $invoice->newref));}
 							if ($result < 0) {
 								$error++;
 							}
@@ -267,7 +267,7 @@ switch ($action)
 			if ($resultcreate > 0)
 			{
 				$warehouseidtodecrease=(isset($_SESSION["CASHDESK_ID_WAREHOUSE"])?$_SESSION["CASHDESK_ID_WAREHOUSE"]:0);
-				if (! empty($conf->global->CASHDESK_NO_DECREASE_STOCK)) $warehouseidtodecrease=0;	// If a particular stock is defined, we disable choice
+				if (! empty($conf->global->CASHDESK_NO_DECREASE_STOCK)) {$warehouseidtodecrease=0;}	// If a particular stock is defined, we disable choice
 
 				$resultvalid=$invoice->validate($user, $obj_facturation->numInvoice(), 0);
 
@@ -285,8 +285,8 @@ switch ($action)
 							$mouvP = new MouvementStock($db);
 							$mouvP->origin = &$invoice;
 							// We decrease stock for product
-							if ($invoice->type == $invoice::TYPE_CREDIT_NOTE) $result=$mouvP->reception($user, $invoice->lines[$i]->fk_product, $warehouseidtodecrease, $invoice->lines[$i]->qty, $invoice->lines[$i]->subprice, $langs->trans("InvoiceValidatedInDolibarrFromPos", $invoice->newref));
-							else $result=$mouvP->livraison($user, $invoice->lines[$i]->fk_product, $warehouseidtodecrease, $invoice->lines[$i]->qty, $invoice->lines[$i]->subprice, $langs->trans("InvoiceValidatedInDolibarrFromPos", $invoice->newref));
+							if ($invoice->type == $invoice::TYPE_CREDIT_NOTE) {$result=$mouvP->reception($user, $invoice->lines[$i]->fk_product, $warehouseidtodecrease, $invoice->lines[$i]->qty, $invoice->lines[$i]->subprice, $langs->trans("InvoiceValidatedInDolibarrFromPos", $invoice->newref));}
+							else {$result=$mouvP->livraison($user, $invoice->lines[$i]->fk_product, $warehouseidtodecrease, $invoice->lines[$i]->qty, $invoice->lines[$i]->subprice, $langs->trans("InvoiceValidatedInDolibarrFromPos", $invoice->newref));}
 							if ($result < 0) {
 							    setEventMessages($mouvP->error, $mouvP->errors, 'errors');
 							    $error++;
@@ -326,7 +326,7 @@ switch ($action)
                     	{
                     		// We set status to payed
                     		$result=$invoice->set_paid($user);
-                  			//print 'set paid';exit;
+                  			
                     	}
                     }
 				}
