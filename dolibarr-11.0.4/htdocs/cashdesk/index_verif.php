@@ -112,7 +112,7 @@ if ( $retour >= 0 )
         $_SESSION['CASHDESK_ID_BANKACCOUNT_CASH'] = ($bankid_cash > 0 ? $bankid_cash : '');
         $_SESSION['CASHDESK_ID_BANKACCOUNT_CHEQUE'] = ($bankid_cheque > 0 ? $bankid_cheque : '');
         $_SESSION['CASHDESK_ID_BANKACCOUNT_CB'] = ($bankid_cb > 0 ? $bankid_cb : '');
-        //var_dump($_SESSION);exit;
+        
 
 		header('Location: '.DOL_URL_ROOT.'/cashdesk/affIndex.php?menutpl=facturation&id=NOUV');
 		exit;
