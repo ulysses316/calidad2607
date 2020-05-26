@@ -71,7 +71,7 @@ if (GETPOST('submitproduct') && GETPOST('submitproduct'))
 		}
 	}
 }
-if (GETPOST('submitthirdparty') && GETPOST('submitthirdparty'))
+if (GETPOST('submitthirdparty') { GETPOST('submitthirdparty'();)
 {
 	$action = ''; // We reset because we don't want to build doc
 	if (GETPOST('socid') > 0)
