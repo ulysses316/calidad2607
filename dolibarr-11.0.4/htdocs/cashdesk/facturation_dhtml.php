@@ -24,12 +24,12 @@
  */
 
 
-if (! defined('NOREQUIRESOC'))   define('NOREQUIRESOC', '1');
-if (! defined('NOCSRFCHECK'))    define('NOCSRFCHECK', '1');
-if (! defined('NOTOKENRENEWAL')) define('NOTOKENRENEWAL', '1');
-if (! defined('NOREQUIREMENU'))  define('NOREQUIREMENU', '1');
-if (! defined('NOREQUIREHTML'))  define('NOREQUIREHTML', '1');
-if (! defined('NOREQUIREAJAX'))  define('NOREQUIREAJAX', '1');
+if (! defined('NOREQUIRESOC'))   {define('NOREQUIRESOC', '1');}
+if (! defined('NOCSRFCHECK'))    {define('NOCSRFCHECK', '1');}
+if (! defined('NOTOKENRENEWAL')) {define('NOTOKENRENEWAL', '1');}
+if (! defined('NOREQUIREMENU'))  {define('NOREQUIREMENU', '1');}
+if (! defined('NOREQUIREHTML'))  {define('NOREQUIREHTML', '1');}
+if (! defined('NOREQUIREAJAX'))  {define('NOREQUIREAJAX', '1');}
 
 // Change this following line to use the correct relative path (../, ../../, etc)
 require '../main.inc.php';
@@ -43,9 +43,9 @@ $search = GETPOST("code", "alpha");
 if (dol_strlen($search) >= 0)	// If search criteria is on char length at least
 {
 	$sql = "SELECT p.rowid, p.ref, p.label, p.tva_tx";
-	if (! empty($conf->stock->enabled) && !empty($conf_fkentrepot)) $sql.= ", ps.reel";
+	if (! empty($conf->stock->enabled) && !empty($conf_fkentrepot)) {$sql.= ", ps.reel";}
 	$sql.= " FROM ".MAIN_DB_PREFIX."product as p";
-	if (! empty($conf->stock->enabled) && !empty($conf_fkentrepot)) $sql.= " LEFT JOIN ".MAIN_DB_PREFIX."product_stock as ps ON p.rowid = ps.fk_product AND ps.fk_entrepot = '".$conf_fkentrepot."'";
+	if (! empty($conf->stock->enabled) && !empty($conf_fkentrepot)) {$sql.= " LEFT JOIN ".MAIN_DB_PREFIX."product_stock as ps ON p.rowid = ps.fk_product AND ps.fk_entrepot = '".$conf_fkentrepot."'";}
 	$sql.= " WHERE p.entity IN (".getEntity('product').")";
 	$sql.= " AND p.tosell = 1";
 	$sql.= " AND p.fk_product_type = 0";
@@ -53,13 +53,13 @@ if (dol_strlen($search) >= 0)	// If search criteria is on char length at least
 	if (! empty($conf->global->PRODUCT_DONOTSEARCH_ANYWHERE))
 	{
 		$sql.= " AND (p.ref LIKE '".$db->escape($search)."%' OR p.label LIKE '".$db->escape($search)."%'";
-		if (! empty($conf->barcode->enabled)) $sql.= " OR p.barcode LIKE '".$db->escape($search)."%'";
+		if (! empty($conf->barcode->enabled)){ $sql.= " OR p.barcode LIKE '".$db->escape($search)."%'";}
 		$sql.= ")";
 	}
 	else
 	{
 		$sql.= " AND (p.ref LIKE '%".$db->escape($search)."%' OR p.label LIKE '%".$db->escape($search)."%'";
-		if (! empty($conf->barcode->enabled)) $sql.= " OR p.barcode LIKE '%".$db->escape($search)."%'";
+		if (! empty($conf->barcode->enabled)) {$sql.= " OR p.barcode LIKE '%".$db->escape($search)."%'";}
 		$sql.= ")";
 	}
 	$sql.= " ORDER BY label";
