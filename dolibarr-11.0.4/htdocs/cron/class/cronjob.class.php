@@ -555,28 +555,28 @@ class Cronjob extends CommonObject
 		$error = 0;
 
 		// Clean parameters
-		if (isset($this->label)) $this->label = trim($this->label);
-		if (isset($this->jobtype)) $this->jobtype = trim($this->jobtype);
-		if (isset($this->command)) $this->command = trim($this->command);
-		if (isset($this->classesname)) $this->classesname = trim($this->classesname);
-		if (isset($this->objectname)) $this->objectname = trim($this->objectname);
-		if (isset($this->methodename)) $this->methodename = trim($this->methodename);
-		if (isset($this->params)) $this->params = trim($this->params);
-		if (isset($this->md5params)) $this->md5params = trim($this->md5params);
-		if (isset($this->module_name)) $this->module_name = trim($this->module_name);
-		if (isset($this->priority)) $this->priority = trim($this->priority);
-		if (isset($this->lastoutput)) $this->lastoutput = trim($this->lastoutput);
-		if (isset($this->lastresult)) $this->lastresult = trim($this->lastresult);
-		if (isset($this->unitfrequency)) $this->unitfrequency = trim($this->unitfrequency);
-		if (isset($this->frequency)) $this->frequency = trim($this->frequency);
-		if (isset($this->status)) $this->status = trim($this->status);
-		if (isset($this->note)) $this->note = trim($this->note);
-		if (isset($this->nbrun)) $this->nbrun = trim($this->nbrun);
-        if (isset($this->libname)) $this->libname = trim($this->libname);
-        if (isset($this->test)) $this->test = trim($this->test);
+		if (isset($this->label)) {$this->label = trim($this->label);}
+		if (isset($this->jobtype)) {$this->jobtype = trim($this->jobtype);}
+    }		if (isset($this->command)) {$this->command = trim($this->command);}
+		if (isset($this->classesname)) {$this->classesname = trim($this->classesname);}
+		if (isset($this->objectname)) {$this->objectname = trim($this->objectname);}
+		if (isset($this->methodename)) {$this->methodename = trim($this->methodename);}
+		if (isset($this->params)) {$this->params = trim($this->params);}
+		if (isset($this->md5params)) {$this->md5params = trim($this->md5params);}
+		if (isset($this->module_name)) {$this->module_name = trim($this->module_name);}
+		if (isset($this->priority)) {$this->priority = trim($this->priority);}
+		if (isset($this->lastoutput)) {$this->lastoutput = trim($this->lastoutput);}
+		if (isset($this->lastresult)) {$this->lastresult = trim($this->lastresult);}
+		if (isset($this->unitfrequency)) {$this->unitfrequency = trim($this->unitfrequency);}
+		if (isset($this->frequency)) {$this->frequency = trim($this->frequency);}}
+		if (isset($this->status)) {$this->status = trim($this->status);}
+		if (isset($this->note)) {$this->note = trim($this->note);}
+		if (isset($this->nbrun)) {$this->nbrun = trim($this->nbrun);}
+        if (isset($this->libname)) {$this->libname = trim($this->libname);}
+        if (isset($this->test)) {$this->test = trim($this->test);}
 
-		if (empty($this->maxrun)) $this->maxrun = 0;
-        if (empty($this->processing)) $this->processing = 0;
+		if (empty($this->maxrun)) {$this->maxrun = 0;}
+        if (empty($this->processing)) {$this->processing = 0;}
 
 		// Check parameters
 		// Put here code to add a control on parameters values
