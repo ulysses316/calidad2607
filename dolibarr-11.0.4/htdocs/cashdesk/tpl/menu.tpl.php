@@ -31,12 +31,7 @@ include_once DOL_DOCUMENT_ROOT.'/societe/class/societe.class.php';
 include_once DOL_DOCUMENT_ROOT.'/compta/bank/class/account.class.php';
 include_once DOL_DOCUMENT_ROOT.'/product/stock/class/entrepot.class.php';
 
-/*if (!empty($_SESSION["CASHDESK_ID_THIRDPARTY"]))
-{
-	$company=new Societe($db);
-	$company->fetch($_SESSION["CASHDESK_ID_THIRDPARTY"]);
-	$companyLink = $company->getNomUrl(1);
-}*/
+
 if (!empty($_SESSION["CASHDESK_ID_BANKACCOUNT_CASH"]))
 {
 	$bankcash=new Account($db);
@@ -80,12 +75,10 @@ print '<form id="frmThirdparty" class="formulaire1 inline-block" method="post" a
 print $langs->trans("CashDeskThirdParty").': ';
 print $form->select_company($_SESSION["CASHDESK_ID_THIRDPARTY"], 'CASHDESK_ID_THIRDPARTY', '(s.client IN (1,3) AND s.status = 1)', '', 0, 0, null, 0, 'valignmiddle inline-block');
 print '<input class="button bouton_change_thirdparty inline-block valignmiddle" type="submit" id="bouton_change_thirdparty" value="'.$langs->trans("Modify").'">';
-//print $companyLink;
+
 print '<br>';
 print '</form>';
-/*print $langs->trans("CashDeskBankCash").': '.$bankcashLink.'<br>';
-print $langs->trans("CashDeskBankCB").': '.$bankcbLink.'<br>';
-print $langs->trans("CashDeskBankCheque").': '.$bankchequeLink.'<br>';*/
+
 print '<div class="clearboth">';
 if (!empty($_SESSION["CASHDESK_ID_WAREHOUSE"]) && ! empty($conf->stock->enabled) && empty($conf->global->CASHDESK_NO_DECREASE_STOCK))
 {
