@@ -18,7 +18,6 @@
  * See https://medium.com/@lhartikk/a-blockchain-in-200-lines-of-code-963cc1cc0e54
  */
 
-/*ini_set('unserialize_callback_func', 'mycallback');
 
 function mycallback($classname)
 {
