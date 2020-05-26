@@ -41,9 +41,9 @@ switch($action)
 		if ( $_POST['hdnSource'] != 'NULL' )
 		{
 			$sql = "SELECT p.rowid, p.ref, p.price, p.tva_tx, p.default_vat_code, p.recuperableonly";
-			if (! empty($conf->stock->enabled) && !empty($conf_fkentrepot)) $sql.= ", ps.reel";
+			if (! empty($conf->stock->enabled) && !empty($conf_fkentrepot)) {$sql.= ", ps.reel";}
 			$sql.= " FROM ".MAIN_DB_PREFIX."product as p";
-			if (! empty($conf->stock->enabled) && !empty($conf_fkentrepot)) $sql.= " LEFT JOIN ".MAIN_DB_PREFIX."product_stock as ps ON p.rowid = ps.fk_product AND ps.fk_entrepot = ".$conf_fkentrepot;
+			if (! empty($conf->stock->enabled) && !empty($conf_fkentrepot)) {$sql.= " LEFT JOIN ".MAIN_DB_PREFIX."product_stock as ps ON p.rowid = ps.fk_product AND ps.fk_entrepot = ".$conf_fkentrepot;}
 			$sql.= " WHERE p.entity IN (".getEntity('product').")";
 
 			// Recuperation des donnees en fonction de la source (liste deroulante ou champ texte) ...
@@ -82,7 +82,7 @@ switch($action)
 					// Update if prices fields are defined
 					$tva_tx = get_default_tva($mysoc, $societe, $product->id);
 					$tva_npr = get_default_npr($mysoc, $societe, $product->id);
-					if (empty($tva_tx)) $tva_npr=0;
+					if (empty($tva_tx)) {$tva_npr=0;}
 
 					$pu_ht = $prod->price;
 					$pu_ttc = $prod->price_ttc;
@@ -98,8 +98,8 @@ switch($action)
 					    $price_base_type = $prod->multiprices_base_type[$societe->price_level];
 					    if (! empty($conf->global->PRODUIT_MULTIPRICES_USE_VAT_PER_LEVEL))  // using this option is a bug. kept for backward compatibility
 					    {
-					        if (isset($prod->multiprices_tva_tx[$societe->price_level])) $tva_tx=$prod->multiprices_tva_tx[$societe->price_level];
-					        if (isset($prod->multiprices_recuperableonly[$societe->price_level])) $tva_npr=$prod->multiprices_recuperableonly[$societe->price_level];
+					        if (isset($prod->multiprices_tva_tx[$societe->price_level])) {$tva_tx=$prod->multiprices_tva_tx[$societe->price_level];}
+					        if (isset($prod->multiprices_recuperableonly[$societe->price_level])) {$tva_npr=$prod->multiprices_recuperableonly[$societe->price_level];}
 					    }
 					}
 					elseif (! empty($conf->global->PRODUIT_CUSTOMER_PRICES))
@@ -119,9 +119,9 @@ switch($action)
 					            $pu_ttc = price($prodcustprice->lines[0]->price_ttc);
 					            $price_base_type = $prodcustprice->lines[0]->price_base_type;
 					            $tva_tx = $prodcustprice->lines[0]->tva_tx;
-					            if ($prodcustprice->lines[0]->default_vat_code && ! preg_match('/\(.*\)/', $tva_tx)) $tva_tx.= ' ('.$prodcustprice->lines[0]->default_vat_code.')';
+					            if ($prodcustprice->lines[0]->default_vat_code && ! preg_match('/\(.*\)/', $tva_tx)) {$tva_tx.= ' ('.$prodcustprice->lines[0]->default_vat_code.')';}
 					            $tva_npr = $prodcustprice->lines[0]->recuperableonly;
-					            if (empty($tva_tx)) $tva_npr=0;
+					            if (empty($tva_tx)) {$tva_npr=0;}
 					        }
 					    }
 					    else
@@ -151,7 +151,7 @@ switch($action)
 					$obj_facturation->id($ret['rowid']);
 					$obj_facturation->ref($ret['ref']);
 					$obj_facturation->stock($ret['reel']);
-					//$obj_facturation->prix($ret['price']);
+					
 					$obj_facturation->prix($pu_ht);
 
 
@@ -230,6 +230,6 @@ switch($action)
 
 // We saved object obj_facturation
 $_SESSION['serObjFacturation'] = serialize($obj_facturation);
-//var_dump($_SESSION['serObjFacturation']);
+
 header('Location: '.$redirection);
 exit;
