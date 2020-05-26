@@ -555,28 +555,28 @@ class Cronjob extends CommonObject
 		$error = 0;
 
 		// Clean parameters
-		if (isset($this->label)) $this->label = trim($this->label);
-		if (isset($this->jobtype)) $this->jobtype = trim($this->jobtype);
-		if (isset($this->command)) $this->command = trim($this->command);
-		if (isset($this->classesname)) $this->classesname = trim($this->classesname);
-		if (isset($this->objectname)) $this->objectname = trim($this->objectname);
-		if (isset($this->methodename)) $this->methodename = trim($this->methodename);
-		if (isset($this->params)) $this->params = trim($this->params);
-		if (isset($this->md5params)) $this->md5params = trim($this->md5params);
-		if (isset($this->module_name)) $this->module_name = trim($this->module_name);
-		if (isset($this->priority)) $this->priority = trim($this->priority);
-		if (isset($this->lastoutput)) $this->lastoutput = trim($this->lastoutput);
-		if (isset($this->lastresult)) $this->lastresult = trim($this->lastresult);
-		if (isset($this->unitfrequency)) $this->unitfrequency = trim($this->unitfrequency);
-		if (isset($this->frequency)) $this->frequency = trim($this->frequency);
-		if (isset($this->status)) $this->status = trim($this->status);
-		if (isset($this->note)) $this->note = trim($this->note);
-		if (isset($this->nbrun)) $this->nbrun = trim($this->nbrun);
-        if (isset($this->libname)) $this->libname = trim($this->libname);
-        if (isset($this->test)) $this->test = trim($this->test);
+		if (isset($this->label)) {$this->label = trim($this->label);}
+		if (isset($this->jobtype)) {$this->jobtype = trim($this->jobtype);}
+    }		if (isset($this->command)) {$this->command = trim($this->command);}
+		if (isset($this->classesname)) {$this->classesname = trim($this->classesname);}
+		if (isset($this->objectname)) {$this->objectname = trim($this->objectname);}
+		if (isset($this->methodename)) {$this->methodename = trim($this->methodename);}
+		if (isset($this->params)) {$this->params = trim($this->params);}
+		if (isset($this->md5params)) {$this->md5params = trim($this->md5params);}
+		if (isset($this->module_name)) {$this->module_name = trim($this->module_name);}
+		if (isset($this->priority)) {$this->priority = trim($this->priority);}
+		if (isset($this->lastoutput)) {$this->lastoutput = trim($this->lastoutput);}
+		if (isset($this->lastresult)) {$this->lastresult = trim($this->lastresult);}
+		if (isset($this->unitfrequency)) {$this->unitfrequency = trim($this->unitfrequency);}
+		if (isset($this->frequency)) {$this->frequency = trim($this->frequency);}}
+		if (isset($this->status)) {$this->status = trim($this->status);}
+		if (isset($this->note)) {$this->note = trim($this->note);}
+		if (isset($this->nbrun)) {$this->nbrun = trim($this->nbrun);}
+        if (isset($this->libname)) {$this->libname = trim($this->libname);}
+        if (isset($this->test)) {$this->test = trim($this->test);}
 
-		if (empty($this->maxrun)) $this->maxrun = 0;
-        if (empty($this->processing)) $this->processing = 0;
+		if (empty($this->maxrun)) {$this->maxrun = 0;}
+        if (empty($this->processing)) {$this->processing = 0;}
 
 		// Check parameters
 		// Put here code to add a control on parameters values
@@ -657,18 +657,18 @@ class Cronjob extends CommonObject
         $resql = $this->db->query($sql);
     	if (!$resql) { $error++; $this->errors[] = "Error ".$this->db->lasterror(); }
 
-		//if (! $error && ! $notrigger)
-		//{
-	            // Uncomment this and change MYOBJECT to your own tag if you
-	            // want this action calls a trigger.
 
-	            //// Call triggers
-	            //include_once DOL_DOCUMENT_ROOT . '/core/class/interfaces.class.php';
-	            //$interface=new Interfaces($this->db);
-	            //$result=$interface->run_triggers('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
-	            //if ($result < 0) { $error++; $this->errors=$interface->errors; }
-	            //// End call triggers
-		//}
+
+
+
+
+
+
+
+
+
+
+
 
         // Commit or rollback
 		if ($error)
@@ -767,9 +767,9 @@ class Cronjob extends CommonObject
 		}
 
 		//if (! $error)
-		//{
+		
 
-		//}
+		
 
 		unset($object->context['createfromclone']);
 
@@ -846,7 +846,7 @@ class Cronjob extends CommonObject
 		global $dolibarr_main_authentication, $dolibarr_main_demo;
 		global $menumanager;
 
-		if (!empty($conf->dol_no_mouse_hover)) $notooltip = 1; // Force disable tooltips
+		if (!empty($conf->dol_no_mouse_hover)) {$notooltip = 1;} // Force disable tooltips
 
 		$result = '';
 
@@ -860,8 +860,8 @@ class Cronjob extends CommonObject
 		{
 			// Add param to save lastsearch_values or not
 			$add_save_lastsearch_values = ($save_lastsearch_value == 1 ? 1 : 0);
-			if ($save_lastsearch_value == -1 && preg_match('/list\.php/', $_SERVER["PHP_SELF"])) $add_save_lastsearch_values = 1;
-			if ($add_save_lastsearch_values) $url .= '&save_lastsearch_values=1';
+			if ($save_lastsearch_value == -1 && preg_match('/list\.php/', $_SERVER["PHP_SELF"])) {$add_save_lastsearch_values = 1;}
+			if ($add_save_lastsearch_values) {$url .= '&save_lastsearch_values=1';}
 		}
 
 		$linkclose = '';
@@ -875,17 +875,17 @@ class Cronjob extends CommonObject
 			$linkclose .= ' title="'.dol_escape_htmltag($label, 1).'"';
 			$linkclose .= ' class="classfortooltip'.($morecss ? ' '.$morecss : '').'"';
 		}
-		else $linkclose = ($morecss ? ' class="'.$morecss.'"' : '');
+		else {$linkclose = ($morecss ? ' class="'.$morecss.'"' : '');}
 
 		$linkstart = '<a href="'.$url.'"';
 		$linkstart .= $linkclose.'>';
 		$linkend = '</a>';
 
 		$result .= $linkstart;
-		if ($withpicto) $result .= img_object(($notooltip ? '' : $label), ($this->picto ? $this->picto : 'generic'), ($notooltip ? (($withpicto != 2) ? 'class="paddingright"' : '') : 'class="'.(($withpicto != 2) ? 'paddingright ' : '').'classfortooltip"'), 0, 0, $notooltip ? 0 : 1);
-		if ($withpicto != 2) $result .= $this->ref;
+		if {($withpicto) $result .= img_object(($notooltip ? '' : $label), ($this->picto ? $this->picto : 'generic'), ($notooltip ? (($withpicto != 2) ? 'class="paddingright"' : '') : 'class="'.(($withpicto != 2) ? 'paddingright ' : '').'classfortooltip"'), 0, 0, $notooltip ? 0 : 1);}
+		if {($withpicto != 2) $result .= $this->ref;}
 		$result .= $linkend;
-		//if ($withpicto != 2) $result.=(($addlabel && $this->label) ? $sep . dol_trunc($this->label, ($addlabel > 1 ? $addlabel : 0)) : '');
+		
 
 		return $result;
 	}
@@ -947,7 +947,7 @@ class Cronjob extends CommonObject
 
 		$now = dol_now();
 		$error = 0;
-		$retval = '';
+		
 
 		$langs->load('cron');
 
@@ -997,7 +997,7 @@ class Cronjob extends CommonObject
 		{
 			$err = error_reporting();
 			error_reporting(0); // Disable all errors
-			//error_reporting(E_ALL);
+			
 			@set_time_limit($ExecTimeLimit); // Need more than 240 on Windows 7/64
 			error_reporting($err);
 		}
@@ -1029,8 +1029,8 @@ class Cronjob extends CommonObject
 				$ret = dol_include_once($this->classesname);
 				if ($ret === false || (!class_exists($this->objectname)))
 				{
-					if ($ret === false) $this->error = $langs->trans('CronCannotLoadClass', $this->classesname, $this->objectname);
-					else $this->error = $langs->trans('CronCannotLoadObject', $this->classesname, $this->objectname);
+					if {($ret === false) $this->error = $langs->trans('CronCannotLoadClass', $this->classesname, $this->objectname)};
+					else {$this->error = $langs->trans('CronCannotLoadObject', $this->classesname, $this->objectname)};
 					dol_syslog(get_class($this)."::run_jobs ".$this->error, LOG_ERR);
 					$this->lastoutput = $this->error;
 					$this->lastresult = -1;
@@ -1056,7 +1056,7 @@ class Cronjob extends CommonObject
 			// Load langs
 			if (!$error)
 			{
-				$result = $langs->load($this->module_name);
+				
 				$result = $langs->load($this->module_name.'@'.$this->module_name); // If this->module_name was an existing language file, this will make nothing
 				if ($result < 0)	// If technical error
 				{
@@ -1075,7 +1075,7 @@ class Cronjob extends CommonObject
 
 				// Create Object for the called module
 				$object = new $this->objectname($this->db);
-				if ($this->entity > 0) $object->entity = $this->entity; // We work on a dedicated entity
+				if ($this->entity > 0) {$object->entity = $this->entity;} // We work on a dedicated entity
 
 				$params_arr = array_map('trim', explode(",", $this->params));
 
@@ -1093,9 +1093,9 @@ class Cronjob extends CommonObject
 				    $langs->load("errors");
 
 				    $errmsg = '';
-				    if (!is_array($object->errors) || !in_array($object->error, $object->errors)) $errmsg .= $object->error;
-				    if (is_array($object->errors) && count($object->errors)) $errmsg .= ($errmsg ? ', '.$errmsg : '').join(', ', $object->errors);
-				    if (empty($errmsg)) $errmsg = $langs->trans('ErrorUnknown');
+				    if (!is_array($object->errors) || !in_array($object->error, $object->errors)) {$errmsg .= $object->error;}
+				    if (is_array($object->errors) && count($object->errors)) {$errmsg .= ($errmsg ? ', '.$errmsg : '').join(', ', $object->errors);}
+				    if (empty($errmsg)) {$errmsg = $langs->trans('ErrorUnknown');}
 
 				    dol_syslog(get_class($this)."::run_jobs END result=".$result." error=".$errmsg, LOG_ERR);
 
@@ -1128,7 +1128,7 @@ class Cronjob extends CommonObject
 			}
 
 			// Load langs
-			$result = $langs->load($this->module_name);
+			
 			$result = $langs->load($this->module_name.'@'.$this->module_name); // If this->module_name was an existing language file, this will make nothing
 			if ($result < 0)	// If technical error
 			{
@@ -1170,7 +1170,7 @@ class Cronjob extends CommonObject
 		if ($this->jobtype == 'command')
 		{
 			$outputdir = $conf->cron->dir_temp;
-			if (empty($outputdir)) $outputdir = $conf->cronjob->dir_temp;
+			if (empty($outputdir)) {$outputdir = $conf->cronjob->dir_temp;}
 
 			if (!empty($outputdir))
 			{
@@ -1242,8 +1242,8 @@ class Cronjob extends CommonObject
 
 		if (empty($this->datenextrun))
 		{
-			if (empty($this->datestart)) $this->datenextrun = $now + ($this->frequency * $this->unitfrequency);
-			else $this->datenextrun = $this->datestart + ($this->frequency * $this->unitfrequency);
+			if (empty($this->datestart)) {$this->datenextrun = $now + ($this->frequency * $this->unitfrequency);}
+			else {$this->datenextrun = $this->datestart + ($this->frequency * $this->unitfrequency);}
 		}
 
 		if ($this->datenextrun < $now && $this->frequency > 0 && $this->unitfrequency > 0)
@@ -1258,7 +1258,7 @@ class Cronjob extends CommonObject
 		}
 		else
 		{
-			//$this->datenextrun=$this->datenextrun + ($this->frequency * $this->unitfrequency);
+			
 		    dol_syslog(get_class($this)."::reprogram_jobs datenextrun is already in future, we do not change it");
 		}
 
@@ -1266,8 +1266,8 @@ class Cronjob extends CommonObject
 		// Archive job
 		if ($this->autodelete == 2)
 		{
-		    if (($this->maxrun > 0 && ($this->nbrun >= $this->maxrun))
-		        || ($this->dateend && ($this->datenextrun > $this->dateend)))
+		    if (($this->maxrun > 0 && ($this->nbrun >= $this->maxrun)) || ($this->dateend && ($this->datenextrun > $this->dateend)))
+			    
 		    {
 		        $this->status = 2;
 		        dol_syslog(get_class($this)."::reprogram_jobs Job will be set to archived", LOG_ERR);
@@ -1317,8 +1317,8 @@ class Cronjob extends CommonObject
 			$langs->load('users');
 
 			$moretext = '';
-			if ($processing) $moretext = ' ('.$langs->trans("Running").')';
-			elseif ($lastresult) $moretext .= ' ('.$langs->trans("Error").')';
+			if {($processing) $moretext = ' ('.$langs->trans("Running").')';}
+			elseif {($lastresult) $moretext .= ' ('.$langs->trans("Error").')';}
 
 			$this->labelStatus[self::STATUS_DISABLED] = $langs->trans('Disabled').$moretext;
 			$this->labelStatus[self::STATUS_ENABLED] = $langs->trans('Enabled').$moretext;
@@ -1327,9 +1327,9 @@ class Cronjob extends CommonObject
 		}
 
 		$statusType = 'status4';
-		if ($status == 1 && $processing) $statusType = 'status1';
-		if ($status == 0) $statusType = 'status5';
-		if ($this->lastresult) $statusType = 'status8';
+		if ($status == 1 && $processing) {$statusType = 'status1';}
+		if ($status == 0) {$statusType = 'status5';}
+		if ($this->lastresult) {$statusType = 'status8';}
 
 		return dolGetStatus($this->labelStatus[$status], $this->labelStatusShort[$status], '', $statusType, $mode);
     }
