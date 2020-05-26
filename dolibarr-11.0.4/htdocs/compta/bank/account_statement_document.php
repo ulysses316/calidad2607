@@ -53,9 +53,9 @@ if ($user->socid) {
 	$action = '';
 	$socid = $user->socid;
 }
-if ($user->socid)
+if ($user->socid){
 	$socid = $user->socid;
-
+}
 // Get parameters
 $sortfield = GETPOST("sortfield", 'alpha');
 $sortorder = GETPOST("sortorder", 'alpha');
@@ -64,16 +64,17 @@ if (empty($page) || $page == -1) { $page = 0; }
 $offset = $conf->liste_limit * $page;
 $pageprev = $page - 1;
 $pagenext = $page + 1;
-if (!$sortorder)
-	$sortorder = "ASC";
-if (!$sortfield)
+if (!$sortorder){
+	$sortorder = "ASC";}
+if (!$sortfield){
 	$sortfield = "name";
 
 $object = new Account($db);
-if ($id > 0 || !empty($ref)) $object->fetch($id, $ref);
+}
+if ($id > 0 || !empty($ref)){ $object->fetch($id, $ref);
 
 $result = restrictedArea($user, 'banque', $object->id, 'bank_account', '', '');
-
+			    }			    
 
 /*
  * Actions
@@ -134,7 +135,7 @@ if ($id > 0 || !empty($ref)) {
 		$permission = $user->rights->banque->modifier;
 		$permtoedit = $user->rights->banque->modifier;
 		$param = '&id='.$object->id.'&num='.urlencode($num);
-		$moreparam = '&num='.urlencode($num);;
+		$moreparam = '&num='.urlencode($num);
 		$relativepathwithnofile = $id."/statement/".dol_sanitizeFileName($num)."/";
 		include_once DOL_DOCUMENT_ROOT.'/core/tpl/document_actions_post_headers.tpl.php';
 	}
