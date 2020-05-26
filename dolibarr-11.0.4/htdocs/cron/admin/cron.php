@@ -32,8 +32,8 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/cron.lib.php';
 // Load translation files required by the page
 $langs->loadLangs(array('admin', 'cron'));
 
-if (! $user->admin)
-	accessforbidden();
+if (! $user->admin){
+	accessforbidden();}
 
 $actionsave=GETPOST("save");
 
@@ -89,13 +89,13 @@ print "</tr>";
 print '<tr class="impair">';
 print '<td class="fieldrequired">'.$langs->trans("KeyForCronAccess").'</td>';
 $disabled='';
-if (! empty($conf->global->CRON_DISABLE_KEY_CHANGE)) $disabled=' disabled="disabled"';
+if (! empty($conf->global->CRON_DISABLE_KEY_CHANGE)) {$disabled=' disabled="disabled"';}
 print '<td>';
 if (empty($conf->global->CRON_DISABLE_KEY_CHANGE))
 {
     print '<input type="text" class="flat minwidth200"'.$disabled.' id="CRON_KEY" name="CRON_KEY" value="'. (GETPOST('CRON_KEY')?GETPOST('CRON_KEY'):(! empty($conf->global->CRON_KEY)?$conf->global->CRON_KEY:'')) . '">';
-    if (! empty($conf->use_javascript_ajax))
-    	print '&nbsp;'.img_picto($langs->trans('Generate'), 'refresh', 'id="generate_token" class="linkobject"');
+    if (! empty($conf->use_javascript_ajax)){
+    	print '&nbsp;'.img_picto($langs->trans('Generate'), 'refresh', 'id="generate_token" class="linkobject"');}
 }
 else
 {
@@ -120,7 +120,7 @@ print '</form>';
 print '<br><br><br>';
 
 print $langs->trans("UseMenuModuleToolsToAddCronJobs", dol_buildpath('/cron/list.php?leftmenu=admintools', 1)).'<br>';
-if (! empty($conf->global->CRON_WARNING_DELAY_HOURS)) print info_admin($langs->trans("WarningCronDelayed", $conf->global->CRON_WARNING_DELAY_HOURS)).'<br>';
+if (! empty($conf->global->CRON_WARNING_DELAY_HOURS)) {print info_admin($langs->trans("WarningCronDelayed", $conf->global->CRON_WARNING_DELAY_HOURS)).'<br>';}
 
 print '<br>';
 
