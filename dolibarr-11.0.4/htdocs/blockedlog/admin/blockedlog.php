@@ -30,7 +30,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
 // Load translation files required by the page
 $langs->loadLangs(array("admin","other","blockedlog"));
 
-if (! $user->admin || empty($conf->blockedlog->enabled)) accessforbidden();
+if (! $user->admin || empty($conf->blockedlog->enabled)) {accessforbidden();}
 
 $action = GETPOST('action', 'alpha');
 $backtopage = GETPOST('backtopage', 'alpha');
@@ -44,7 +44,7 @@ if (preg_match('/set_(.*)/', $action, $reg))
 {
 	$code=$reg[1];
 	$values = GETPOST($code);
-	if(is_array($values))$values = implode(',', $values);
+	if(is_array($values)){$values = implode(',', $values);}
 
 	if (dolibarr_set_const($db, $code, $values, 'chaine', 0, '', $conf->entity) > 0)
 	{
