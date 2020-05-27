@@ -124,12 +124,12 @@ class CdavLib
 	 */
 	public function toVCalendar($calid, $obj)
 	{
-		/*$categ = array();
-		if($obj->soc_client)
-		{
-			$nick[] = $obj->soc_code_client;
-			$categ[] = $this->langs->transnoentitiesnoconv('Customer');
-		}*/
+		
+		
+		
+			
+			
+		
 
 		$location=$obj->location;
 
@@ -159,10 +159,10 @@ class CdavLib
 		$address[]='';
 		$address[]='';
 
-		if($obj->percent==-1 && trim($obj->datep)!='')
-			$type='VEVENT';
-		else
-			$type='VTODO';
+		if($obj->percent==-1 && trim($obj->datep)!=''){
+			$type='VEVENT';}
+		else	{
+			$type='VTODO';}
 
 		$timezone = date_default_timezone_get();
 
@@ -174,10 +174,10 @@ class CdavLib
 		$caldata.="CREATED:".gmdate('Ymd\THis', strtotime($obj->datec))."Z\n";
 		$caldata.="LAST-MODIFIED:".gmdate('Ymd\THis', strtotime($obj->lastupd))."Z\n";
 		$caldata.="DTSTAMP:".gmdate('Ymd\THis', strtotime($obj->lastupd))."Z\n";
-		if($obj->sourceuid=='')
-			$caldata.="UID:".$obj->id.'-ev-'.$calid.'-cal-'.CDAV_URI_KEY."\n";
-		else
-			$caldata.="UID:".$obj->sourceuid."\n";
+		if($obj->sourceuid==''){
+			$caldata.="UID:".$obj->id.'-ev-'.$calid.'-cal-'.CDAV_URI_KEY."\n";}
+		else	{
+			$caldata.="UID:".$obj->sourceuid."\n";}
 		$caldata.="SUMMARY:".$obj->label."\n";
 		$caldata.="LOCATION:".$location."\n";
 		$caldata.="PRIORITY:".$obj->priority."\n";
@@ -186,39 +186,39 @@ class CdavLib
 			$caldata.="DTSTART;VALUE=DATE:".date('Ymd', strtotime($obj->datep))."\n";
 			if($type=='VEVENT')
 			{
-				if(trim($obj->datep2)!='')
-					$caldata.="DTEND;VALUE=DATE:".date('Ymd', strtotime($obj->datep2)+1)."\n";
-				else
-					$caldata.="DTEND;VALUE=DATE:".date('Ymd', strtotime($obj->datep)+(25*3600))."\n";
+				if(trim($obj->datep2)!=''){
+					$caldata.="DTEND;VALUE=DATE:".date('Ymd', strtotime($obj->datep2)+1)."\n";}
+				else	{
+					$caldata.="DTEND;VALUE=DATE:".date('Ymd', strtotime($obj->datep)+(25*3600))."\n";}
 			}
-			elseif(trim($obj->datep2)!='')
-				$caldata.="DUE;VALUE=DATE:".date('Ymd', strtotime($obj->datep2)+1)."\n";
+			elseif(trim($obj->datep2)!=''){
+				$caldata.="DUE;VALUE=DATE:".date('Ymd', strtotime($obj->datep2)+1)."\n";}
 		}
 		else
 		{
 			$caldata.="DTSTART;TZID=".$timezone.":".strtr($obj->datep, array(" "=>"T", ":"=>"", "-"=>""))."\n";
 			if($type=='VEVENT')
 			{
-				if(trim($obj->datep2)!='')
-					$caldata.="DTEND;TZID=".$timezone.":".strtr($obj->datep2, array(" "=>"T", ":"=>"", "-"=>""))."\n";
-				else
-					$caldata.="DTEND;TZID=".$timezone.":".strtr($obj->datep, array(" "=>"T", ":"=>"", "-"=>""))."\n";
+				if(trim($obj->datep2)!=''){
+					$caldata.="DTEND;TZID=".$timezone.":".strtr($obj->datep2, array(" "=>"T", ":"=>"", "-"=>""))."\n";}
+				else	{
+					$caldata.="DTEND;TZID=".$timezone.":".strtr($obj->datep, array(" "=>"T", ":"=>"", "-"=>""))."\n";}
 			}
-			elseif(trim($obj->datep2)!='')
-				$caldata.="DUE;TZID=".$timezone.":".strtr($obj->datep2, array(" "=>"T", ":"=>"", "-"=>""))."\n";
+			elseif(trim($obj->datep2)!=''){
+				$caldata.="DUE;TZID=".$timezone.":".strtr($obj->datep2, array(" "=>"T", ":"=>"", "-"=>""))."\n";}
 		}
 		$caldata.="CLASS:PUBLIC\n";
-		if($obj->transparency==1)
-			$caldata.="TRANSP:TRANSPARENT\n";
-		else
-			$caldata.="TRANSP:OPAQUE\n";
+		if($obj->transparency==1){
+			$caldata.="TRANSP:TRANSPARENT\n";}
+		else	{
+			$caldata.="TRANSP:OPAQUE\n";}
 
-		if($type=='VEVENT')
-			$caldata.="STATUS:CONFIRMED\n";
-		elseif($obj->percent==0)
-			$caldata.="STATUS:NEEDS-ACTION\n";
-		elseif($obj->percent==100)
-			$caldata.="STATUS:COMPLETED\n";
+		if($type=='VEVENT'){
+			$caldata.="STATUS:CONFIRMED\n";}
+		elseif($obj->percent==0){
+			$caldata.="STATUS:NEEDS-ACTION\n";}
+		elseif($obj->percent==100){
+			$caldata.="STATUS:COMPLETED\n";}
 		else
 		{
 			$caldata.="STATUS:IN-PROCESS\n";
@@ -227,16 +227,16 @@ class CdavLib
 
 		$caldata.="DESCRIPTION:";
 		$caldata.=strtr($obj->note, array("\n"=>"\\n", "\r"=>""));
-		if(!empty($obj->soc_nom))
-			$caldata.="\\n*DOLIBARR-SOC: ".$obj->soc_nom;
-		if(!empty($obj->soc_phone))
-			$caldata.="\\n*DOLIBARR-SOC-TEL: ".$obj->soc_phone;
-		if(!empty($obj->firstname) || !empty($obj->lastname))
-			$caldata.="\\n*DOLIBARR-CTC: ".trim($obj->firstname.' '.$obj->lastname);
-		if(!empty($obj->phone) || !empty($obj->phone_perso) || !empty($obj->phone_mobile))
-			$caldata.="\\n*DOLIBARR-CTC-TEL: ".trim($obj->phone.' '.$obj->phone_perso.' '.$obj->phone_mobile);
-		if(strpos($obj->other_users, ',')) // several
-			$caldata.="\\n*DOLIBARR-USR: ".$obj->other_users;
+		if(!empty($obj->soc_nom)){
+			$caldata.="\\n*DOLIBARR-SOC: ".$obj->soc_nom;}
+		if(!empty($obj->soc_phone)){
+			$caldata.="\\n*DOLIBARR-SOC-TEL: ".$obj->soc_phone;}
+		if(!empty($obj->firstname) || !empty($obj->lastname)){
+			$caldata.="\\n*DOLIBARR-CTC: ".trim($obj->firstname.' '.$obj->lastname);}
+		if(!empty($obj->phone) || !empty($obj->phone_perso) || !empty($obj->phone_mobile)){
+			$caldata.="\\n*DOLIBARR-CTC-TEL: ".trim($obj->phone.' '.$obj->phone_perso.' '.$obj->phone_mobile);}
+		if(strpos($obj->other_users, ',')){ // several
+			$caldata.="\\n*DOLIBARR-USR: ".$obj->other_users;}
 		$caldata.="\n";
 
 		$caldata.="END:".$type."\n";
@@ -257,11 +257,11 @@ class CdavLib
 		$calid = ($calendarId*1);
 		$calevents = array();
 
-		if(! $this->user->rights->agenda->myactions->read)
-			return $calevents;
+		if(! $this->user->rights->agenda->myactions->read){
+			return $calevents;}
 
-		if($calid!=$this->user->id && (!isset($this->user->rights->agenda->allactions->read) || !$this->user->rights->agenda->allactions->read))
-			return $calevents;
+		if($calid!=$this->user->id && (!isset($this->user->rights->agenda->allactions->read) || !$this->user->rights->agenda->allactions->read)){
+			return $calevents;}
 
 		$sql = $this->getSqlCalEvents($calid);
 
