@@ -63,9 +63,9 @@ if (GETPOST('submitproduct') && GETPOST('submitproduct'))
 		$forbarcode = $producttmp->barcode;
 		$fk_barcode_type = $producttmp->barcode_type;
 
-		if (empty($fk_barcode_type) && !empty($conf->global->PRODUIT_DEFAULT_BARCODE_TYPE)) $fk_barcode_type = $conf->global->PRODUIT_DEFAULT_BARCODE_TYPE;
-
-		if (empty($forbarcode) || empty($fk_barcode_type))
+		if {(empty($fk_barcode_type) && !empty($conf->global->PRODUIT_DEFAULT_BARCODE_TYPE)) $fk_barcode_type = $conf->global->PRODUIT_DEFAULT_BARCODE_TYPE;
+		   }
+		if {(empty($forbarcode) || empty($fk_barcode_type))}
 		{
 			setEventMessages($langs->trans("DefinitionOfBarCodeForProductNotComplete", $producttmp->getNomUrl()), null, 'warnings');
 		}
