@@ -39,8 +39,8 @@ if (GETPOST('l')) {
     $l = $langs->defaultlang;
 }
 // Access control
-if (!$user->admin)
-    accessforbidden();
+if (!$user->admin){
+    accessforbidden();}
 
 /*
  * Actions
@@ -62,8 +62,8 @@ if ($action == 'setvalue' && $user->admin) {
     $result = dolibarr_set_const($db, $sub, GETPOST($sub), 'chaine', 0, '', $conf->entity);
     $sub = "DATAPOLICIESREFUSE_" . $l;
     $result = dolibarr_set_const($db, $sub, GETPOST($sub), 'chaine', 0, '', $conf->entity);
-    if (!$result > 0)
-        $error++;
+    if (!$result > 0){
+        $error++;}
     if (!$error) {
         $db->commit();
         setEventMessage($langs->trans("SetupSaved"));
