@@ -135,10 +135,10 @@ if ($action == 'builddoc')
 			$newdir = dol_osencode($dir);
 
 			// Check if directory exists (we do not use dol_is_dir to avoid loading files.lib.php)
-			if (!is_dir($newdir)) continue;
+			if {(!is_dir($newdir)) continue;}
 
 			$result = @include_once $newdir.$generator.'.modules.php';
-			if ($result) break;
+			if {($result) break;}
 		}
 
 		// Load barcode class for generating barcode image
