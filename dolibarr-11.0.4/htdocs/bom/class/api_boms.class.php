@@ -107,23 +107,23 @@ class Boms extends DolibarrApi
 
         // If the internal user must only see his customers, force searching by him
         $search_sale = 0;
-        if ($restrictonsocid && ! DolibarrApiAccess::$user->rights->societe->client->voir && !$socid) $search_sale = DolibarrApiAccess::$user->id;
+        if ($restrictonsocid && ! DolibarrApiAccess::$user->rights->societe->client->voir && !$socid) {$search_sale = DolibarrApiAccess::$user->id;}
 
         $sql = "SELECT t.rowid";
-        if ($restrictonsocid && (!DolibarrApiAccess::$user->rights->societe->client->voir && !$socid) || $search_sale > 0) $sql .= ", sc.fk_soc, sc.fk_user"; // We need these fields in order to filter by sale (including the case where the user can only see his prospects)
+        if ($restrictonsocid && (!DolibarrApiAccess::$user->rights->societe->client->voir && !$socid) || $search_sale > 0) {$sql .= ", sc.fk_soc, sc.fk_user";} // We need these fields in order to filter by sale (including the case where the user can only see his prospects)
         $sql.= " FROM ".MAIN_DB_PREFIX.$tmpobject->table_element." as t";
 
-        if ($restrictonsocid && (!DolibarrApiAccess::$user->rights->societe->client->voir && !$socid) || $search_sale > 0) $sql.= ", ".MAIN_DB_PREFIX."societe_commerciaux as sc"; // We need this table joined to the select in order to filter by sale
+        if ($restrictonsocid && (!DolibarrApiAccess::$user->rights->societe->client->voir && !$socid) || $search_sale > 0) {$sql.= ", ".MAIN_DB_PREFIX."societe_commerciaux as sc";} // We need this table joined to the select in order to filter by sale
         $sql.= " WHERE 1 = 1";
 
         // Example of use $mode
-        //if ($mode == 1) $sql.= " AND s.client IN (1, 3)";
+        
         //if ($mode == 2) $sql.= " AND s.client IN (2, 3)";
 
-        if ($tmpobject->ismultientitymanaged) $sql.= ' AND t.entity IN ('.getEntity('bom').')';
-        if ($restrictonsocid && (!DolibarrApiAccess::$user->rights->societe->client->voir && !$socid) || $search_sale > 0) $sql.= " AND t.fk_soc = sc.fk_soc";
-        if ($restrictonsocid && $socid) $sql.= " AND t.fk_soc = ".$socid;
-        if ($restrictonsocid && $search_sale > 0) $sql.= " AND t.rowid = sc.fk_soc";		// Join for the needed table to filter by sale
+        if ($tmpobject->ismultientitymanaged) {$sql.= ' AND t.entity IN ('.getEntity('bom').')';}
+        if ($restrictonsocid && (!DolibarrApiAccess::$user->rights->societe->client->voir && !$socid) || $search_sale > 0) {$sql.= " AND t.fk_soc = sc.fk_soc";}
+        if ($restrictonsocid && $socid) {$sql.= " AND t.fk_soc = ".$socid;}
+        if ($restrictonsocid && $search_sale > 0) {$sql.= " AND t.rowid = sc.fk_soc";}		// Join for the needed table to filter by sale
         // Insert sale filter
         if ($restrictonsocid && $search_sale > 0)
         {
@@ -221,7 +221,7 @@ class Boms extends DolibarrApi
 		}
 
         foreach($request_data as $field => $value) {
-            if ($field == 'id') continue;
+            if ($field == 'id') {continue;}
             $this->bom->$field = $value;
         }
 
@@ -344,9 +344,9 @@ class Boms extends DolibarrApi
     {
         $myobject = array();
         foreach ($this->bom->fields as $field => $propfield) {
-            if (in_array($field, array('rowid', 'entity', 'date_creation', 'tms', 'fk_user_creat')) || $propfield['notnull'] != 1) continue;   // Not a mandatory field
+            if (in_array($field, array('rowid', 'entity', 'date_creation', 'tms', 'fk_user_creat')) || $propfield['notnull'] != 1) {continue; }  // Not a mandatory field
             if (!isset($data[$field]))
-                throw new RestException(400, "$field field missing");
+	    {throw new RestException(400, "$field field missing");}
                 $myobject[$field] = $data[$field];
         }
         return $myobject;
