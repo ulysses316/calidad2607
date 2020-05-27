@@ -42,7 +42,7 @@ if ($user->socid > 0)
 
 $nowyear=strftime("%Y", dol_now());
 $year = GETPOST('year')>0?GETPOST('year'):$nowyear;
-//$startyear=$year-2;
+
 $startyear=$year-1;
 $endyear=$year;
 
@@ -67,7 +67,7 @@ $stats = new ExpeditionStats($db, $socid, '', ($userid>0?$userid:0));
 
 // Build graphic number of object
 $data = $stats->getNbByMonthWithPrevYear($endyear, $startyear);
-//var_dump($data);exit;
+
 // $data = array(array('Lib',val1,val2,val3),...)
 
 
@@ -107,7 +107,7 @@ if (! $mesg)
 
 // Build graphic amount of object
 /*
-$data = $stats->getAmountByMonthWithPrevYear($endyear,$startyear);
+
 //var_dump($data);
 // $data = array(array('Lib',val1,val2,val3),...)
 
@@ -147,7 +147,7 @@ if (! $mesg)
 */
 
 /*
-$data = $stats->getAverageByMonthWithPrevYear($endyear, $startyear);
+
 
 if (!$user->rights->societe->client->voir || $user->socid)
 {
@@ -213,7 +213,7 @@ print '<div class="fichecenter"><div class="fichethirdleft">';
 
 
 //if (empty($socid))
-//{
+
 	// Show filter box
 	print '<form name="stats" method="POST" action="'.$_SERVER["PHP_SELF"].'">';
 	print '<input type="hidden" name="token" value="'.newToken().'">';
@@ -247,8 +247,8 @@ print '<table class="noborder centpercent">';
 print '<tr class="liste_titre" height="24">';
 print '<td class="center">'.$langs->trans("Year").'</td>';
 print '<td class="right">'.$langs->trans("NbOfSendings").'</td>';
-/*print '<td class="center">'.$langs->trans("AmountTotal").'</td>';
-print '<td class="center">'.$langs->trans("AmountAverage").'</td>';*/
+
+
 print '</tr>';
 
 $oldyear=0;
@@ -264,8 +264,8 @@ foreach ($data as $val)
 		print '<td class="center"><a href="'.$_SERVER["PHP_SELF"].'?year='.$oldyear.'">'.$oldyear.'</a></td>';
 
 		print '<td class="right">0</td>';
-		/*print '<td class="right">0</td>';
-		print '<td class="right">0</td>';*/
+		
+		
 		print '</tr>';
 	}
 
@@ -275,8 +275,8 @@ foreach ($data as $val)
 	else print $langs->trans("ValidationDateNotDefinedEvenIfShipmentValidated");
 	print '</td>';
 	print '<td class="right">'.$val['nb'].'</td>';
-	/*print '<td class="right">'.price(price2num($val['total'],'MT'),1).'</td>';
-	print '<td class="right">'.price(price2num($val['avg'],'MT'),1).'</td>';*/
+	
+	
 	print '</tr>';
 	$oldyear=$year;
 }
@@ -294,9 +294,9 @@ if ($mesg) { print $mesg; }
 else {
     print $px1->show();
     print "<br>\n";
-    /*print $px2->show();
-    print "<br>\n";
-    print $px3->show();*/
+    
+	
+	
 }
 print '</td></tr></table>';
 
@@ -309,36 +309,7 @@ dol_fiche_end();
 
 
 // TODO USe code similar to commande/stats/index.php instead of this one.
-/*
-print '<table class="border centpercent">';
-print '<tr><td class="center">'.$langs->trans("Year").'</td>';
-print '<td width="40%" class="center">'.$langs->trans("NbOfSendings").'</td></tr>';
 
-$sql = "SELECT count(*) as nb, date_format(date_expedition,'%Y') as dm";
-$sql.= " FROM ".MAIN_DB_PREFIX."expedition";
-$sql.= " WHERE fk_statut > 0";
-$sql.= " AND entity = ".$conf->entity;
-$sql.= " GROUP BY dm DESC";
-
-$resql=$db->query($sql);
-if ($resql)
-{
-    $num = $db->num_rows($resql);
-    $i = 0;
-    while ($i < $num)
-    {
-        $row = $db->fetch_row($resql);
-        $nbproduct = $row[0];
-        $year = $row[1];
-        print "<tr>";
-        print '<td class="center"><a href="month.php?year='.$year.'">'.$year.'</a></td><td class="center">'.$nbproduct.'</td></tr>';
-        $i++;
-    }
-}
-$db->free($resql);
-
-print '</table>';
-*/
 
 print '<br>';
 print '<i>'.$langs->trans("StatsOnShipmentsOnlyValidated").'</i>';
