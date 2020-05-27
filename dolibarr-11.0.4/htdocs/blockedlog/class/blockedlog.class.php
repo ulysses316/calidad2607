@@ -514,7 +514,7 @@ class BlockedLog
 			$paymentpartnumber = 0;
 			foreach ($object->amounts as $objid => $amount)
 			{
-				if (empty($amount)) continue;
+				if (empty($amount)) {continue;}
 
 				$totalamount += $amount;
 
@@ -578,32 +578,32 @@ class BlockedLog
 					$paymentpart->thirdparty = new stdClass();
 					foreach($tmpobject->thirdparty as $key=>$value)
 					{
-						if (in_array($key, $arrayoffieldstoexclude)) continue;	// Discard some properties
+						if (in_array($key, $arrayoffieldstoexclude)) {continue;}	// Discard some properties
                         if (! in_array($key, array(
 						'name','name_alias','ref_ext','address','zip','town','state_code','country_code','idprof1','idprof2','idprof3','idprof4','idprof5','idprof6','phone','fax','email','barcode',
 						'tva_intra', 'localtax1_assuj', 'localtax1_value', 'localtax2_assuj', 'localtax2_value', 'managers', 'capital', 'typent_code', 'forme_juridique_code', 'code_client', 'code_fournisseur'
-						))) continue;									// Discard if not into a dedicated list
+						))) {continue;}									// Discard if not into a dedicated list
 						if (!is_object($value)) $paymentpart->thirdparty->{$key} = $value;
 					}
 				}
 
 				// Init object to avoid warnings
-				if ($this->element == 'payment_donation') $paymentpart->donation = new stdClass();
-				else $paymentpart->invoice = new stdClass();
+				if ($this->element == 'payment_donation') {$paymentpart->donation = new stdClass();}
+				else {$paymentpart->invoice = new stdClass();}
 
 				if ($this->element != 'payment_various')
 				{
 					foreach($tmpobject as $key=>$value)
 					{
-						if (in_array($key, $arrayoffieldstoexclude)) continue;	// Discard some properties
+						if (in_array($key, $arrayoffieldstoexclude)) {continue;}	// Discard some properties
                         if (! in_array($key, array(
 						'ref','ref_client','ref_supplier','date','datef','type','total_ht','total_tva','total_ttc','localtax1','localtax2','revenuestamp','datepointoftax','note_public'
-						))) continue;									// Discard if not into a dedicated list
+						))) {continue;}									// Discard if not into a dedicated list
 						if (!is_object($value))
 						{
-							if ($this->element == 'payment_donation') $paymentpart->donation->{$key} = $value;
-							elseif ($this->element == 'payment_various') $paymentpart->various->{$key} = $value;
-							else $paymentpart->invoice->{$key} = $value;
+							if ($this->element == 'payment_donation') {$paymentpart->donation->{$key} = $value;}
+							elseif {($this->element == 'payment_various') $paymentpart->various->{$key} = $value;}
+							else {$paymentpart->invoice->{$key} = $value;}
 						}
 					}
 
@@ -614,36 +614,36 @@ class BlockedLog
 
 			$this->object_data->amount = $totalamount;
 
-			if (!empty($object->newref)) $this->object_data->ref = $object->newref;
+			if (!empty($object->newref)) {$this->object_data->ref = $object->newref;}
 		}
 		elseif ($this->element == 'payment_salary')
 		{
 			$this->object_data->amounts = array($object->amount);
 
-			if (!empty($object->newref)) $this->object_data->ref = $object->newref;
+			if (!empty($object->newref)) {$this->object_data->ref = $object->newref;}
 		}
 		elseif ($this->element == 'subscription')
 		{
 			foreach ($object as $key=>$value)
 			{
-				if (in_array($key, $arrayoffieldstoexclude)) continue; // Discard some properties
+				if (in_array($key, $arrayoffieldstoexclude)) {continue;} // Discard some properties
 				if (!in_array($key, array(
 					'id', 'datec', 'dateh', 'datef', 'fk_adherent', 'amount', 'import_key', 'statut', 'note'
-				))) continue; // Discard if not into a dedicated list
-				if (!is_object($value)) $this->object_data->{$key} = $value;
+				))) {continue;} // Discard if not into a dedicated list
+				if (!is_object($value)) {$this->object_data->{$key} = $value;}
 			}
 
-			if (!empty($object->newref)) $this->object_data->ref = $object->newref;
+			if (!empty($object->newref)) {$this->object_data->ref = $object->newref;}
 		}
 		else 	// Generic case
 		{
 			foreach ($object as $key=>$value)
 			{
-				if (in_array($key, $arrayoffieldstoexclude)) continue; // Discard some properties
-				if (!is_object($value)) $this->object_data->{$key} = $value;
+				if (in_array($key, $arrayoffieldstoexclude)) {continue;} // Discard some properties
+				if (!is_object($value)) {$this->object_data->{$key} = $value;}
 			}
 
-			if (!empty($object->newref)) $this->object_data->ref = $object->newref;
+			if (!empty($object->newref)) {$this->object_data->ref = $object->newref;}
 		}
 
 		return 1;
@@ -673,7 +673,7 @@ class BlockedLog
 		$sql = "SELECT b.rowid, b.date_creation, b.signature, b.signature_line, b.amounts, b.action, b.element, b.fk_object, b.entity,";
 		$sql .= " b.certified, b.tms, b.fk_user, b.user_fullname, b.date_object, b.ref_object, b.object_data";
 		$sql .= " FROM ".MAIN_DB_PREFIX."blockedlog as b";
-		if ($id) $sql .= " WHERE b.rowid = ".$id;
+		if ($id) {$sql .= " WHERE b.rowid = ".$id;}
 
 		$resql = $this->db->query($sql);
 		if ($resql)
@@ -732,12 +732,12 @@ class BlockedLog
 	public function dolDecodeBlockedData($data, $mode = 0)
 	{
 		try {
-			//include_once DOL_DOCUMENT_ROOT.'/compta/facture/class/facture.class.php';
+			
 			//include_once DOL_DOCUMENT_ROOT.'/compta/facture/class/facture.class.php';
 			$aaa = unserialize($data);
-			//$aaa = unserialize($data);
+			
 		} catch (Exception $e) {
-			//print $e->getErrs);
+			
 		}
 		return $aaa;
 	}
@@ -752,7 +752,7 @@ class BlockedLog
     {
 
 		$res = $this->db->query("UPDATE ".MAIN_DB_PREFIX."blockedlog SET certified=1 WHERE rowid=".$this->id);
-		if ($res === false) return false;
+		if ($res === false) {return false;}
 
 		return true;
 	}
@@ -771,7 +771,7 @@ class BlockedLog
 
 		$langs->load('blockedlog');
 
-		$error = 0;
+		$ = 0;
 
 		// Clean data
 		$this->amounts = (double) $this->amounts;
@@ -797,7 +797,7 @@ class BlockedLog
 			dol_syslog($this->error, LOG_WARNING);
 			return -3;
 		}
-		if (empty($this->fk_user)) $this->user_fullname = '(Anonymous)';
+		if (empty($this->fk_user)) {$this->user_fullname = '(Anonymous)';}
 
 		$this->date_creation = dol_now();
 
@@ -809,8 +809,8 @@ class BlockedLog
 
 		$this->signature_line = dol_hash($keyforsignature, '5'); // Not really usefull
 		$this->signature = dol_hash($previoushash.$keyforsignature, '5');
-		if ($forcesignature) $this->signature = $forcesignature;
-		//var_dump($keyforsignature);var_dump($previoushash);var_dump($this->signature_line);var_dump($this->signature);
+		if ($forcesignature) {$this->signature = $forcesignature;}
+		
 
 		$sql = "INSERT INTO ".MAIN_DB_PREFIX."blockedlog (";
 		$sql .= " date_creation,";
@@ -890,7 +890,7 @@ class BlockedLog
 
 		$signature_line = dol_hash($keyforsignature, '5'); // Not really usefull
 		$signature = dol_hash($previoushash.$keyforsignature, '5');
-		//var_dump($previoushash); var_dump($keyforsignature); var_dump($signature_line); var_dump($signature);
+		
 
 		$res = ($signature === $this->signature);
 
@@ -910,7 +910,7 @@ class BlockedLog
 	 */
 	private function buildKeyForSignature()
 	{
-		//print_r($this->object_data);
+		
 		return $this->date_creation.'|'.$this->action.'|'.$this->amounts.'|'.$this->ref_object.'|'.$this->date_object.'|'.$this->user_fullname.'|'.print_r($this->object_data, true);
 	}
 
@@ -930,7 +930,7 @@ class BlockedLog
 
 	 	$sql = "SELECT rowid, signature FROM ".MAIN_DB_PREFIX."blockedlog";
 	 	$sql .= " WHERE entity=".$conf->entity;
-	 	if ($beforeid) $sql .= " AND rowid < ".(int) $beforeid;
+	 	if ($beforeid) {$sql .= " AND rowid < ".(int) $beforeid;}
 	 	$sql .= " ORDER BY rowid DESC LIMIT 1";
 	 	$sql .= ($withlock ? " FOR UPDATE " : "");
 
@@ -978,7 +978,7 @@ class BlockedLog
 		global $conf, $cachedlogs;
 
 		/* $cachedlogs allow fastest search */
-		if (empty($cachedlogs)) $cachedlogs = array();
+		if (empty($cachedlogs)) {$cachedlogs = array();}
 
 		if ($element == 'all') {
 	 		$sql = "SELECT rowid FROM ".MAIN_DB_PREFIX."blockedlog
@@ -997,12 +997,12 @@ class BlockedLog
 	         WHERE entity=".$conf->entity." AND element='".$element."' AND fk_object=".(int) $fk_object;
 		}
 
-		if ($search_fk_user > 0)  $sql .= natural_search("fk_user", $search_fk_user, 2);
-		if ($search_start > 0)    $sql .= " AND date_creation >= '".$this->db->idate($search_start)."'";
-		if ($search_end > 0)      $sql .= " AND date_creation <= '".$this->db->idate($search_end)."'";
-		if ($search_ref != '')    $sql .= natural_search("ref_object", $search_ref);
-		if ($search_amount != '') $sql .= natural_search("amounts", $search_amount, 1);
-		if ($search_code != '' && $search_code != '-1')   $sql .= natural_search("action", $search_code, 3);
+		if ($search_fk_user > 0)  {$sql .= natural_search("fk_user", $search_fk_user, 2);}
+		if ($search_start > 0)    {$sql .= " AND date_creation >= '".$this->db->idate($search_start)."'";}
+		if ($search_end > 0)      {$sql .= " AND date_creation <= '".$this->db->idate($search_end)."'";}
+		if ($search_ref != '')    {$sql .= natural_search("ref_object", $search_ref);}
+		if ($search_amount != '') {$sql .= natural_search("amounts", $search_amount, 1);}
+		if ($search_code != '' && $search_code != '-1')   {$sql .= natural_search("action", $search_code, 3);}
 
 		$sql .= $this->db->order($sortfield, $sortorder);
 		$sql .= $this->db->plimit($limit + 1); // We want more, because we will stop into loop later with error if we reach max
@@ -1077,16 +1077,16 @@ class BlockedLog
 
 		$sql = "SELECT rowid FROM ".MAIN_DB_PREFIX."blockedlog";
 		$sql .= " WHERE entity = ".$conf->entity;
-		if ($ignoresystem) $sql .= " AND action not in ('MODULE_SET','MODULE_RESET')";
+		if ($ignoresystem) {$sql .= " AND action not in ('MODULE_SET','MODULE_RESET')";}
 		$sql .= $this->db->plimit(1);
 
 		$res = $this->db->query($sql);
 		if ($res !== false)
 		{
 			$obj = $this->db->fetch_object($res);
-			if ($obj) $result = true;
+			if ($obj) {$result = true;}
 		}
-		else dol_print_error($this->db);
+		else {dol_print_error($this->db);}
 
 		dol_syslog("Module Blockedlog alreadyUsed with ignoresystem=".$ignoresystem." is ".$result);
 
