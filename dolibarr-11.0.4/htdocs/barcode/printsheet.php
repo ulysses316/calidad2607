@@ -272,7 +272,7 @@ print '<br>';
 
 dol_htmloutput_errors($mesg);
 
-//print img_picto('','puce').' '.$langs->trans("PrintsheetForOneBarCode").'<br>';
+
 //print '<br>';
 
 print '<form action="'.$_SERVER["PHP_SELF"].'" method="POST">';
