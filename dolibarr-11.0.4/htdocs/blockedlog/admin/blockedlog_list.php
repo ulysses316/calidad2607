@@ -33,7 +33,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/date.lib.php';
 // Load translation files required by the page
 $langs->loadLangs(array("admin", "other", "blockedlog", "bills"));
 
-if ((! $user->admin && ! $user->rights->blockedlog->read) || empty($conf->blockedlog->enabled)) accessforbidden();
+if ((! $user->admin && ! $user->rights->blockedlog->read) {|| empty($conf->blockedlog->enabled)) accessforbidden();}
 
 $action = GETPOST('action', 'alpha');
 $contextpage= GETPOST('contextpage', 'aZ')?GETPOST('contextpage', 'aZ'):'blockedloglist';   // To manage different context of search
@@ -41,18 +41,18 @@ $backtopage = GETPOST('backtopage', 'alpha');											// Go back to a dedicate
 $optioncss  = GETPOST('optioncss', 'aZ');												// Option for the css output (always '' except when 'print')
 
 $search_showonlyerrors = GETPOST('search_showonlyerrors', 'int');
-if ($search_showonlyerrors < 0) $search_showonlyerrors=0;
+if ($search_showonlyerrors < 0) {$search_showonlyerrors=0;}
 
 $search_fk_user=GETPOST('search_fk_user', 'intcomma');
 $search_start = -1;
-if (GETPOST('search_startyear')!='') $search_start = dol_mktime(0, 0, 0, GETPOST('search_startmonth'), GETPOST('search_startday'), GETPOST('search_startyear'));
+if (GETPOST('search_startyear')!='') {$search_start = dol_mktime(0, 0, 0, GETPOST('search_startmonth'), GETPOST('search_startday'), GETPOST('search_startyear'));}
 $search_end = -1;
-if (GETPOST('search_endyear')!='') $search_end= dol_mktime(23, 59, 59, GETPOST('search_endmonth'), GETPOST('search_endday'), GETPOST('search_endyear'));
+if (GETPOST('search_endyear')!='') {$search_end= dol_mktime(23, 59, 59, GETPOST('search_endmonth'), GETPOST('search_endday'), GETPOST('search_endyear'));}
 $search_code = GETPOST('search_code', 'alpha');
 $search_ref = GETPOST('search_ref', 'alpha');
 $search_amount = GETPOST('search_amount', 'alpha');
 
-if (($search_start == -1 || empty($search_start)) && ! GETPOSTISSET('search_startmonth')) $search_start = dol_time_plus_duree(dol_now(), '-1', 'w');
+if (($search_start == -1 || empty($search_start)) && ! GETPOSTISSET('search_startmonth')) {$search_start = dol_time_plus_duree(dol_now(), '-1', 'w');}
 
 // Load variable for pagination
 $limit = GETPOST('limit', 'int')?GETPOST('limit', 'int'):$conf->liste_limit;
@@ -64,8 +64,8 @@ $offset = $limit * $page;
 $pageprev = $page - 1;
 $pagenext = $page + 1;
 
-if (empty($sortfield)) $sortfield='rowid';
-if (empty($sortorder)) $sortorder='DESC';
+if (empty($sortfield)) {$sortfield='rowid';}
+if (empty($sortorder)) {$sortorder='DESC';}
 
 $block_static = new BlockedLog($db);
 
@@ -209,8 +209,8 @@ if ($action === 'downloadblockchain') {
 				if ($checksignature)
 				{
 					$statusofrecord = 'Valid';
-					if ($loweridinerror > 0) $statusofrecordnote = 'ValidButFoundAPreviousKO';
-					else $statusofrecordnote = '';
+					if ($loweridinerror > 0) {$statusofrecordnote = 'ValidButFoundAPreviousKO';}
+					else {$statusofrecordnote = '';}
 				}
 				else
 				{
@@ -306,21 +306,20 @@ print '<span class="opacitymedium hideonsmartphone">'.$langs->trans("Fingerprint
 print '<br>';
 
 $param='';
-if (! empty($contextpage) && $contextpage != $_SERVER["PHP_SELF"]) $param.='&contextpage='.urlencode($contextpage);
-if ($limit > 0 && $limit != $conf->liste_limit) $param.='&limit='.urlencode($limit);
-if ($search_fk_user > 0)    $param.='&search_fk_user='.urlencode($search_fk_user);
-if ($search_startyear > 0)  $param.='&search_startyear='.urlencode(GETPOST('search_startyear', 'int'));
-if ($search_startmonth > 0) $param.='&search_startmonth='.urlencode(GETPOST('search_startmonth', 'int'));
-if ($search_startday > 0)   $param.='&search_startday='.urlencode(GETPOST('search_startday', 'int'));
-if ($search_endyear > 0)    $param.='&search_endyear='.urlencode(GETPOST('search_endyear', 'int'));
-if ($search_endmonth > 0)   $param.='&search_endmonth='.urlencode(GETPOST('search_endmonth', 'int'));
-if ($search_endday > 0)     $param.='&search_endday='.urlencode(GETPOST('search_endday', 'int'));
-if ($search_showonlyerrors > 0) $param.='&search_showonlyerrors='.urlencode($search_showonlyerrors);
-if ($optioncss != '')       $param.='&optioncss='.urlencode($optioncss);
-if (GETPOST('withtab', 'alpha')) $param.='&withtab='.urlencode(GETPOST('withtab', 'alpha'));
+if (! empty($contextpage) && $contextpage != $_SERVER["PHP_SELF"]) {$param.='&contextpage='.urlencode($contextpage);}
+if ($limit > 0 && $limit != $conf->liste_limit) {$param.='&limit='.urlencode($limit);}
+if ($search_fk_user > 0)    {$param.='&search_fk_user='.urlencode($search_fk_user);}
+if ($search_startyear > 0)  {$param.='&search_startyear='.urlencode(GETPOST('search_startyear', 'int'));}
+if ($search_startmonth > 0) {$param.='&search_startmonth='.urlencode(GETPOST('search_startmonth', 'int'));}
+if ($search_startday > 0)   {$param.='&search_startday='.urlencode(GETPOST('search_startday', 'int'));}
+if ($search_endyear > 0)    {$param.='&search_endyear='.urlencode(GETPOST('search_endyear', 'int'));}
+if ($search_endmonth > 0)   {$param.='&search_endmonth='.urlencode(GETPOST('search_endmonth', 'int'));}
+if ($search_endday > 0)     {$param.='&search_endday='.urlencode(GETPOST('search_endday', 'int'));}
+if ($search_showonlyerrors > 0) {$param.='&search_showonlyerrors='.urlencode($search_showonlyerrors);}
+if ($optioncss != '')       {$param.='&optioncss='.urlencode($optioncss);}
+if (GETPOST('withtab', 'alpha')) {$param.='&withtab='.urlencode(GETPOST('withtab', 'alpha'));}
 
 // Add $param from extra fields
-//include DOL_DOCUMENT_ROOT.'/core/tpl/extrafields_list_search_param.tpl.php';
 
 print '<form method="POST" id="searchFormList" action="'.$_SERVER["PHP_SELF"].'">';
 
@@ -342,7 +341,7 @@ print $retstring;
 print '<input type="text" name="yeartoexport" class="valignmiddle maxwidth50imp" value="'.GETPOST('yeartoexport', 'int').'">';
 print '<input type="hidden" name="withtab" value="'.GETPOST('withtab', 'alpha').'">';
 print '<input type="submit" name="downloadcsv" class="button" value="'.$langs->trans('DownloadLogCSV').'">';
-if (!empty($conf->global->BLOCKEDLOG_USE_REMOTE_AUTHORITY)) print ' | <a href="?action=downloadblockchain'.(GETPOST('withtab', 'alpha')?'&withtab='.GETPOST('withtab', 'alpha'):'').'">'.$langs->trans('DownloadBlockChain').'</a>';
+if (!empty($conf->global->BLOCKEDLOG_USE_REMOTE_AUTHORITY)) {print ' | <a href="?action=downloadblockchain'.(GETPOST('withtab', 'alpha')?'&withtab='.GETPOST('withtab', 'alpha'):'').'">'.$langs->trans('DownloadBlockChain').'</a>';}
 print ' </div><br>';
 
 print '</form>';
@@ -351,7 +350,7 @@ print '<form method="POST" id="searchFormList" action="'.$_SERVER["PHP_SELF"].'"
 
 print '<div class="div-table-responsive">';		// You can use div-table-responsive-no-min if you dont need reserved height for your table
 
-if ($optioncss != '') print '<input type="hidden" name="optioncss" value="'.$optioncss.'">';
+if ($optioncss != '') {print '<input type="hidden" name="optioncss" value="'.$optioncss.'">';}
 print '<input type="hidden" name="token" value="'.newToken().'">';
 print '<input type="hidden" name="formfilteraction" id="formfilteraction" value="list">';
 print '<input type="hidden" name="action" value="list">';
@@ -369,9 +368,9 @@ print '<tr class="liste_titre_filter">';
 print '<td class="liste_titre">&nbsp;</td>';
 
 print '<td class="liste_titre">';
-//print $langs->trans("from").': ';
+    
 print $form->selectDate($search_start, 'search_start');
-//print '<br>';
+
 //print $langs->trans("to").': ';
 print $form->selectDate($search_end, 'search_end');
 print '</td>';
@@ -454,8 +453,8 @@ else
 			$checkresult[$block->id]=$checksignature;	// false if error
 			if (! $checksignature)
 			{
-				if (empty($loweridinerror)) $loweridinerror=$block->id;
-				else $loweridinerror = min($loweridinerror, $block->id);
+				if (empty($loweridinerror)) {$loweridinerror=$block->id;}
+				else {$loweridinerror = min($loweridinerror, $block->id);}
 			}
 		}
 	}
@@ -508,8 +507,8 @@ if (is_array($blocks))
 		   	print '<td class="center">';
 		   	if (! $checkresult[$block->id] || ($loweridinerror && $block->id >= $loweridinerror))	// If error
 		   	{
-		   		if ($checkresult[$block->id]) print img_picto($langs->trans('OkCheckFingerprintValidityButChainIsKo'), 'statut4');
-		   		else print img_picto($langs->trans('KoCheckFingerprintValidity'), 'statut8');
+		   		if ($checkresult[$block->id]) {print img_picto($langs->trans('OkCheckFingerprintValidityButChainIsKo'), 'statut4');}
+		   		else {print img_picto($langs->trans('KoCheckFingerprintValidity'), 'statut8');}
 		   	}
 		   	else
 		   	{
@@ -522,7 +521,7 @@ if (is_array($blocks))
 		   	print '<td class="center">';
 		   	if (! $checkresult[$block->id] || ($loweridinerror && $block->id >= $loweridinerror))	// If error
 		   	{
-		   		if ($checkresult[$block->id]) print $form->textwithpicto('', $langs->trans('OkCheckFingerprintValidityButChainIsKo'));
+		   		if ($checkresult[$block->id]) {print $form->textwithpicto('', $langs->trans('OkCheckFingerprintValidityButChainIsKo'));}
 		   	}
 
 		   	if(!empty($conf->global->BLOCKEDLOG_USE_REMOTE_AUTHORITY) && !empty($conf->global->BLOCKEDLOG_AUTHORITY_URL)) {
