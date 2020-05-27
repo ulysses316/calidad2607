@@ -22,12 +22,12 @@
  * \brief   datapolicy setup page.
  */
 
-if (!defined('NOLOGIN'))
-    define("NOLOGIN", 1);   // This means this output page does not require to be logged.
-if (!defined('NOCSRFCHECK'))
-    define('NOCSRFCHECK', '1');  // Do not check anti CSRF attack test
-if (!defined('NOREQUIREMENU'))
-    define('NOREQUIREMENU', '1');
+if (!defined('NOLOGIN')){
+    define("NOLOGIN", 1);}   // This means this output page does not require to be logged.
+if (!defined('NOCSRFCHECK')){
+    define('NOCSRFCHECK', '1');}  // Do not check anti CSRF attack test
+if (!defined('NOREQUIREMENU')){
+    define('NOREQUIREMENU', '1');}
 
 require '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/contact/class/contact.class.php';
@@ -103,13 +103,13 @@ if (empty($action) || (empty($idc) && empty($ids) && empty($ida))) {
         $adherent->array_options['options_datapolicy_consentement'] = 1;
         $adherent->array_options['options_datapolicy_opposition_traitement'] = 0;
         $adherent->array_options['options_datapolicy_opposition_prospection'] = 0;
-        //$adherent->array_options['options_datapolicy_date'] = date('Y-m-d', time());
+        
         $return = $conf->global->$acc;
     } elseif ($action == 2) {
         $adherent->array_options['options_datapolicy_consentement'] = 0;
         $adherent->array_options['options_datapolicy_opposition_traitement'] = 1;
         $adherent->array_options['options_datapolicy_opposition_prospection'] = 1;
-        //$adherent->array_options['options_datapolicy_date'] = date('Y-m-d', time());
+        
 
         $return = $conf->global->$ref;
     }
