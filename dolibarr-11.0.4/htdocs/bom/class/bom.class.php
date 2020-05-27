@@ -23,7 +23,7 @@
 
 // Put here all includes required by your class file
 require_once DOL_DOCUMENT_ROOT.'/core/class/commonobject.class.php';
-//require_once DOL_DOCUMENT_ROOT . '/societe/class/societe.class.php';
+
 //require_once DOL_DOCUMENT_ROOT . '/product/class/product.class.php';
 
 /**
@@ -154,7 +154,7 @@ class BOM extends CommonObject
 	/**
 	 * @var array	List of child tables. To test if we can delete object.
 	 */
-	//protected $childtables=array();
+	
 
 	/**
 	 * @var array	List of child tables. To know object to delete on cascade.
@@ -179,8 +179,8 @@ class BOM extends CommonObject
 
 		$this->db = $db;
 
-		if (empty($conf->global->MAIN_SHOW_TECHNICAL_ID) && isset($this->fields['rowid'])) $this->fields['rowid']['visible'] = 0;
-		if (empty($conf->multicompany->enabled) && isset($this->fields['entity'])) $this->fields['entity']['enabled'] = 0;
+		if (empty($conf->global->MAIN_SHOW_TECHNICAL_ID) && isset($this->fields['rowid'])) {$this->fields['rowid']['visible'] = 0;}
+		if (empty($conf->multicompany->enabled) && isset($this->fields['entity'])) {$this->fields['entity']['enabled'] = 0;}
 
 		// Unset fields that are disabled
 		foreach ($this->fields as $key => $val)
@@ -213,7 +213,7 @@ class BOM extends CommonObject
 	 */
 	public function create(User $user, $notrigger = false)
 	{
-		if ($this->efficiency <= 0 || $this->efficiency > 1) $this->efficiency = 1;
+		if ($this->efficiency <= 0 || $this->efficiency > 1) {$this->efficiency = 1;}
 
 		return $this->createCommon($user, $notrigger);
 	}
@@ -238,11 +238,11 @@ class BOM extends CommonObject
 
 	    // Load source object
 	    $result = $object->fetchCommon($fromid);
-	    if ($result > 0 && !empty($object->table_element_line)) $object->fetchLines();
+	    if ($result > 0 && !empty($object->table_element_line)) {$object->fetchLines();}
 
 	    // Get lines so they will be clone
 	    //foreach($object->lines as $line)
-	    //	$line->fetch_optionals();
+	   
 
 	    // Reset some properties
 	    unset($object->id);
@@ -263,7 +263,7 @@ class BOM extends CommonObject
 	    		$shortkey = preg_replace('/options_/', '', $key);
 	    		if (!empty($extrafields->attributes[$this->element]['unique'][$shortkey]))
 	    		{
-	    			//var_dump($key); var_dump($clonedObj->array_options[$key]); exit;
+	    			
 	    			unset($object->array_options[$key]);
 	    		}
 	    	}
@@ -323,7 +323,7 @@ class BOM extends CommonObject
 	public function fetch($id, $ref = null)
 	{
 		$result = $this->fetchCommon($id, $ref);
-		if ($result > 0 && !empty($this->table_element_line)) $this->fetchLines();
+		if ($result > 0 && !empty($this->table_element_line)) {$this->fetchLines();}
 		return $result;
 	}
 
@@ -362,8 +362,8 @@ class BOM extends CommonObject
 		$sql = 'SELECT ';
 		$sql .= $this->getFieldList();
 		$sql .= ' FROM '.MAIN_DB_PREFIX.$this->table_element.' as t';
-		if ($this->ismultientitymanaged) $sql .= ' WHERE t.entity IN ('.getEntity($this->table_element).')';
-		else $sql .= ' WHERE 1 = 1';
+		if ($this->ismultientitymanaged) {$sql .= ' WHERE t.entity IN ('.getEntity($this->table_element).')';}
+		else {$sql .= ' WHERE 1 = 1';}
 		// Manage filter
 		$sqlwhere = array();
 		if (count($filter) > 0) {
@@ -424,7 +424,7 @@ class BOM extends CommonObject
 	 */
 	public function update(User $user, $notrigger = false)
 	{
-		if ($this->efficiency <= 0 || $this->efficiency > 1) $this->efficiency = 1;
+		if ($this->efficiency <= 0 || $this->efficiency > 1) {$this->efficiency = 1;}
 
 		return $this->updateCommon($user, $notrigger);
 	}
@@ -439,7 +439,7 @@ class BOM extends CommonObject
 	public function delete(User $user, $notrigger = false)
 	{
 		return $this->deleteCommon($user, $notrigger);
-		//return $this->deleteCommon($user, $notrigger, 1);
+		
 	}
 
 	/**
@@ -506,7 +506,7 @@ class BOM extends CommonObject
 	        else
 	        {
 	            $this->error = $obj->error;
-	            //dol_print_error($this->db,get_class($this)."::getNextNumRef ".$obj->error);
+	            
 	            return "";
 	        }
 	    }
@@ -541,7 +541,7 @@ class BOM extends CommonObject
 
 	    /*if (! ((empty($conf->global->MAIN_USE_ADVANCED_PERMS) && ! empty($user->rights->bom->create))
 	        || (! empty($conf->global->MAIN_USE_ADVANCED_PERMS) && ! empty($user->rights->bom->bom_advance->validate))))
-	    {
+	    
 	        $this->error='NotEnoughPermissions';
 	        dol_syslog(get_class($this)."::valid ".$this->error, LOG_ERR);
 	        return -1;
@@ -584,7 +584,7 @@ class BOM extends CommonObject
 	    {
 	        // Call trigger
 	        $result = $this->call_trigger('BOM_VALIDATE', $user);
-	        if ($result < 0) $error++;
+	        if ($result < 0) {$error++;}
 	        // End call triggers
 	    }
 
@@ -664,7 +664,7 @@ class BOM extends CommonObject
 
 		/*if (! ((empty($conf->global->MAIN_USE_ADVANCED_PERMS) && ! empty($user->rights->bom->write))
 		 || (! empty($conf->global->MAIN_USE_ADVANCED_PERMS) && ! empty($user->rights->bom->bom_advance->validate))))
-		 {
+		 
 		 $this->error='Permission denied';
 		 return -1;
 		 }*/
@@ -689,7 +689,7 @@ class BOM extends CommonObject
 
 		/*if (! ((empty($conf->global->MAIN_USE_ADVANCED_PERMS) && ! empty($user->rights->bom->write))
 		 || (! empty($conf->global->MAIN_USE_ADVANCED_PERMS) && ! empty($user->rights->bom->bom_advance->validate))))
-		 {
+		 
 		 $this->error='Permission denied';
 		 return -1;
 		 }*/
@@ -714,7 +714,7 @@ class BOM extends CommonObject
 
 		/*if (! ((empty($conf->global->MAIN_USE_ADVANCED_PERMS) && ! empty($user->rights->bom->write))
 		 || (! empty($conf->global->MAIN_USE_ADVANCED_PERMS) && ! empty($user->rights->bom->bom_advance->validate))))
-		 {
+		 
 		 $this->error='Permission denied';
 		 return -1;
 		 }*/
@@ -739,7 +739,7 @@ class BOM extends CommonObject
         global $dolibarr_main_authentication, $dolibarr_main_demo;
         global $menumanager;
 
-        if (!empty($conf->dol_no_mouse_hover)) $notooltip = 1; // Force disable tooltips
+        if (!empty($conf->dol_no_mouse_hover)) {$notooltip = 1; // Force disable tooltips}
 
         $result = '';
 
@@ -756,8 +756,8 @@ class BOM extends CommonObject
         {
 	        // Add param to save lastsearch_values or not
 	        $add_save_lastsearch_values = ($save_lastsearch_value == 1 ? 1 : 0);
-	        if ($save_lastsearch_value == -1 && preg_match('/list\.php/', $_SERVER["PHP_SELF"])) $add_save_lastsearch_values = 1;
-	        if ($add_save_lastsearch_values) $url .= '&save_lastsearch_values=1';
+	        if ($save_lastsearch_value == -1 && preg_match('/list\.php/', $_SERVER["PHP_SELF"])) {$add_save_lastsearch_values = 1;}
+	        if ($add_save_lastsearch_values) {$url .= '&save_lastsearch_values=1';}
         }
 
         $linkclose = '';
@@ -772,30 +772,30 @@ class BOM extends CommonObject
             $linkclose .= ' class="classfortooltip'.($morecss ? ' '.$morecss : '').'"';
 
             /*
-             $hookmanager->initHooks(array('bomdao'));
+             
              $parameters=array('id'=>$this->id);
              $reshook=$hookmanager->executeHooks('getnomurltooltip',$parameters,$this,$action);    // Note that $action and $object may have been modified by some hooks
              if ($reshook > 0) $linkclose = $hookmanager->resPrint;
              */
         }
-        else $linkclose = ($morecss ? ' class="'.$morecss.'"' : '');
+        else {$linkclose = ($morecss ? ' class="'.$morecss.'"' : '');}
 
 		$linkstart = '<a href="'.$url.'"';
 		$linkstart .= $linkclose.'>';
 		$linkend = '</a>';
 
 		$result .= $linkstart;
-		if ($withpicto) $result .= img_object(($notooltip ? '' : $label), ($this->picto ? $this->picto : 'generic'), ($notooltip ? (($withpicto != 2) ? 'class="paddingright"' : '') : 'class="'.(($withpicto != 2) ? 'paddingright ' : '').'classfortooltip"'), 0, 0, $notooltip ? 0 : 1);
-		if ($withpicto != 2) $result .= $this->ref;
+		if ($withpicto) {$result .= img_object(($notooltip ? '' : $label), ($this->picto ? $this->picto : 'generic'), ($notooltip ? (($withpicto != 2) ? 'class="paddingright"' : '') : 'class="'.(($withpicto != 2) ? 'paddingright ' : '').'classfortooltip"'), 0, 0, $notooltip ? 0 : 1);}
+		if ($withpicto != 2) {$result .= $this->ref;}
 		$result .= $linkend;
-		//if ($withpicto != 2) $result.=(($addlabel && $this->label) ? $sep . dol_trunc($this->label, ($addlabel > 1 ? $addlabel : 0)) : '');
+		
 
 		global $action, $hookmanager;
 		$hookmanager->initHooks(array('bomdao'));
 		$parameters = array('id'=>$this->id, 'getnomurl'=>$result);
 		$reshook = $hookmanager->executeHooks('getNomUrl', $parameters, $this, $action); // Note that $action and $object may have been modified by some hooks
-		if ($reshook > 0) $result = $hookmanager->resPrint;
-		else $result .= $hookmanager->resPrint;
+		if ($reshook > 0) {$result = $hookmanager->resPrint;}
+		else {$result .= $hookmanager->resPrint;}
 
 		return $result;
 	}
@@ -825,15 +825,15 @@ class BOM extends CommonObject
 		if (empty($this->labelStatus))
 		{
 			global $langs;
-			//$langs->load("mrp");
+			
 			$this->labelStatus[self::STATUS_DRAFT] = $langs->trans('Draft');
 			$this->labelStatus[self::STATUS_VALIDATED] = $langs->trans('Enabled');
 			$this->labelStatus[self::STATUS_CANCELED] = $langs->trans('Disabled');
 		}
 
 		$statusType = 'status'.$status;
-		if ($status == self::STATUS_VALIDATED) $statusType = 'status4';
-		if ($status == self::STATUS_CANCELED) $statusType = 'status6';
+		if ($status == self::STATUS_VALIDATED) {$statusType = 'status4';}
+		if ($status == self::STATUS_CANCELED) {$statusType = 'status6';}
 
 		return dolGetStatus($this->labelStatus[$status], $this->labelStatus[$status], '', $statusType, $mode);
 	}
@@ -973,7 +973,7 @@ class BOM extends CommonObject
 	{
 		global $conf, $langs;
 
-		//$conf->global->SYSLOG_FILE = 'DOL_DATA_ROOT/dolibarr_mydedicatedlofile.log';
+		
 
 		$error = 0;
 		$this->output = '';
@@ -1084,8 +1084,8 @@ class BOMLine extends CommonObjectLine
 
 		$this->db = $db;
 
-		if (empty($conf->global->MAIN_SHOW_TECHNICAL_ID) && isset($this->fields['rowid'])) $this->fields['rowid']['visible'] = 0;
-		if (empty($conf->multicompany->enabled) && isset($this->fields['entity'])) $this->fields['entity']['enabled'] = 0;
+		if (empty($conf->global->MAIN_SHOW_TECHNICAL_ID) && isset($this->fields['rowid'])) {$this->fields['rowid']['visible'] = 0;}
+		if (empty($conf->multicompany->enabled) && isset($this->fields['entity'])) {$this->fields['entity']['enabled'] = 0;}
 
 		// Unset fields that are disabled
 		foreach ($this->fields as $key => $val)
@@ -1118,7 +1118,7 @@ class BOMLine extends CommonObjectLine
 	 */
 	public function create(User $user, $notrigger = false)
 	{
-		if ($this->efficiency < 0 || $this->efficiency > 1) $this->efficiency = 1;
+		if ($this->efficiency < 0 || $this->efficiency > 1) {$this->efficiency = 1;}
 
 		return $this->createCommon($user, $notrigger);
 	}
@@ -1133,7 +1133,7 @@ class BOMLine extends CommonObjectLine
 	public function fetch($id, $ref = null)
 	{
 		$result = $this->fetchCommon($id, $ref);
-		//if ($result > 0 && ! empty($this->table_element_line)) $this->fetchLines();
+		
 		return $result;
 	}
 
@@ -1159,8 +1159,8 @@ class BOMLine extends CommonObjectLine
 		$sql = 'SELECT ';
 		$sql .= $this->getFieldList();
 		$sql .= ' FROM '.MAIN_DB_PREFIX.$this->table_element.' as t';
-		if ($this->ismultientitymanaged) $sql .= ' WHERE t.entity IN ('.getEntity($this->table_element).')';
-		else $sql .= ' WHERE 1 = 1';
+		if ($this->ismultientitymanaged) {$sql .= ' WHERE t.entity IN ('.getEntity($this->table_element).')';}
+		else {$sql .= ' WHERE 1 = 1';}
 		// Manage filter
 		$sqlwhere = array();
 		if (count($filter) > 0) {
@@ -1221,7 +1221,7 @@ class BOMLine extends CommonObjectLine
 	 */
 	public function update(User $user, $notrigger = false)
 	{
-		if ($this->efficiency < 0 || $this->efficiency > 1) $this->efficiency = 1;
+		if ($this->efficiency < 0 || $this->efficiency > 1) {$this->efficiency = 1;}
 
 		return $this->updateCommon($user, $notrigger);
 	}
@@ -1253,7 +1253,7 @@ class BOMLine extends CommonObjectLine
     {
         global $db, $conf, $langs, $hookmanager;
 
-        if (!empty($conf->dol_no_mouse_hover)) $notooltip = 1; // Force disable tooltips
+        if (!empty($conf->dol_no_mouse_hover)) {$notooltip = 1;} // Force disable tooltips
 
         $result = '';
 
@@ -1267,8 +1267,8 @@ class BOMLine extends CommonObjectLine
         {
 	        // Add param to save lastsearch_values or not
 	        $add_save_lastsearch_values = ($save_lastsearch_value == 1 ? 1 : 0);
-	        if ($save_lastsearch_value == -1 && preg_match('/list\.php/', $_SERVER["PHP_SELF"])) $add_save_lastsearch_values = 1;
-	        if ($add_save_lastsearch_values) $url .= '&save_lastsearch_values=1';
+	        if ($save_lastsearch_value == -1 && preg_match('/list\.php/', $_SERVER["PHP_SELF"])) {$add_save_lastsearch_values = 1;}
+	        if ($add_save_lastsearch_values) {$url .= '&save_lastsearch_values=1';}
         }
 
         $linkclose = '';
@@ -1283,30 +1283,29 @@ class BOMLine extends CommonObjectLine
             $linkclose .= ' class="classfortooltip'.($morecss ? ' '.$morecss : '').'"';
 
             /*
-             $hookmanager->initHooks(array('bomlinedao'));
+             
              $parameters=array('id'=>$this->id);
              $reshook=$hookmanager->executeHooks('getnomurltooltip',$parameters,$this,$action);    // Note that $action and $object may have been modified by some hooks
              if ($reshook > 0) $linkclose = $hookmanager->resPrint;
              */
         }
-        else $linkclose = ($morecss ? ' class="'.$morecss.'"' : '');
+        else {$linkclose = ($morecss ? ' class="'.$morecss.'"' : '');}
 
 		$linkstart = '<a href="'.$url.'"';
 		$linkstart .= $linkclose.'>';
 		$linkend = '</a>';
 
 		$result .= $linkstart;
-		if ($withpicto) $result .= img_object(($notooltip ? '' : $label), ($this->picto ? $this->picto : 'generic'), ($notooltip ? (($withpicto != 2) ? 'class="paddingright"' : '') : 'class="'.(($withpicto != 2) ? 'paddingright ' : '').'classfortooltip"'), 0, 0, $notooltip ? 0 : 1);
-		if ($withpicto != 2) $result .= $this->ref;
+		if ($withpicto) {$result .= img_object(($notooltip ? '' : $label), ($this->picto ? $this->picto : 'generic'), ($notooltip ? (($withpicto != 2) ? 'class="paddingright"' : '') : 'class="'.(($withpicto != 2) ? 'paddingright ' : '').'classfortooltip"'), 0, 0, $notooltip ? 0 : 1);}
+		if ($withpicto != 2) {$result .= $this->ref;}
 		$result .= $linkend;
-		//if ($withpicto != 2) $result.=(($addlabel && $this->label) ? $sep . dol_trunc($this->label, ($addlabel > 1 ? $addlabel : 0)) : '');
-
+		
 		global $action, $hookmanager;
 		$hookmanager->initHooks(array('bomlinedao'));
 		$parameters = array('id'=>$this->id, 'getnomurl'=>$result);
 		$reshook = $hookmanager->executeHooks('getNomUrl', $parameters, $this, $action); // Note that $action and $object may have been modified by some hooks
-		if ($reshook > 0) $result = $hookmanager->resPrint;
-		else $result .= $hookmanager->resPrint;
+		if ($reshook > 0) {$result = $hookmanager->resPrint;}
+		else {$result .= $hookmanager->resPrint;}
 
 		return $result;
     }
