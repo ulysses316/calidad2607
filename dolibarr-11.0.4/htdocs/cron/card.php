@@ -36,7 +36,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/cron.lib.php';
 // Load translation files required by the page
 $langs->loadLangs(array('admin', 'cron', 'members'));
 
-if (!$user->rights->cron->create) accessforbidden();
+if (!$user->rights->cron->create) {accessforbidden();}
 
 $id=GETPOST('id', 'int');
 $action=GETPOST('action', 'alpha');
@@ -122,8 +122,8 @@ if ($action == 'confirm_execute' && $confirm == "yes" && $user->rights->cron->ex
     		$res = $object->reprogram_jobs($user->login, $now);
     		if ($res > 0)
     		{
-    			if ($object->lastresult > 0) setEventMessages($langs->trans("JobFinished"), null, 'warnings');
-    			else setEventMessages($langs->trans("JobFinished"), null, 'mesgs');
+    			if ($object->lastresult > 0) {setEventMessages($langs->trans("JobFinished"), null, 'warnings');}
+    			else {setEventMessages($langs->trans("JobFinished"), null, 'mesgs');}
     			$action='';
     		}
     		else
@@ -322,8 +322,8 @@ if (($action=="create") || ($action=="edit"))
 		print '<input type="hidden" name="action" value="add">'."\n";
 	}
 
-	if ($action=="edit") dol_fiche_head($head, 'card', $langs->trans("CronTask"), 0, 'cron');
-	else dol_fiche_head('');
+	if ($action=="edit") {dol_fiche_head($head, 'card', $langs->trans("CronTask"), 0, 'cron');}
+	else {dol_fiche_head('');}
 
 	print '<table class="border centpercent">';
 
@@ -643,10 +643,10 @@ else
 	print '<tr><td class="titlefield">';
 	print $langs->trans('CronEvery')."</td>";
 	print "<td>";
-	if($object->unitfrequency == "60") print $langs->trans('CronEach')." ".($object->frequency)." ".$langs->trans('Minutes');
-	if($object->unitfrequency == "3600") print $langs->trans('CronEach')." ".($object->frequency)." ".$langs->trans('Hours');
-	if($object->unitfrequency == "86400") print $langs->trans('CronEach')." ".($object->frequency)." ".$langs->trans('Days');
-	if($object->unitfrequency == "604800") print $langs->trans('CronEach')." ".($object->frequency)." ".$langs->trans('Weeks');
+	if($object->unitfrequency == "60") {print $langs->trans('CronEach')." ".($object->frequency)." ".$langs->trans('Minutes');}
+	if($object->unitfrequency == "3600") {print $langs->trans('CronEach')." ".($object->frequency)." ".$langs->trans('Hours');}
+	if($object->unitfrequency == "86400") {print $langs->trans('CronEach')." ".($object->frequency)." ".$langs->trans('Days');}
+	if($object->unitfrequency == "604800") {print $langs->trans('CronEach')." ".($object->frequency)." ".$langs->trans('Weeks');}
 	print "</td></tr>";
 
 	print '<tr><td>';
@@ -680,13 +680,13 @@ else
 	print $langs->trans('CronDtNextLaunch');
 	print ' ('.$langs->trans('CronFrom').')';
 	print "</td><td>";
-	if (! $object->status) print $langs->trans("Disabled");
+	if (! $object->status) {print $langs->trans("Disabled");}
 	elseif (!empty($object->datenextrun)) { print img_picto('', 'object_calendarday').' '.dol_print_date($object->datenextrun, 'dayhoursec');}
 	else { print $langs->trans('CronNone'); }
 	if ($object->status == Cronjob::STATUS_ENABLED)
 	{
-		if ($object->maxrun && $object->nbrun >= $object->maxrun) print img_warning($langs->trans("MaxRunReached"));
-		elseif ($object->datenextrun && $object->datenextrun < $now) print img_warning($langs->trans("Late"));
+		if ($object->maxrun && $object->nbrun >= $object->maxrun) {print img_warning($langs->trans("MaxRunReached"));}
+		elseif ($object->datenextrun && $object->datenextrun < $now) {print img_warning($langs->trans("Late"));}
 	}
 	print "</td></tr>";
 
@@ -711,9 +711,9 @@ else
 
 	print '<tr><td>';
 	print $langs->trans('CronLastResult')."</td><td>";
-	if ($object->lastresult) print '<span class="error">';
+	if ($object->lastresult) {print '<span class="error">';}
 	print $object->lastresult;
-	if ($object->lastresult) print '</span>';
+	if ($object->lastresult) {print '</span>';}
 	print "</td></tr>";
 
 	print '<tr><td>';
@@ -734,7 +734,7 @@ else
 		print '<a class="butAction" href="'.$_SERVER['PHP_SELF'].'?action=edit&id='.$object->id.'">'.$langs->trans("Edit").'</a>';
 	}
 
-	if ((empty($user->rights->cron->execute)))
+	if (empty($user->rights->cron->execute))
 	{
 		print '<a class="butActionRefused classfortooltip" href="#" title="'.dol_escape_htmltag($langs->transnoentitiesnoconv("NotEnoughPermissions")).'">'.$langs->trans("CronExecute").'</a>';
 	}
