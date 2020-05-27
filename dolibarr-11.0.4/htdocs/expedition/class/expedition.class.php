@@ -753,7 +753,7 @@ class Expedition extends CommonObject
 					if ($qty <= 0) continue;
 					dol_syslog(get_class($this)."::valid movement index ".$i." ed.rowid=".$obj->rowid." edb.rowid=".$obj->edbrowid);
 
-					//var_dump($this->lines[$i]);
+					
 					$mouvS = new MouvementStock($this->db);
 					$mouvS->origin = &$this;
 
@@ -948,7 +948,7 @@ class Expedition extends CommonObject
 			{
 				// Check must be done for stock of product into warehouse if $entrepot_id defined
 				$product = new Product($this->db);
-				$result = $product->fetch($fk_product);
+				
 
 				if ($entrepot_id > 0) {
 					$product->load_stock('warehouseopen');
@@ -1006,7 +1006,7 @@ class Expedition extends CommonObject
 				{
 					// $value['q']=qty to move
 					// $value['id_batch']=id into llx_product_batch of record to move
-					//var_dump($value);
+					
 
 					$linebatch = new ExpeditionLineBatch($this->db);
 					$ret = $linebatch->fetchFromStock($value['id_batch']); // load serial, sellby, eatby
@@ -1034,7 +1034,7 @@ class Expedition extends CommonObject
 						}
 					}
 
-					//var_dump($linebatch);
+					
 				}
 			}
 			$line->entrepot_id = $linebatch->entrepot_id;
@@ -1046,7 +1046,7 @@ class Expedition extends CommonObject
 			if (empty($conf->global->MAIN_EXTRAFIELDS_DISABLED) && is_array($array_options) && count($array_options) > 0) // For avoid conflicts if trigger used
 				$line->array_options = $array_options;
 
-			//var_dump($line);
+			
 			$this->lines[$num] = $line;
 			return 1;
 		}
@@ -1312,7 +1312,7 @@ class Expedition extends CommonObject
 							{
 								// Check if there is no more shipment. If not, we can move back status of order to "validated" instead of "shipment in progress"
 								$this->$origin->loadExpeditions();
-								//var_dump($this->$origin->expeditions);exit;
+								
 								if (count($this->$origin->expeditions) <= 0)
 								{
 									$this->$origin->setStatut(Commande::STATUS_VALIDATED);
@@ -1590,8 +1590,8 @@ class Expedition extends CommonObject
 
 			if ($line->delete($user) > 0)
 			{
-				//$this->update_price(1);
-
+				
+				
 				$this->db->commit();
 				return 1;
 			}
@@ -2247,7 +2247,7 @@ class Expedition extends CommonObject
 						if ($qty <= 0) continue;
 						dol_syslog(get_class($this)."::reopen expedition movement index ".$i." ed.rowid=".$obj->rowid." edb.rowid=".$obj->edbrowid);
 
-						//var_dump($this->lines[$i]);
+						
 						$mouvS = new MouvementStock($this->db);
 						$mouvS->origin = &$this;
 
@@ -2742,13 +2742,9 @@ class ExpeditionLigne extends CommonObjectLine
 	public function update($user = null, $notrigger = 0)
 	{
 		global $conf;
-
 		$error = 0;
-
 		dol_syslog(get_class($this)."::update id=$this->id, entrepot_id=$this->entrepot_id, product_id=$this->fk_product, qty=$this->qty");
-
 		$this->db->begin();
-
 		// Clean parameters
 		if (empty($this->qty)) $this->qty = 0;
 		$qty = price2num($this->qty);
@@ -2791,7 +2787,6 @@ class ExpeditionLigne extends CommonObjectLine
 			}
 			$qty = price2num($this->detail_batch->qty);
 		}
-
 		// check parameters
 		if (!isset($this->id) || !isset($this->entrepot_id))
 		{
@@ -2800,19 +2795,15 @@ class ExpeditionLigne extends CommonObjectLine
 			$error++;
 			return -1;
 		}
-
 		// update lot
-
 		if (!empty($batch) && $conf->productbatch->enabled)
 		{
 			dol_syslog(get_class($this)."::update expedition batch id=$expedition_batch_id, batch_id=$batch_id, batch=$batch");
-
 			if (empty($batch_id) || empty($this->fk_product)) {
 				dol_syslog(get_class($this).'::update missing fk_origin_stock (batch_id) and/or fk_product', LOG_ERR);
 				$this->errors[] = 'ErrorMandatoryParametersNotProvided';
 				$error++;
 			}
-
 			// fetch remaining lot qty
 			require_once DOL_DOCUMENT_ROOT.'/expedition/class/expeditionbatch.class.php';
 			if (!$error && ($lotArray = ExpeditionLineBatch::fetchAll($this->db, $this->id)) < 0)
@@ -2831,9 +2822,7 @@ class ExpeditionLigne extends CommonObjectLine
 					}
 				}
 				$qty += $remainingQty;
-
 				//fetch lot details
-
 				// fetch from product_lot
 				require_once DOL_DOCUMENT_ROOT.'/product/stock/class/productlot.class.php';
 				$lot = new Productlot($this->db);
@@ -2848,7 +2837,6 @@ class ExpeditionLigne extends CommonObjectLine
 					$sql = "DELETE FROM ".MAIN_DB_PREFIX."expeditiondet_batch";
 					$sql .= " WHERE fk_expeditiondet = ".$this->id;
 					$sql .= " AND rowid = ".$expedition_batch_id;
-
 					if (!$this->db->query($sql))
 					{
 						$this->errors[] = $this->db->lasterror()." - sql=$sql";
@@ -2883,14 +2871,12 @@ class ExpeditionLigne extends CommonObjectLine
 			$sql .= " fk_entrepot = ".($this->entrepot_id > 0 ? $this->entrepot_id : 'null');
 			$sql .= " , qty = ".$qty;
 			$sql .= " WHERE rowid = ".$this->id;
-
 			if (!$this->db->query($sql))
 			{
 				$this->errors[] = $this->db->lasterror()." - sql=$sql";
 				$error++;
 			}
 		}
-
 		if (!$error)
 		{
 			if (empty($conf->global->MAIN_EXTRAFIELDS_DISABLED)) // For avoid conflicts if trigger used
