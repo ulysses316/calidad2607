@@ -49,10 +49,6 @@ $obj_facturation->calculTotaux();	// Redefine prix_total_ttc, prix_total_ht et m
 
 $total_ttc = $obj_facturation->prixTotalTtc();
 
-/*var_dump($obj_facturation);
-var_dump($_SESSION['poscart']);
-var_dump($total_ttc);
-exit;*/
 
 
 // Left area with selected articles (area for article, amount and payments)
@@ -60,7 +56,7 @@ print '<div class="inline-block" style="vertical-align: top">';
 print '<div class="principal">';
 
 $page=GETPOST('menutpl', 'alpha');
-if (empty($page)) $page='facturation';
+if (empty($page)) {$page='facturation';}
 
 if (in_array(
 		$page,

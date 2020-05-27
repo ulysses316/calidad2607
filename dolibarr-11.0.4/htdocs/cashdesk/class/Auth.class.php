@@ -95,9 +95,9 @@ class Auth
 		$test=true;
 
         // Authentication mode
-        if (empty($dolibarr_main_authentication)) $dolibarr_main_authentication='http,dolibarr';
+        if (empty($dolibarr_main_authentication)) {$dolibarr_main_authentication='http,dolibarr';}
         // Authentication mode: forceuser
-        if ($dolibarr_main_authentication == 'forceuser' && empty($dolibarr_auto_user)) $dolibarr_auto_user='auto';
+        if ($dolibarr_main_authentication == 'forceuser' && empty($dolibarr_auto_user)) {$dolibarr_auto_user='auto';}
         // Set authmode
         $authmode=explode(',', $dolibarr_main_authentication);
 
@@ -117,8 +117,8 @@ class Auth
         // If ok, the variable will be initialized login
         // If error, we will put error message in session under the name dol_loginmesg
         $goontestloop=false;
-        if (isset($_SERVER["REMOTE_USER"]) && in_array('http', $authmode)) $goontestloop=true;
-        if (isset($aLogin) || GETPOST('openid_mode', 'alpha', 1)) $goontestloop=true;
+        if (isset($_SERVER["REMOTE_USER"]) && in_array('http', $authmode)) {$goontestloop=true;}
+        if (isset($aLogin) || GETPOST('openid_mode', 'alpha', 1)) {$goontestloop=true;}
 
         if ($test && $goontestloop)
         {

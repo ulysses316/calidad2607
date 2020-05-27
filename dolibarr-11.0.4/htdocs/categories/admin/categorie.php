@@ -28,7 +28,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/categories.lib.php';
 
 
 if (!$user->admin)
-accessforbidden();
+{accessforbidden();}
 
 // Load translation files required by the page
 $langs->loadLangs(array("categories","admin"));

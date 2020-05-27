@@ -39,11 +39,11 @@ $langs->loadLangs(array("main", "bills", "banks"));
 <?php
 // Affichage de la tva par taux
 if ( $obj_facturation->montantTva() ) {
-	echo ('<tr><td class="resume_label">'.$langs->trans("VAT").'</td><td>'.price(price2num($obj_facturation->montantTva(), 'MT'), 0, $langs, 0, 0, -1, $conf->currency).'</td></tr>');
+	echo '<tr><td class="resume_label">'.$langs->trans("VAT").'</td><td>'.price(price2num($obj_facturation->montantTva(), 'MT'), 0, $langs, 0, 0, -1, $conf->currency).'</td></tr>';
 }
 else
 {
-	echo ('<tr><td class="resume_label">'.$langs->trans("VAT").'</td><td>'.$langs->trans("NoVAT").'</td></tr>');
+	echo '<tr><td class="resume_label">'.$langs->trans("VAT").'</td><td>'.$langs->trans("NoVAT").'</td></tr>';
 }
 ?>
 		<tr><td class="resume_label"><?php echo $langs->trans("TotalTTC"); ?> </td><td><?php echo price(price2num($obj_facturation->prixTotalTtc(), 'MT'), 0, $langs, 0, 0, -1, $conf->currency); ?></td></tr>
@@ -55,19 +55,25 @@ else
 				echo $langs->trans("Cash");
 				$filtre = 'courant=2';
 				if (!empty($_SESSION["CASHDESK_ID_BANKACCOUNT_CASH"]))
+				{
 					$selected = $_SESSION["CASHDESK_ID_BANKACCOUNT_CASH"];
+				}
 				break;
 			case 'CB':
 				echo $langs->trans("CreditCard");
 				$filtre = 'courant=1';
 				if (!empty($_SESSION["CASHDESK_ID_BANKACCOUNT_CB"]))
+				{
 					$selected = $_SESSION["CASHDESK_ID_BANKACCOUNT_CB"];
+				}
 				break;
 			case 'CHQ':
 				echo $langs->trans("Cheque");
 				$filtre = 'courant=1';
 				if (!empty($_SESSION["CASHDESK_ID_BANKACCOUNT_CHEQUE"]))
+				{
 					$selected = $_SESSION["CASHDESK_ID_BANKACCOUNT_CHEQUE"];
+				}
 				break;
 			case 'DIF':
 				echo $langs->trans("Reported");
@@ -85,14 +91,14 @@ else
 <?php
 // Affichage des infos en fonction du mode de paiement
 if ( $obj_facturation->getsetPaymentMode() == 'DIF' ) {
-	echo ('<tr><td class="resume_label">'.$langs->trans("DateDue").'</td><td>'.$obj_facturation->paiementLe().'</td></tr>');
+	echo '<tr><td class="resume_label">'.$langs->trans("DateDue").'</td><td>'.$obj_facturation->paiementLe().'</td></tr>';
 } else {
-	echo ('<tr><td class="resume_label">'.$langs->trans("Received").'</td><td>'.price(price2num($obj_facturation->montantEncaisse(), 'MT'), 0, $langs, 0, 0, -1, $conf->currency).'</td></tr>');
+	echo '<tr><td class="resume_label">'.$langs->trans("Received").'</td><td>'.price(price2num($obj_facturation->montantEncaisse(), 'MT'), 0, $langs, 0, 0, -1, $conf->currency).'</td></tr>';
 }
 
 // Affichage du montant rendu (reglement en especes)
 if ( $obj_facturation->montantRendu() ) {
-	echo ('<tr><td class="resume_label">'.$langs->trans("Change").'</td><td>'.price(price2num($obj_facturation->montantRendu(), 'MT'), 0, $langs, 0, 0, -1, $conf->currency).'</td></tr>');
+	echo '<tr><td class="resume_label">'.$langs->trans("Change").'</td><td>'.price(price2num($obj_facturation->montantRendu(), 'MT'), 0, $langs, 0, 0, -1, $conf->currency).'</td></tr>';
 }
 
 ?>

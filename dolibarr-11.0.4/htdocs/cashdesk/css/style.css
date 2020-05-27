@@ -272,7 +272,7 @@ p.titre {
 
 .select_design select {
 	border: 1px solid #6d3f6d;
-    font: 12px verdana,arial,helvetica;
+    font: 12px Verdana, Arial,Helvetica, Sans-serif;
 	background: #fff;
 }
 

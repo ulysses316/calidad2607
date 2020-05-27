@@ -36,7 +36,7 @@ $langs->load("categories");
 
 // Security check
 $socid = GETPOST('socid', 'int');
-if (!$user->rights->categorie->lire) accessforbidden();
+if (!$user->rights->categorie->lire) {accessforbidden();}
 
 $action		= GETPOST('action', 'alpha');
 $cancel		= GETPOST('cancel', 'alpha');
@@ -55,15 +55,15 @@ $parent = GETPOST('parent');
 
 if ($origin)
 {
-	if ($type == Categorie::TYPE_PRODUCT)     $idProdOrigin     = $origin;
-	if ($type == Categorie::TYPE_SUPPLIER)    $idSupplierOrigin = $origin;
-	if ($type == Categorie::TYPE_CUSTOMER)    $idCompanyOrigin  = $origin;
-	if ($type == Categorie::TYPE_MEMBER)      $idMemberOrigin   = $origin;
-	if ($type == Categorie::TYPE_CONTACT)     $idContactOrigin  = $origin;
-	if ($type == Categorie::TYPE_PROJECT)     $idProjectOrigin  = $origin;
+	if ($type == Categorie::TYPE_PRODUCT)     {$idProdOrigin     = $origin;}
+	if ($type == Categorie::TYPE_SUPPLIER)    {$idSupplierOrigin = $origin;}
+	if ($type == Categorie::TYPE_CUSTOMER)    {$idCompanyOrigin  = $origin;}
+	if ($type == Categorie::TYPE_MEMBER)      {$idMemberOrigin   = $origin;}
+	if ($type == Categorie::TYPE_CONTACT)     {$idContactOrigin  = $origin;}
+	if ($type == Categorie::TYPE_PROJECT)     {$idProjectOrigin  = $origin;}
 }
 
-if ($catorigin && $type == Categorie::TYPE_PRODUCT) $idCatOrigin = $catorigin;
+if ($catorigin && $type == Categorie::TYPE_PRODUCT) {$idCatOrigin = $catorigin;}
 
 $object = new Categorie($db);
 
@@ -135,10 +135,10 @@ if ($action == 'add' && $user->rights->categorie->creer)
 	$object->visible = $visible;
 	$object->type = $type;
 
-	if ($parent != "-1") $object->fk_parent = $parent;
+	if ($parent != "-1") {$object->fk_parent = $parent;}
 
 	$ret = $extrafields->setOptionalsFromPost(null, $object);
-	if ($ret < 0) $error++;
+	if ($ret < 0) {$error++;}
 
 	if (!$object->label)
 	{
@@ -226,10 +226,7 @@ $formother = new FormOther($db);
 $helpurl = '';
 llxHeader("", $langs->trans("Categories"), $helpurl);
 
-if ($user->rights->categorie->creer)
-{
-	// Create or add
-	if ($action == 'create' || $_POST["addcat"] == 'addcat')
+if ($user->rights->categorie->creer) && ($action == 'create' || $_POST["addcat"] == 'addcat')
 	{
 		dol_set_focus('#label');
 
@@ -241,8 +238,8 @@ if ($user->rights->categorie->creer)
 		print '<input type="hidden" name="id" value="'.GETPOST('origin', 'alpha').'">';
 		print '<input type="hidden" name="type" value="'.$type.'">';
 		print '<input type="hidden" name="backtopage" value="'.$backtopage.'">';
-		if ($origin) print '<input type="hidden" name="origin" value="'.$origin.'">';
-		if ($catorigin)	print '<input type="hidden" name="catorigin" value="'.$catorigin.'">';
+		if ($origin) {print '<input type="hidden" name="origin" value="'.$origin.'">';}
+		if ($catorigin)	{print '<input type="hidden" name="catorigin" value="'.$catorigin.'">';}
 
 		print load_fiche_titre($langs->trans("CreateCat"));
 

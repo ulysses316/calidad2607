@@ -41,7 +41,7 @@ $action = GETPOST('action', 'alpha');
 $cancel = GETPOST('cancel', 'alpha');
 $type   = GETPOST('type', 'aZ09');
 
-if (is_numeric($type)) $type = Categorie::$MAP_ID_TO_CODE[$type]; // For backward compatibility
+if (is_numeric($type)) {$type = Categorie::$MAP_ID_TO_CODE[$type]; // For backward compatibility}
 
 // Security check
 $fieldvalue = (!empty($id) ? $id : (!empty($ref) ? $ref : ''));
@@ -107,7 +107,7 @@ $cancel != $langs->trans("Cancel") &&
 
             // sauvegarde en base
             $res = $object->setMultiLangs($user);
-            if ($res < 0) $error++;
+            if ($res < 0) {$error++;}
         }
     }
 
@@ -148,7 +148,7 @@ $cancel != $langs->trans("Cancel") &&
 
     if (!$error) {
         $res = $object->setMultiLangs($user);
-        if ($res < 0)   $error++;
+        if ($res < 0)   {$error++;}
     }
 
     if ($error) {
@@ -172,15 +172,15 @@ $form = new Form($db);
 $formadmin = new FormAdmin($db);
 $formother = new FormOther($db);
 
-if ($type == Categorie::TYPE_PRODUCT)       $title = $langs->trans("ProductsCategoryShort");
-elseif ($type == Categorie::TYPE_SUPPLIER)  $title = $langs->trans("SuppliersCategoryShort");
-elseif ($type == Categorie::TYPE_CUSTOMER)  $title = $langs->trans("CustomersCategoryShort");
-elseif ($type == Categorie::TYPE_MEMBER)    $title = $langs->trans("MembersCategoryShort");
-elseif ($type == Categorie::TYPE_CONTACT)   $title = $langs->trans("ContactCategoriesShort");
-elseif ($type == Categorie::TYPE_ACCOUNT)   $title = $langs->trans("AccountsCategoriesShort");
-elseif ($type == Categorie::TYPE_PROJECT)   $title = $langs->trans("ProjectsCategoriesShort");
-elseif ($type == Categorie::TYPE_USER)      $title = $langs->trans("UsersCategoriesShort");
-else                                        $title = $langs->trans("Category");
+if ($type == Categorie::TYPE_PRODUCT)       {$title = $langs->trans("ProductsCategoryShort");}
+elseif ($type == Categorie::TYPE_SUPPLIER)  {$title = $langs->trans("SuppliersCategoryShort");}
+elseif ($type == Categorie::TYPE_CUSTOMER)  {$title = $langs->trans("CustomersCategoryShort");}
+elseif ($type == Categorie::TYPE_MEMBER)    {$title = $langs->trans("MembersCategoryShort");}
+elseif ($type == Categorie::TYPE_CONTACT)   {$title = $langs->trans("ContactCategoriesShort");}
+elseif ($type == Categorie::TYPE_ACCOUNT)   {$title = $langs->trans("AccountsCategoriesShort");}
+elseif ($type == Categorie::TYPE_PROJECT)   {$title = $langs->trans("ProjectsCategoriesShort");}
+elseif ($type == Categorie::TYPE_USER)      {$title = $langs->trans("UsersCategoriesShort");}
+else                                        {$title = $langs->trans("Category");}
 
 $head = categories_prepare_head($object, $type);
 
@@ -244,14 +244,12 @@ dol_fiche_end();
 
 print "\n<div class=\"tabsAction\">\n";
 
-if ($action == '')
-{
-    if ($user->rights->produit->creer || $user->rights->service->creer)
+if ($action == '') && ($user->rights->produit->creer || $user->rights->service->creer)
     {
         print '<a class="butAction" href="'.$_SERVER['PHP_SELF'].'?action=add&id='.$object->id.'&type='.$type.'">'.$langs->trans('Add').'</a>';
-        if ($cnt_trans > 0) print '<a class="butAction" href="'.$_SERVER['PHP_SELF'].'?action=edit&id='.$object->id.'&type='.$type.'">'.$langs->trans('Update').'</a>';
+        if ($cnt_trans > 0) {print '<a class="butAction" href="'.$_SERVER['PHP_SELF'].'?action=edit&id='.$object->id.'&type='.$type.'">'.$langs->trans('Update').'</a>';}
     }
-}
+
 
 print "\n</div>\n";
 
@@ -302,7 +300,7 @@ if ($action == 'edit')
 }
 elseif ($action != 'add')
 {
-    if ($cnt_trans) print '<div class="underbanner clearboth"></div>';
+    if ($cnt_trans) {print '<div class="underbanner clearboth"></div>';}
 
     if (!empty($object->multilangs))
 	{
@@ -320,7 +318,7 @@ elseif ($action != 'add')
 			print '</table>';
 		}
 	}
-	if (!$cnt_trans && $action != 'add') print '<div class="opacitymedium">'.$langs->trans('NoTranslation').'</div>';
+	if (!$cnt_trans && $action != 'add') {print '<div class="opacitymedium">'.$langs->trans('NoTranslation').'</div>';}
 }
 
 

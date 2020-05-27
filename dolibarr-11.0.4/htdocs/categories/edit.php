@@ -89,10 +89,13 @@ if ($action == 'update' && $user->rights->categorie->creer)
 	$object->visible        = $visible;
 
 	if ($parent != "-1")
+	{
 		$object->fk_parent = $parent;
+	}
 	else
+	{
 		$object->fk_parent = "";
-
+	}
 
 	if (empty($object->label))
 	{
@@ -103,7 +106,7 @@ if ($action == 'update' && $user->rights->categorie->creer)
 	if (!$error && empty($object->error))
 	{
 		$ret = $extrafields->setOptionalsFromPost(null, $object);
-		if ($ret < 0) $error++;
+		if ($ret < 0) {$error++;}
 
 		if (!$error && $object->update($user) > 0)
 		{

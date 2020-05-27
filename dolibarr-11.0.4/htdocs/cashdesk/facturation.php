@@ -40,12 +40,12 @@ if ( GETPOST('filtre', 'alpha') ) {
 	$ret=array(); $i=0;
 
 	$sql = "SELECT p.rowid, p.ref, p.label, p.tva_tx, p.fk_product_type";
-	if (! empty($conf->stock->enabled) && !empty($conf_fkentrepot)) $sql.= ", ps.reel";
+	if (! empty($conf->stock->enabled) && !empty($conf_fkentrepot)) {$sql.= ", ps.reel";}
 	$sql.= " FROM ".MAIN_DB_PREFIX."product as p";
-	if (! empty($conf->stock->enabled) && !empty($conf_fkentrepot)) $sql.= " LEFT JOIN ".MAIN_DB_PREFIX."product_stock as ps ON p.rowid = ps.fk_product AND ps.fk_entrepot = '".$conf_fkentrepot."'";
+	if (! empty($conf->stock->enabled) && !empty($conf_fkentrepot)) {$sql.= " LEFT JOIN ".MAIN_DB_PREFIX."product_stock as ps ON p.rowid = ps.fk_product AND ps.fk_entrepot = '".$conf_fkentrepot."'";}
 	$sql.= " WHERE p.entity IN (".getEntity('product').")";
 	$sql.= " AND p.tosell = 1";
-	if(!$conf->global->CASHDESK_SERVICES) $sql.= " AND p.fk_product_type = 0";
+	if(!$conf->global->CASHDESK_SERVICES) {$sql.= " AND p.fk_product_type = 0";}
 	$sql.= " AND (";
 	$sql.= "p.ref LIKE '%".$db->escape(GETPOST('filtre'))."%' OR p.label LIKE '%".$db->escape(GETPOST('filtre'))."%'";
 	if (! empty($conf->barcode->enabled))
@@ -92,12 +92,12 @@ if ( GETPOST('filtre', 'alpha') ) {
 	$i=0;
 
 	$sql = "SELECT p.rowid, ref, label, tva_tx, p.fk_product_type";
-	if (! empty($conf->stock->enabled) && !empty($conf_fkentrepot)) $sql.= ", ps.reel";
+	if (! empty($conf->stock->enabled) && !empty($conf_fkentrepot)) {$sql.= ", ps.reel";}
 	$sql.= " FROM ".MAIN_DB_PREFIX."product as p";
-	if (! empty($conf->stock->enabled) && !empty($conf_fkentrepot)) $sql.= " LEFT JOIN ".MAIN_DB_PREFIX."product_stock as ps ON p.rowid = ps.fk_product AND ps.fk_entrepot = '".$conf_fkentrepot."'";
+	if (! empty($conf->stock->enabled) && !empty($conf_fkentrepot)) {$sql.= " LEFT JOIN ".MAIN_DB_PREFIX."product_stock as ps ON p.rowid = ps.fk_product AND ps.fk_entrepot = '".$conf_fkentrepot."'";}
 	$sql.= " WHERE p.entity IN (".getEntity('product').")";
 	$sql.= " AND p.tosell = 1";
-	if(!$conf->global->CASHDESK_SERVICES) $sql.= " AND p.fk_product_type = 0";
+	if(!$conf->global->CASHDESK_SERVICES) {$sql.= " AND p.fk_product_type = 0";}
 	$sql.= " ORDER BY p.label";
 
 	dol_syslog($sql);
@@ -123,7 +123,7 @@ if ( GETPOST('filtre', 'alpha') ) {
 	$tab_designations=$ret;
 }
 
-//$nbr_enreg = count($tab_designations);
+
 
 if ( $nbr_enreg > 1 )
 {
