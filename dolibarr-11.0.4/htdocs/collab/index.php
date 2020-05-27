@@ -31,7 +31,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
 // Load translation files required by the page
 $langs->loadLangs(array("admin", "other", "website"));
 
-if (!$user->admin) accessforbidden();
+if (!$user->admin) {accessforbidden();}
 
 $conf->dol_hide_leftmenu = 1; // Force hide of left menu.
 
@@ -51,7 +51,7 @@ if (GETPOST('setashome')) { $action = 'setashome'; }
 if (GETPOST('editmeta')) { $action = 'editmeta'; }
 if (GETPOST('editcontent')) { $action = 'editcontent'; }
 
-if (empty($action)) $action = 'preview';
+if (empty($action)) {$action = 'preview';}
 
 
 
@@ -60,8 +60,8 @@ if (empty($action)) $action = 'preview';
  * Actions
  */
 
-if (GETPOST('refreshsite')) $pageid = 0; // If we change the site, we reset the pageid.
-if (GETPOST('refreshpage')) $action = 'preview';
+if (GETPOST('refreshsite')) {$pageid = 0;} // If we change the site, we reset the pageid.
+if (GETPOST('refreshpage')) }$action = 'preview';}
 
 
 // Add a collab page
@@ -163,9 +163,9 @@ if ($action == 'create')
 
 // Add a margin under toolbar ?
 $style = '';
-if ($action != 'preview' && $action != 'editcontent') $style = ' margin-bottom: 5px;';
+if ($action != 'preview' && $action != 'editcontent') {$style = ' margin-bottom: 5px;';}
 
-//var_dump($objectpage);exit;
+
 print '<div class="centpercent websitebar">';
 
 
