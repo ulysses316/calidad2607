@@ -26,14 +26,14 @@
 // This script is called with a POST method.
 // Directory to scan (full path) is inside POST['dir'].
 
-if (! defined('NOTOKENRENEWAL')) define('NOTOKENRENEWAL', 1); // Disables token renewal
-if (! defined('NOREQUIREMENU')) define('NOREQUIREMENU', '1');
-if (! defined('NOREQUIREHTML')) define('NOREQUIREHTML', '1');
+if (! defined('NOTOKENRENEWAL')) {define('NOTOKENRENEWAL', 1);} // Disables token renewal
+if (! defined('NOREQUIREMENU')) {define('NOREQUIREMENU', '1');}
+if (! defined('NOREQUIREHTML')) {define('NOREQUIREHTML', '1');}
 
 
 require '../../main.inc.php';
 
-if(empty($conf->global->BLOCKEDLOG_AUTHORITY_URL)) exit('BLOCKEDLOG_AUTHORITY_URL not set');
+if(empty($conf->global->BLOCKEDLOG_AUTHORITY_URL)) {exit('BLOCKEDLOG_AUTHORITY_URL not set');}
 
 require_once DOL_DOCUMENT_ROOT.'/blockedlog/class/blockedlog.class.php';
 require_once DOL_DOCUMENT_ROOT.'/blockedlog/class/authority.class.php';
@@ -56,5 +56,5 @@ $hash = $auth->getBlockchainHash();
 $url = $conf->global->BLOCKEDLOG_AUTHORITY_URL.'/blockedlog/ajax/authority.php?s='.$auth->signature.'&h='.$hash;
 
 $res = file_get_contents($url);
-//echo $url;
+
 echo $res;
