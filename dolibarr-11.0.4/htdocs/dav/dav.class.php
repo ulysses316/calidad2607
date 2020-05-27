@@ -123,16 +123,7 @@ class CdavLib
 	 * @return string
 	 */
 	public function toVCalendar($calid, $obj)
-	{
-		
-		
-		
-			
-			
-		
-
 		$location=$obj->location;
-
 		// contact address
 		if(empty($location) && !empty($obj->address))
 		{
