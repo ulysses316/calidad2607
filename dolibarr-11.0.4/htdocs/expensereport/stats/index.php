@@ -52,7 +52,7 @@ $result = restrictedArea($user, 'expensereport', $id, '');
 
 $nowyear=strftime("%Y", dol_now());
 $year = GETPOST('year')>0?GETPOST('year'):$nowyear;
-//$startyear=$year-2;
+
 $startyear=$year-1;
 $endyear=$year;
 
@@ -79,9 +79,9 @@ if ($object_status != '' && $object_status >= -1) $stats->where .= ' AND e.fk_st
 
 // Build graphic number of object
 // $data = array(array('Lib',val1,val2,val3),...)
-//print "$endyear, $startyear";
+
 $data = $stats->getNbByMonthWithPrevYear($endyear, $startyear);
-//var_dump($data);
+
 
 $filenamenb = $dir."/tripsexpensesnbinyear-".$year.".png";
 $fileurlnb = DOL_URL_ROOT.'/viewimage.php?modulepart=tripsexpensesstats&amp;file=tripsexpensesnbinyear-'.$year.'.png';
@@ -112,7 +112,7 @@ if (! $mesg)
 
 // Build graphic amount of object
 $data = $stats->getAmountByMonthWithPrevYear($endyear, $startyear);
-//var_dump($data);
+
 // $data = array(array('Lib',val1,val2,val3),...)
 
 $filenameamount = $dir."/tripsexpensesamountinyear-".$year.".png";
@@ -218,7 +218,7 @@ print '<table class="noborder centpercent">';
 print '<tr class="liste_titre"><td class="liste_titre" colspan="2">'.$langs->trans("Filter").'</td></tr>';
 // Company
 /*
-print '<tr><td>'.$langs->trans("ThirdParty").'</td><td>';
+
 print $form->select_company($socid,'socid','',1,1,0,array(),0,'','style="width: 95%"');
 print '</td></tr>';
 */

@@ -102,7 +102,7 @@ include DOL_DOCUMENT_ROOT.'/core/actions_fetchobject.inc.php'; // Must be includ
 $hookmanager->initHooks(array('expeditioncard', 'globalcard'));
 
 $permissiondellink = $user->rights->expedition->livraison->creer; // Used by the include of actions_dellink.inc.php
-//var_dump($object->lines[0]->detail_batch);
+
 
 
 /*
@@ -252,7 +252,7 @@ if (empty($reshook))
     				    $sub_qty[$j]['id_batch'] = GETPOST($batch, 'int'); // the id into llx_product_batch of stock record to move
     					$subtotalqty += $sub_qty[$j]['q'];
 
-    					//var_dump($qty);var_dump($batch);var_dump($sub_qty[$j]['q']);var_dump($sub_qty[$j]['id_batch']);
+    					
 
     					$j++;
     					$batch = "batchl".$i."_".$j;
@@ -297,7 +297,7 @@ if (empty($reshook))
 			}
 			else
 			{
-			    //var_dump(GETPOST($qty,'int')); var_dump($_POST); var_dump($batch);exit;
+			    
 				//shipment line for product with no batch management and no multiple stock location
 				if (GETPOST($qty, 'int') > 0) $totalqty += GETPOST($qty, 'int');
 			}
@@ -313,11 +313,11 @@ if (empty($reshook))
 			}
 	    }
 
-	    //var_dump($batch_line[2]);
+	    
 
 	    if ($totalqty > 0)		// There is at least one thing to ship
 	    {
-	        //var_dump($_POST);exit;
+	        
 	        for ($i = 0; $i < $num; $i++)
 	        {
 	            $qty = "qtyl".$i;
@@ -477,7 +477,7 @@ if (empty($reshook))
 	}
 	// TODO add alternative status
 	/*elseif ($action == 'reopen' && (! empty($user->rights->expedition->creer) || ! empty($user->rights->expedition->shipping_advance->validate)))
-	{
+	
 	    $result = $object->setStatut(0);
 	    if ($result < 0)
 	    {
@@ -487,7 +487,7 @@ if (empty($reshook))
 
 	elseif ($action == 'setdate_livraison' && $user->rights->expedition->creer)
 	{
-	    //print "x ".$_POST['liv_month'].", ".$_POST['liv_day'].", ".$_POST['liv_year'];
+	    
 	    $datedelivery = dol_mktime(GETPOST('liv_hour', 'int'), GETPOST('liv_min', 'int'), 0, GETPOST('liv_month', 'int'), GETPOST('liv_day', 'int'), GETPOST('liv_year', 'int'));
 
 	    $object->fetch($id);
@@ -1151,7 +1151,7 @@ if ($action == 'create')
 	                {
 	                    $product->fetch($line->fk_product);
 	                    $product->load_stock('warehouseopen'); // Load all $product->stock_warehouse[idwarehouse]->detail_batch
-	                    //var_dump($product->stock_warehouse[1]);
+	                    
 
 	                    print '<td>';
 	                    print '<a name="'.$line->rowid.'"></a>'; // ancre pour retourner sur la ligne
@@ -1263,7 +1263,7 @@ if ($action == 'create')
 
 										if ($tmpentrepot_id > 0 && $tmpentrepot_id == $warehouse_id)
 										{
-											//print $stock.' '.$quantityToBeDelivered;
+											
 											if ($stock < $quantityToBeDelivered)
 											{
 												print ' '.img_warning($langs->trans("StockTooLow")); // Stock too low for this $warehouse_id but you can change warehouse
@@ -1289,7 +1289,7 @@ if ($action == 'create')
 								{
 									foreach ($prods_arbo as $key => $value)
 									{
-										//print $value[0];
+										
 										$img = '';
 										if ($value['stock'] < $value['stock_alert'])
 										{
@@ -1327,7 +1327,7 @@ if ($action == 'create')
 							{
 								foreach ($product->stock_warehouse[$warehouse_id]->detail_batch as $dbatch)	// $dbatch is instance of Productbatch
 								{
-									//var_dump($dbatch);
+									
 									$batchStock = + $dbatch->qty; // To get a numeric
 									$deliverableQty = min($quantityToBeDelivered, $batchStock);
 									print '<!-- subj='.$subj.'/'.$nbofsuggested.' --><tr '.((($subj + 1) == $nbofsuggested) ? $bc[$var] : '').'>';
@@ -1446,7 +1446,7 @@ if ($action == 'create')
 								{
 									foreach ($prods_arbo as $key => $value)
 									{
-										//print $value[0];
+										
 										$img = '';
 										if ($value['stock'] < $value['stock_alert'])
 										{
@@ -1489,7 +1489,7 @@ if ($action == 'create')
 								if (($stock_warehouse->real > 0) && (count($stock_warehouse->detail_batch))) {
 							        foreach ($stock_warehouse->detail_batch as $dbatch)
 									{
-										//var_dump($dbatch);
+										
 										$batchStock = + $dbatch->qty; // To get a numeric
 										$deliverableQty = min($quantityToBeDelivered, $batchStock);
 										if ($deliverableQty < 0) $deliverableQty = 0;
@@ -1504,7 +1504,7 @@ if ($action == 'create')
 										print '<!-- Show details of lot -->';
 										print '<input name="batchl'.$indiceAsked.'_'.$subj.'" type="hidden" value="'.$dbatch->id.'">';
 
-										//print '|'.$line->fk_product.'|'.$dbatch->batch.'|<br>';
+										
 										print $langs->trans("Batch").': ';
 										$result = $productlotObject->fetch(0, $line->fk_product, $dbatch->batch);
 										if ($result > 0) print $productlotObject->getNomUrl(1);
@@ -1515,7 +1515,7 @@ if ($action == 'create')
 										{
 											$quantityToBeDelivered = 0;
 										}
-										//dol_syslog('deliverableQty = '.$deliverableQty.' batchStock = '.$batchStock);
+										
 										$subj++;
 										print '</td></tr>';
 									}
@@ -1569,13 +1569,13 @@ if ($action == 'create')
 					// Line extrafield
 					if (! empty($extrafields))
 					{
-						//var_dump($line);
+						
 						$colspan=5;
 						$expLine = new ExpeditionLigne($db);
 
 						$srcLine = new OrderLine($db);
 						$srcLine->fetch_optionals($line->id); // fetch extrafields also available in orderline
-						//$line->fetch_optionals($line->id);
+						
 						$line->array_options = array_merge($line->array_options, $srcLine->array_options);
 
 						print $expLine->showOptionals($extrafields, 'edit', array('style'=>'class="drag drop oddeven"', 'colspan'=>$colspan), $indiceAsked, '', empty($conf->global->MAIN_EXTRAFIELDS_IN_ONE_TD) ? 0 : 1);
@@ -1736,7 +1736,7 @@ elseif ($id || $ref)
                     $morehtmlref .= '<a class="editfielda" href="'.$_SERVER['PHP_SELF'].'?action=classify&amp;id='.$object->id.'">'.img_edit($langs->transnoentitiesnoconv('SetProject')).'</a> : ';
                 }
                 if ($action == 'classify') {
-                    // $morehtmlref.=$form->form_project($_SERVER['PHP_SELF'] . '?id=' . $object->id, $object->socid, $object->fk_project, 'projectid', 0, 0, 1, 1);
+                    
                     $morehtmlref .= '<form method="post" action="'.$_SERVER['PHP_SELF'].'?id='.$object->id.'">';
                     $morehtmlref .= '<input type="hidden" name="action" value="classin">';
                     $morehtmlref .= '<input type="hidden" name="token" value="'.newToken().'">';
@@ -1914,7 +1914,7 @@ elseif ($id || $ref)
 		{
 			if ($calculatedVolume) print ' ('.$langs->trans("SumOfProductVolumes").': ';
 			print showDimensionInBestUnit($totalVolume, 0, "volume", $langs, isset($conf->global->MAIN_VOLUME_DEFAULT_ROUND)?$conf->global->MAIN_VOLUME_DEFAULT_ROUND:-1, isset($conf->global->MAIN_VOLUME_DEFAULT_UNIT)?$conf->global->MAIN_VOLUME_DEFAULT_UNIT:'no');
-			//if (empty($calculatedVolume)) print ' ('.$langs->trans("Calculated").')';
+			
 			if ($calculatedVolume) print ')';
 		}
 		print "</td>\n";
@@ -2083,7 +2083,7 @@ elseif ($id || $ref)
 		}
 		print '<td class="center linecolweight">'.$langs->trans("CalculatedWeight").'</td>';
 		print '<td class="center linecolvolume">'.$langs->trans("CalculatedVolume").'</td>';
-		//print '<td class="center">'.$langs->trans("Size").'</td>';
+		
 		if ($object->statut == 0)
 		{
 			print '<td class="linecoledit"></td>';
@@ -2113,19 +2113,19 @@ elseif ($id || $ref)
     		$sql = "SELECT obj.rowid, obj.fk_product, obj.label, obj.description, obj.product_type as fk_product_type, obj.qty as qty_asked, obj.date_start, obj.date_end";
     		$sql .= ", ed.rowid as shipmentline_id, ed.qty as qty_shipped, ed.fk_expedition as expedition_id, ed.fk_origin_line, ed.fk_entrepot";
     		$sql .= ", e.rowid as shipment_id, e.ref as shipment_ref, e.date_creation, e.date_valid, e.date_delivery, e.date_expedition";
-    		//if ($conf->livraison_bon->enabled) $sql .= ", l.rowid as livraison_id, l.ref as livraison_ref, l.date_delivery, ld.qty as qty_received";
+    		
     		$sql .= ', p.label as product_label, p.ref, p.fk_product_type, p.rowid as prodid, p.tobatch as product_tobatch';
     		$sql .= ', p.description as product_desc';
     		$sql .= " FROM ".MAIN_DB_PREFIX."expeditiondet as ed";
     		$sql .= ", ".MAIN_DB_PREFIX."expedition as e";
     		$sql .= ", ".MAIN_DB_PREFIX.$origin."det as obj";
-    		//if ($conf->livraison_bon->enabled) $sql .= " LEFT JOIN ".MAIN_DB_PREFIX."livraison as l ON l.fk_expedition = e.rowid LEFT JOIN ".MAIN_DB_PREFIX."livraisondet as ld ON ld.fk_livraison = l.rowid  AND obj.rowid = ld.fk_origin_line";
+    		
     		$sql .= " LEFT JOIN ".MAIN_DB_PREFIX."product as p ON obj.fk_product = p.rowid";
     		$sql .= " WHERE e.entity IN (".getEntity('expedition').")";
     		$sql .= " AND obj.fk_".$origin." = ".$origin_id;
     		$sql .= " AND obj.rowid = ed.fk_origin_line";
     		$sql .= " AND ed.fk_expedition = e.rowid";
-    		//if ($filter) $sql.= $filter;
+    		
     		$sql .= " ORDER BY obj.fk_product";
 
     		dol_syslog("get list of shipment lines", LOG_DEBUG);
@@ -2146,7 +2146,7 @@ elseif ($id || $ref)
         		    $i++;
     		    }
     		}
-    		//var_dump($alreadysent);
+    		
 		}
 
 		print '<tbody>';
@@ -2423,7 +2423,7 @@ elseif ($id || $ref)
 				print '</td>';
 
 				// Size
-				//print '<td class="center">'.$lines[$i]->volume*$lines[$i]->qty_shipped.' '.measuringUnitString(0, "volume", $lines[$i]->volume_units).'</td>';
+				
 
 				if ($action == 'editline' && $lines[$i]->id == $line_id)
 				{
@@ -2552,7 +2552,7 @@ elseif ($id || $ref)
 			}
 
 			// This is just to generate a delivery receipt
-			//var_dump($object->linkedObjectsIds['delivery']);
+			
 			if ($conf->livraison_bon->enabled && ($object->statut == Expedition::STATUS_VALIDATED || $object->statut == Expedition::STATUS_CLOSED) && $user->rights->expedition->livraison->creer && empty($object->linkedObjectsIds['delivery']))
 			{
 				print '<a class="butAction" href="'.$_SERVER["PHP_SELF"].'?id='.$object->id.'&amp;action=create_delivery">'.$langs->trans("CreateDeliveryOrder").'</a>';
@@ -2603,7 +2603,7 @@ elseif ($id || $ref)
 
 
 		// Show links to link elements
-		//$linktoelem = $form->showLinkToObjectBlock($object, null, array('order'));
+		
 		$somethingshown = $form->showLinkedObjectBlock($object, '');
 
 

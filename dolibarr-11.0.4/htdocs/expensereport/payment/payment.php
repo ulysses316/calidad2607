@@ -3,10 +3,6 @@
  * Copyright (C) 2015       Laurent Destailleur     <eldy@users.sourceforge.net>
  * Copyright (C) 2018       Frédéric France         <frederic.france@netlogic.fr>
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -211,8 +207,7 @@ if ($action == 'create' || empty($action))
     dol_fiche_head(null, '0', '', -1);
 
     $linkback = '';
-    // $linkback = '<a href="' . DOL_URL_ROOT . '/expensereport/payment/list.php">' . $langs->trans("BackToList") . '</a>';
-
+    
     dol_banner_tab($expensereport, 'ref', $linkback, 1, 'ref', 'ref', '');
 
     print '<div class="fichecenter">';

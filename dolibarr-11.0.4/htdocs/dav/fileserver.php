@@ -24,7 +24,6 @@
  *      \ingroup    dav
  *      \brief      Server DAV
  */
-
 if (! defined('NOTOKENRENEWAL')) {define('NOTOKENRENEWAL', '1');}
 if (! defined('NOREQUIREMENU'))  {define('NOREQUIREMENU', '1');} // If there is no menu to show
 if (! defined('NOREQUIREHTML'))  {define('NOREQUIREHTML', '1');} // If we don't need to load the html.form.class.php
@@ -65,7 +64,7 @@ if (! empty($conf->global->DAV_RESTRICT_ON_IP))
 		dol_syslog('Remote ip is '.$ipremote.', not into list '.$conf->global->DAV_RESTRICT_ON_IP);
 		print 'DAV not allowed from the IP '.$ipremote;
 		header('HTTP/1.1 503 DAV not allowed from your IP '.$ipremote);
-	
+
 		exit(0);
 	}
 }
@@ -78,7 +77,7 @@ $publicDir = $conf->dav->multidir_output[$entity].'/public';
 $privateDir = $conf->dav->multidir_output[$entity].'/private';
 $ecmDir = $conf->ecm->multidir_output[$entity];
 $tmpDir = $conf->dav->multidir_output[$entity];     // We need root dir, not a dir that can be deleted
-//var_dump($tmpDir);mkdir($tmpDir);exit;
+
 
 
 // Authentication callback function
@@ -106,9 +105,11 @@ $authBackend = new \Sabre\DAV\Auth\Backend\BasicCallBack(function ($username, $p
 	// Authentication mode
 	if (empty($dolibarr_main_authentication)) {$dolibarr_main_authentication='dolibarr';}
 
+
 	// Authentication mode: forceuser
 	if ($dolibarr_main_authentication == 'forceuser')
 	{
+
 		if (empty($dolibarr_auto_user)) {$dolibarr_auto_user='auto';}
 		if ($dolibarr_auto_user != $username)
 		{
@@ -167,14 +168,13 @@ if (! empty($conf->ecm->enabled) && ! empty($conf->global->DAV_ALLOW_ECM_DIR))
 
 // /calendars
 
-
-
 // The rootnode needs in turn to be passed to the server class
 $server = new \Sabre\DAV\Server($nodes);
 
 // If you want to run the SabreDAV server in a custom location (using mod_rewrite for instance)
 // You can override the baseUri here.
 $baseUri = DOL_URL_ROOT.'/dav/fileserver.php/';
+
 if (isset($baseUri)) {$server->setBaseUri($baseUri);}
 
 // Add authentication function
@@ -199,16 +199,6 @@ if (empty($conf->global->DAV_DISABLE_BROWSER))
 }
 
 // Automatically guess (some) contenttypes, based on extension
-
-
-
-//$server->addPlugin(new \Sabre\DAVACL\Plugin());
-
-// Temporary file filter
-
-
-
-
 
 // And off we go!
 $server->exec();
