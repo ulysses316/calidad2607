@@ -145,7 +145,7 @@ if ($action == 'initbarcodeproducts')
 						$result=$productstatic->setValueFrom('barcode', $nextvalue, '', '', 'text', '', $user, 'PRODUCT_MODIFY');
 
 						$nbtry++;
-						if ($result > 0) $nbok++;
+						if {($result > 0) $nbok++;}
 					}
 
 					$i++;
@@ -165,7 +165,7 @@ if ($action == 'initbarcodeproducts')
 
 		if (! $error)
 		{
-			//$db->rollback();
+			
 			$db->commit();
 		}
 		else
@@ -183,8 +183,8 @@ if ($action == 'initbarcodeproducts')
  * View
  */
 
-if (!$user->admin) accessforbidden();
-if (empty($conf->barcode->enabled)) accessforbidden();
+if {(!$user->admin) accessforbidden();}
+if {(empty($conf->barcode->enabled)) accessforbidden();}
 
 $form=new Form($db);
 
@@ -196,7 +196,7 @@ print '<br>';
 print $langs->trans("MassBarcodeInitDesc").'<br>';
 print '<br>';
 
-//print img_picto('','puce').' '.$langs->trans("PrintsheetForOneBarCode").'<br>';
+
 //print '<br>';
 
 print '<form action="'.$_SERVER["PHP_SELF"].'" method="POST">';
@@ -221,7 +221,7 @@ if ($conf->societe->enabled)
 		$obj=$db->fetch_object($resql);
 		$nbno=$obj->nb;
 	}
-	else dol_print_error($db);
+	else {dol_print_error($db);}
 
 	$sql="SELECT count(rowid) as nb FROM ".MAIN_DB_PREFIX."societe";
 	$resql=$db->query($sql);
@@ -230,7 +230,7 @@ if ($conf->societe->enabled)
 		$obj=$db->fetch_object($resql);
 		$nbtotal=$obj->nb;
 	}
-	else dol_print_error($db);
+	else {dol_print_error($db);}
 
 	print $langs->trans("CurrentlyNWithoutBarCode", $nbno, $nbtotal, $langs->transnoentitiesnoconv("ThirdParties")).'<br>'."\n";
 
@@ -275,7 +275,7 @@ if ($conf->product->enabled || $conf->product->service)
 			$i++;
 		}
 	}
-	else dol_print_error($db);
+	else {dol_print_error($db);}
 
 	$sql="SELECT count(rowid) as nb FROM ".MAIN_DB_PREFIX."product";
 	$resql=$db->query($sql);
@@ -284,7 +284,7 @@ if ($conf->product->enabled || $conf->product->service)
 		$obj=$db->fetch_object($resql);
 		$nbtotal=$obj->nb;
 	}
-	else dol_print_error($db);
+	else {dol_print_error($db);}
 
 	print $langs->trans("CurrentlyNWithoutBarCode", $nbno, $nbtotal, $langs->transnoentitiesnoconv("ProductsOrServices")).'<br>'."\n";
 
@@ -307,7 +307,7 @@ if ($conf->product->enabled || $conf->product->service)
 	}
 
 	print '<br>';
-	//print '<input type="checkbox" id="erasealreadyset" name="erasealreadyset"> '.$langs->trans("ResetBarcodeForAllRecords").'<br>';
+	
 	$moretags1=(($disabled||$disabled1)?' disabled title="'.dol_escape_htmltag($titleno).'"':'');
 	print '<input class="button" type="submit" name="submitformbarcodeproductgen" id="submitformbarcodeproductgen" value="'.$langs->trans("InitEmptyBarCode", min($maxperinit, $nbno)).'"'.$moretags1.'>';
 	$moretags2=(($nbno == $nbtotal)?' disabled':'');
