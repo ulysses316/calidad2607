@@ -33,7 +33,7 @@ $langs->load('members');
 $langs->load('datapolicy@datapolicy');
 
 // Access control
-if (!$user->admin) accessforbidden();
+if (!$user->admin) {accessforbidden();}
 
 // Parameters
 $action = GETPOST('action', 'alpha');

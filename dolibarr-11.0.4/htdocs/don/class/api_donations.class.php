@@ -77,7 +77,7 @@ class Donations extends DolibarrApi
 		}
 
 		// Add external contacts ids
-		//$this->don->contacts_ids = $this->don->liste_contact(-1,'external',1);
+		
 		//$this->don->fetchObjectLinked();
 		return $this->_cleanObjectDatas($this->don);
 	}
@@ -152,7 +152,7 @@ class Donations extends DolibarrApi
                 $don_static = new Don($db);
                 if($don_static->fetch($obj->rowid)) {
                     // Add external contacts ids
-                    //$don_static->contacts_ids = $don_static->liste_contact(-1, 'external', 1);
+                   
                     $obj_ret[] = $this->_cleanObjectDatas($don_static);
                 }
                 $i++;
@@ -185,7 +185,7 @@ class Donations extends DolibarrApi
         foreach ($request_data as $field => $value) {
             $this->don->$field = $value;
         }
-        /*if (isset($request_data["lines"])) {
+        
           $lines = array();
           foreach ($request_data["lines"] as $line) {
             array_push($lines, (object) $line);

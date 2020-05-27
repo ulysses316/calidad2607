@@ -30,7 +30,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
 $langs->loadLangs(array('admin', 'cron'));
 
 // Security check
-if (!$user->rights->cron->read) accessforbidden();
+if (!$user->rights->cron->read) {accessforbidden();}
 
 $id=GETPOST('id', 'int');
 

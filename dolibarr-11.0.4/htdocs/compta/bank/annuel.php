@@ -17,13 +17,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-
-/**
- *		\file        htdocs/compta/bank/annuel.php
- *		\ingroup     banque
- *		\brief       Page to report input-output of a bank account
- */
-
 require '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/bank.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/compta/bank/class/account.class.php';
@@ -35,17 +28,18 @@ $langs->loadLangs(array('banks', 'categories'));
 $WIDTH = DolGraph::getDefaultGraphSizeForStats('width', 380); // Large for one graph in a smarpthone.
 $HEIGHT = DolGraph::getDefaultGraphSizeForStats('height', 160);
 
-$id = GETPOST('account') ?GETPOST('account', 'alpha') : GETPOST('id');
-$ref = GETPOST('ref');
+$id=GETPOST('account')?GETPOST('account', 'alpha'):GETPOST('id');
+$ref=GETPOST('ref');
 
 // Security check
 $fieldvalue = (!empty($id) ? $id : (!empty($ref) ? $ref : ''));
 $fieldtype = (!empty($ref) ? 'ref' : 'rowid');
-if ($user->socid) $socid = $user->socid;
+if ($user->socid) { $socid = $user->socid;
 $result = restrictedArea($user, 'banque', $fieldvalue, 'bank_account&bank_account', '', '', $fieldtype);
 
 $year_start = GETPOST('year_start');
 $year_current = strftime("%Y", time());
+		  }
 if (!$year_start)
 {
 	$year_start = $year_current - 2;
@@ -92,11 +86,11 @@ $sql .= ", ".MAIN_DB_PREFIX."bank_account as ba";
 $sql .= " WHERE b.fk_account = ba.rowid";
 $sql .= " AND ba.entity IN (".getEntity('bank_account').")";
 $sql .= " AND b.amount >= 0";
-if (!empty($id))
+if (!empty($id)){
 	$sql .= " AND b.fk_account IN (".$db->escape($id).")";
 $sql .= " GROUP BY dm";
 
-$resql = $db->query($sql);
+$resql = $db->query($sql);}
 if ($resql)
 {
 	$num = $db->num_rows($resql);
@@ -120,11 +114,12 @@ $sql .= ", ".MAIN_DB_PREFIX."bank_account as ba";
 $sql .= " WHERE b.fk_account = ba.rowid";
 $sql .= " AND ba.entity IN (".getEntity('bank_account').")";
 $sql .= " AND b.amount <= 0";
-if (!empty($id))
+if (!empty($id)){
 	$sql .= " AND b.fk_account IN (".$db->escape($id).")";
 $sql .= " GROUP BY dm";
 
 $resql = $db->query($sql);
+}
 if ($resql)
 {
 	$num = $db->num_rows($resql);
@@ -167,7 +162,7 @@ if (!empty($id))
             $bankaccount->fetch($aId);
             $bankaccount->label = $bankaccount->ref;
             print $bankaccount->getNomUrl(1);
-            if ($key < (count($listid) - 1)) print ', ';
+            if ($key < (count($listid) - 1)) {print ', ';
         }
     }
 }
@@ -249,14 +244,15 @@ $sql .= " FROM ".MAIN_DB_PREFIX."bank as b";
 $sql .= ", ".MAIN_DB_PREFIX."bank_account as ba";
 $sql .= " WHERE b.fk_account = ba.rowid";
 $sql .= " AND ba.entity IN (".getEntity('bank_account').")";
-if (!empty($id))
+if (!empty($id)){
 	$sql .= " AND b.fk_account IN (".$db->escape($id).")";
 
 $resql = $db->query($sql);
+}
 if ($resql)
 {
 	$obj = $db->fetch_object($resql);
-	if ($obj) $balance = $obj->total;
+	if ($obj){ $balance = $obj->total;
 }
 else {
 	dol_print_error($db);
@@ -289,9 +285,11 @@ else
 	$sql .= ", ".MAIN_DB_PREFIX."bank_account as ba";
 	$sql .= " WHERE b.fk_account = ba.rowid";
 	$sql .= " AND ba.entity IN (".getEntity('bank_account').")";
-	if ($id && $_GET["option"] != 'all') $sql .= " AND b.fk_account IN (".$id.")";
+	if ($id && $_GET["option"] != 'all'){
+		$sql .= " AND b.fk_account IN (".$id.")";
 
 	$resql = $db->query($sql);
+	}
 	if ($resql)
 	{
 		$num = $db->num_rows($resql);
@@ -323,10 +321,12 @@ else
 		$sql .= " AND b.datev >= '".($year - $annee)."-01-01 00:00:00'";
 		$sql .= " AND b.datev <= '".($year - $annee)."-12-31 23:59:59'";
 		$sql .= " AND b.amount > 0";
-		if ($id && $_GET["option"] != 'all') $sql .= " AND b.fk_account IN (".$id.")";
+		if ($id && $_GET["option"] != 'all'){
+			$sql .= " AND b.fk_account IN (".$id.")";
 		$sql .= " GROUP BY date_format(b.datev,'%m');";
 
 		$resql = $db->query($sql);
+		}
 		if ($resql)
 		{
 			$num = $db->num_rows($resql);
@@ -410,10 +410,12 @@ else
 		$sql .= " AND b.datev >= '".($year - $annee)."-01-01 00:00:00'";
 		$sql .= " AND b.datev <= '".($year - $annee)."-12-31 23:59:59'";
 		$sql .= " AND b.amount < 0";
-		if ($id && $_GET["option"] != 'all') $sql .= " AND b.fk_account IN (".$id.")";
+		if ($id && $_GET["option"] != 'all'){
+			$sql .= " AND b.fk_account IN (".$id.")";
 		$sql .= " GROUP BY date_format(b.datev,'%m');";
 
 		$resql = $db->query($sql);
+		}
 		if ($resql)
 		{
 			$num = $db->num_rows($resql);

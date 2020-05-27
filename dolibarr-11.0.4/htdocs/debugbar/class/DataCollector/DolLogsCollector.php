@@ -2,7 +2,7 @@
 
 use DebugBar\DataCollector\MessagesCollector;
 use Psr\Log\LogLevel;
-//use ReflectionClass;
+
 
 /**
  * DolLogsCollector class

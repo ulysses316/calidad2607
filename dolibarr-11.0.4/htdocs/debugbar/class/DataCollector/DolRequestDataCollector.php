@@ -26,9 +26,9 @@ class DolRequestDataCollector extends RequestDataCollector
 				{
 					foreach($arrayofvalues as $key => $val)
 					{
-						if (preg_match('/^DOLSESSID_/', $key)) $arrayofvalues[$key]='*****hidden*****';
+						if (preg_match('/^DOLSESSID_/', $key)){ $arrayofvalues[$key]='*****hidden*****';}
 					}
-					//var_dump($arrayofvalues);
+					
 				}
 
 				$data["$" . $var] = $this->getDataFormatter()->formatVar($arrayofvalues);
