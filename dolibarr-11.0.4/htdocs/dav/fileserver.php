@@ -24,13 +24,12 @@
  *      \ingroup    dav
  *      \brief      Server DAV
  */
-
-if (! defined('NOTOKENRENEWAL')){ define('NOTOKENRENEWAL', '1');}
-if (! defined('NOREQUIREMENU')){  define('NOREQUIREMENU', '1');} // If there is no menu to show
-if (! defined('NOREQUIREHTML')){ define('NOREQUIREHTML', '1');} // If we don't need to load the html.form.class.php
-if (! defined('NOREQUIREAJAX')){ define('NOREQUIREAJAX', '1');}
-if (! defined('NOLOGIN'))  	{ define("NOLOGIN", 1);}		// This means this output page does not require to be logged.
-if (! defined('NOCSRFCHECK'))	{ define("NOCSRFCHECK", 1);}	// We accept to go on this page from external web site.
+if (! defined('NOTOKENRENEWAL')) {define('NOTOKENRENEWAL', '1');}
+if (! defined('NOREQUIREMENU'))  {define('NOREQUIREMENU', '1');} // If there is no menu to show
+if (! defined('NOREQUIREHTML'))  {define('NOREQUIREHTML', '1');} // If we don't need to load the html.form.class.php
+if (! defined('NOREQUIREAJAX'))  {define('NOREQUIREAJAX', '1');}
+if (! defined('NOLOGIN'))  		 {define("NOLOGIN", 1);}		// This means this output page does not require to be logged.
+if (! defined('NOCSRFCHECK'))  	 {define("NOCSRFCHECK", 1);}	// We accept to go on this page from external web site.
 
 require "../main.inc.php";
 require_once DOL_DOCUMENT_ROOT.'/core/lib/security2.lib.php';
@@ -65,7 +64,7 @@ if (! empty($conf->global->DAV_RESTRICT_ON_IP))
 		dol_syslog('Remote ip is '.$ipremote.', not into list '.$conf->global->DAV_RESTRICT_ON_IP);
 		print 'DAV not allowed from the IP '.$ipremote;
 		header('HTTP/1.1 503 DAV not allowed from your IP '.$ipremote);
-		
+
 		exit(0);
 	}
 }
@@ -104,12 +103,14 @@ $authBackend = new \Sabre\DAV\Auth\Backend\BasicCallBack(function ($username, $p
 	}
 
 	// Authentication mode
-	if (empty($dolibarr_main_authentication)){ $dolibarr_main_authentication='dolibarr';}
+	if (empty($dolibarr_main_authentication)) {$dolibarr_main_authentication='dolibarr';}
+
 
 	// Authentication mode: forceuser
 	if ($dolibarr_main_authentication == 'forceuser')
 	{
-		if (empty($dolibarr_auto_user)){ $dolibarr_auto_user='auto';}
+
+		if (empty($dolibarr_auto_user)) {$dolibarr_auto_user='auto';}
 		if ($dolibarr_auto_user != $username)
 		{
 			dol_syslog("Warning: your instance is set to use the automatic forced login '".$dolibarr_auto_user."' that is not the requested login. DAV usage is forbidden in this mode.");
@@ -158,16 +159,14 @@ if (! empty($conf->ecm->enabled) && ! empty($conf->global->DAV_ALLOW_ECM_DIR))
 
 // Principals Backend
 
+// /principals
 
+// CardDav & CalDav Backend
 
+//$caldavBackend    = new \Sabre\CalDAV\Backend\Dolibarr($user,$db,$langs, $cdavLib);
+// /addressbook
 
-
-
-
-
-
-
-
+// /calendars
 
 // The rootnode needs in turn to be passed to the server class
 $server = new \Sabre\DAV\Server($nodes);
@@ -175,7 +174,8 @@ $server = new \Sabre\DAV\Server($nodes);
 // If you want to run the SabreDAV server in a custom location (using mod_rewrite for instance)
 // You can override the baseUri here.
 $baseUri = DOL_URL_ROOT.'/dav/fileserver.php/';
-if (isset($baseUri)){ $server->setBaseUri($baseUri);}
+
+if (isset($baseUri)) {$server->setBaseUri($baseUri);}
 
 // Add authentication function
 if ((empty($conf->global->DAV_ALLOW_PUBLIC_DIR)
@@ -200,17 +200,7 @@ if (empty($conf->global->DAV_DISABLE_BROWSER))
 
 // Automatically guess (some) contenttypes, based on extension
 
-
-
-
-
-
-
-
-
-
-
 // And off we go!
 $server->exec();
 
-if (is_object($db)){ $db->close();}
+if (is_object($db)) {$db->close();}
