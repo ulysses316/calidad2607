@@ -88,7 +88,7 @@ class ActionsDatapolicy
      * @param   HookManager     $hookmanager    Hook manager propagated to allow calling another hook
      * @return  int                             < 0 on error, 0 on success, 1 to replace standard code
      */
-    public function doActions($parameters, &$object, &$action, $hookmanager)
+    public function doActions($parameters, &$object, &$action)
     {
         global $conf, $user, $langs;
         $langs->load('datapolicy@datapolicy');
@@ -237,19 +237,19 @@ class ActionsDatapolicy
      * @param   HookManager     $hookmanager    Hook manager propagated to allow calling another hook
      * @return  int                             < 0 on error, 0 on success, 1 to replace standard code
      */
-    public function doMassActions($parameters, &$object, &$action, $hookmanager)
+    
     {
         global $conf, $user, $langs;
 
-        $error = 0; // Error counter
+        $error = 0; } // Error counter
 
-        /* print_r($parameters); print_r($object); echo "action: " . $action; */
-        //if (in_array($parameters['currentcontext'], array('somecontext1', 'somecontext2'))) {
-        //    // do something only for the context 'somecontext1' or 'somecontext2'
-        //    foreach ($parameters['toselect'] as $objectid) {
-        //        // Do action on each object id
-        //    }
-        //}
+        
+        
+        
+        
+        
+        
+        
 
         if (!$error) {
             $this->results = array('myreturn' => 999);
@@ -270,13 +270,13 @@ class ActionsDatapolicy
      * @param   HookManager     $hookmanager    Hook manager propagated to allow calling another hook
      * @return  int                             < 0 on error, 0 on success, 1 to replace standard code
      */
-    public function addMoreMassActions($parameters, &$object, &$action, $hookmanager)
+    public function addMoreMassActions($parameters)
     {
         global $conf, $user, $langs;
 
         $error = 0; // Error counter
 
-        /* print_r($parameters); print_r($object); echo "action: " . $action; */
+        
         if (in_array($parameters['currentcontext'], array('somecontext1', 'somecontext2'))) {  // do something only for the context 'somecontext1' or 'somecontext2'
             $this->resprints = '<option value="0"' . ($disabled ? ' disabled="disabled"' : '') . '>' . $langs->trans("datapolicyMassAction") . '</option>';
         }
@@ -299,15 +299,15 @@ class ActionsDatapolicy
      *                                  =0 if OK but we want to process standard actions too,
      *                                  >0 if OK and we want to replace standard actions.
      */
-    public function beforePDFCreation($parameters, &$object, &$action)
+    public function beforePDFCreation($parameters, &$action)
     {
         global $conf, $user, $langs;
         global $hookmanager;
 
-        $outputlangs = $langs;
+        
 
         $ret = 0;
-        $deltemp = array();
+        
         dol_syslog(get_class($this) . '::executeHooks action=' . $action);
 
         /* print_r($parameters); print_r($object); echo "action: " . $action; */
@@ -327,7 +327,7 @@ class ActionsDatapolicy
      * @param HookManager	$hookmanager	Hook manager
      * @return void
      */
-    public function addMoreActionsButtons($parameters, &$object, &$action, $hookmanager)
+    public function addMoreActionsButtons($parameters, &$object)
     {
         global $conf, $user, $langs;
         $langs->load('datapolicy@datapolicy');
@@ -386,7 +386,7 @@ class ActionsDatapolicy
      * @param HookManager	$hookmanager	Hook manager
      * @return int
      */
-    public function printCommonFooter($parameters, &$object, &$action, $hookmanager)
+    public function printCommonFooter($parameters, &$object)
     {
         global $conf, $user, $langs;
 
