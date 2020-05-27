@@ -501,10 +501,9 @@ class BlockedLog
 			$this->object_data->date = $datepayment;
 			$this->object_data->type_code = dol_getIdFromCode($this->db, $paymenttypeid, 'c_paiement', 'id', 'code');
 			$this->object_data->payment_num = ($object->num_paiement ? $object->num_paiement : $object->num_payment);
-			//$this->object_data->fk_account = $object->fk_account;
+			
 			$this->object_data->note = $object->note;
-			//var_dump($this->object_data);exit;
-
+			
 			$totalamount = 0;
 
 			if (!is_array($object->amounts) && $object->amount)
