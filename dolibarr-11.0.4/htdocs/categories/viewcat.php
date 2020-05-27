@@ -81,7 +81,7 @@ if ($result <= 0) {
 }
 
 $type = $object->type;
-if (is_numeric($type)) $type = Categorie::$MAP_ID_TO_CODE[$type]; // For backward compatibility
+if (is_numeric($type)) {$type = Categorie::$MAP_ID_TO_CODE[$type]; // For backward compatibility}
 
 $extrafields = new ExtraFields($db);
 $extrafields->fetch_name_optionals_label($object->table_element);
@@ -146,7 +146,7 @@ if ($id > 0 && $removeelem > 0)
     }
 
 	$result = $object->del_type($tmpobject, $elementtype);
-	if ($result < 0) dol_print_error('', $object->error);
+	if ($result < 0) {dol_print_error('', $object->error);}
 }
 
 if ($user->rights->categorie->supprimer && $action == 'confirm_delete' && $confirm == 'yes')
@@ -200,15 +200,15 @@ $formother = new FormOther($db);
 $helpurl = '';
 llxHeader("", $langs->trans("Categories"), $helpurl);
 
-if ($type == Categorie::TYPE_PRODUCT)       $title = $langs->trans("ProductsCategoryShort");
-elseif ($type == Categorie::TYPE_SUPPLIER)  $title = $langs->trans("SuppliersCategoryShort");
-elseif ($type == Categorie::TYPE_CUSTOMER)  $title = $langs->trans("CustomersCategoryShort");
-elseif ($type == Categorie::TYPE_MEMBER)    $title = $langs->trans("MembersCategoryShort");
-elseif ($type == Categorie::TYPE_CONTACT)   $title = $langs->trans("ContactCategoriesShort");
-elseif ($type == Categorie::TYPE_ACCOUNT)   $title = $langs->trans("AccountsCategoriesShort");
-elseif ($type == Categorie::TYPE_PROJECT)   $title = $langs->trans("ProjectsCategoriesShort");
-elseif ($type == Categorie::TYPE_USER)      $title = $langs->trans("UsersCategoriesShort");
-else                                        $title = $langs->trans("Category");
+if ($type == Categorie::TYPE_PRODUCT)       {$title = $langs->trans("ProductsCategoryShort");}
+elseif ($type == Categorie::TYPE_SUPPLIER)  {$title = $langs->trans("SuppliersCategoryShort");}
+elseif ($type == Categorie::TYPE_CUSTOMER)  {$title = $langs->trans("CustomersCategoryShort");}
+elseif ($type == Categorie::TYPE_MEMBER)    {$title = $langs->trans("MembersCategoryShort");}
+elseif ($type == Categorie::TYPE_CONTACT)   {$title = $langs->trans("ContactCategoriesShort");}
+elseif ($type == Categorie::TYPE_ACCOUNT)   {$title = $langs->trans("AccountsCategoriesShort");}
+elseif ($type == Categorie::TYPE_PROJECT)   {$title = $langs->trans("ProjectsCategoriesShort");}
+elseif ($type == Categorie::TYPE_USER)      {$title = $langs->trans("UsersCategoriesShort");}
+else                                        {$title = $langs->trans("Category");}
 
 $head = categories_prepare_head($object, $type);
 
@@ -315,16 +315,7 @@ else
 			print "</td>\n";
 			print "\t\t".'<td colspan="2">'.$cat->description."</td>\n";
 
-			/*
-			if ($cat->visible == 1)
-			{
-				print "\t\t<td>".$langs->trans("ContentsVisibleByAllShort")."</td>\n";
-			}
-			else
-			{
-				print "\t\t<td>".$langs->trans("ContentsNotVisibleByAllShort")."</td>\n";
-			}
-			*/
+			
 
 			print "\t</tr>\n";
 		}
@@ -399,7 +390,7 @@ if ($type == Categorie::TYPE_PRODUCT)
 			foreach ($prods as $prod)
 			{
 				$i++;
-				if ($i > $limit) break;
+				if ($i > $limit) {break;}
 
 				print "\t".'<tr class="oddeven">'."\n";
 				print '<td class="nowrap" valign="top">';
@@ -409,11 +400,11 @@ if ($type == Categorie::TYPE_PRODUCT)
 				// Link to delete from category
 				print '<td class="right">';
 				$permission = 0;
-				if ($type == Categorie::TYPE_PRODUCT)     $permission = ($user->rights->produit->creer || $user->rights->service->creer);
-				if ($type == Categorie::TYPE_SUPPLIER)    $permission = $user->rights->societe->creer;
-				if ($type == Categorie::TYPE_CUSTOMER)    $permission = $user->rights->societe->creer;
-				if ($type == Categorie::TYPE_MEMBER)      $permission = $user->rights->adherent->creer;
-				if ($type == Categorie::TYPE_PROJECT)     $permission = $user->rights->projet->creer;
+				if ($type == Categorie::TYPE_PRODUCT)     {$permission = ($user->rights->produit->creer || $user->rights->service->creer);}
+				if ($type == Categorie::TYPE_SUPPLIER)    {$permission = $user->rights->societe->creer;}
+				if ($type == Categorie::TYPE_CUSTOMER)    {$permission = $user->rights->societe->creer;}
+				if ($type == Categorie::TYPE_MEMBER)      {$permission = $user->rights->adherent->creer;}
+				if ($type == Categorie::TYPE_PROJECT)     {$permission = $user->rights->projet->creer;}
 				if ($permission)
 				{
 					print "<a href= '".$_SERVER['PHP_SELF']."?".(empty($socid) ? 'id' : 'socid')."=".$object->id."&amp;type=".$typeid."&amp;removeelem=".$prod->id."'>";
@@ -464,7 +455,7 @@ if ($type == Categorie::TYPE_SUPPLIER)
 			foreach ($socs as $soc)
 			{
 				$i++;
-				if ($i > $limit) break;
+				if ($i > $limit) {break;}
 
 				print "\t".'<tr class="oddeven">'."\n";
 				print '<td class="nowrap" valign="top">';
@@ -473,11 +464,11 @@ if ($type == Categorie::TYPE_SUPPLIER)
 				// Link to delete from category
 				print '<td class="right">';
 				$permission = 0;
-				if ($type == Categorie::TYPE_PRODUCT)     $permission = ($user->rights->produit->creer || $user->rights->service->creer);
-				if ($type == Categorie::TYPE_SUPPLIER)    $permission = $user->rights->societe->creer;
-				if ($type == Categorie::TYPE_CUSTOMER)    $permission = $user->rights->societe->creer;
-				if ($type == Categorie::TYPE_MEMBER)      $permission = $user->rights->adherent->creer;
-				if ($type == Categorie::TYPE_PROJECT)     $permission = $user->rights->projet->creer;
+				if ($type == Categorie::TYPE_PRODUCT)     {$permission = ($user->rights->produit->creer || $user->rights->service->creer);}
+				if ($type == Categorie::TYPE_SUPPLIER)    {$permission = $user->rights->societe->creer;}
+				if ($type == Categorie::TYPE_CUSTOMER)    {$permission = $user->rights->societe->creer;}
+				if ($type == Categorie::TYPE_MEMBER)      {$permission = $user->rights->adherent->creer;}
+				if ($type == Categorie::TYPE_PROJECT)     {$permission = $user->rights->projet->creer;}
 				if ($permission)
 				{
 					print "<a href= '".$_SERVER['PHP_SELF']."?".(empty($socid) ? 'id' : 'socid')."=".$object->id."&amp;type=".$typeid."&amp;removeelem=".$soc->id."'>";
@@ -529,7 +520,7 @@ if ($type == Categorie::TYPE_CUSTOMER)
 			foreach ($socs as $key => $soc)
 			{
 				$i++;
-				if ($i > $limit) break;
+				if ($i > $limit) {break;}
 
 				print "\t".'<tr class="oddeven">'."\n";
 				print '<td class="nowrap" valign="top">';
@@ -538,11 +529,11 @@ if ($type == Categorie::TYPE_CUSTOMER)
 				// Link to delete from category
 				print '<td class="right">';
 				$permission = 0;
-				if ($type == Categorie::TYPE_PRODUCT)     $permission = ($user->rights->produit->creer || $user->rights->service->creer);
-				if ($type == Categorie::TYPE_SUPPLIER)    $permission = $user->rights->societe->creer;
-				if ($type == Categorie::TYPE_CUSTOMER)    $permission = $user->rights->societe->creer;
-				if ($type == Categorie::TYPE_MEMBER)      $permission = $user->rights->adherent->creer;
-				if ($type == Categorie::TYPE_PROJECT)     $permission = $user->rights->projet->creer;
+				if ($type == Categorie::TYPE_PRODUCT)     {$permission = ($user->rights->produit->creer || $user->rights->service->creer);}
+				if ($type == Categorie::TYPE_SUPPLIER)    {$permission = $user->rights->societe->creer;}
+				if ($type == Categorie::TYPE_CUSTOMER)    {$permission = $user->rights->societe->creer;}
+				if ($type == Categorie::TYPE_MEMBER)      {$permission = $user->rights->adherent->creer;}
+				if ($type == Categorie::TYPE_PROJECT)     {$permission = $user->rights->projet->creer;}
 				if ($permission)
 				{
 					print "<a href= '".$_SERVER['PHP_SELF']."?".(empty($socid) ? 'id' : 'socid')."=".$object->id."&amp;type=".$typeid."&amp;removeelem=".$soc->id."'>";
@@ -596,7 +587,7 @@ if ($type == Categorie::TYPE_MEMBER)
 			foreach ($prods as $key => $member)
 			{
 				$i++;
-				if ($i > $limit) break;
+				if ($i > $limit) {break;}
 
 				print "\t".'<tr class="oddeven">'."\n";
 				print '<td class="nowrap" valign="top">';
@@ -608,11 +599,11 @@ if ($type == Categorie::TYPE_MEMBER)
 				// Link to delete from category
 				print '<td class="right">';
 				$permission = 0;
-				if ($type == Categorie::TYPE_PRODUCT)     $permission = ($user->rights->produit->creer || $user->rights->service->creer);
-				if ($type == Categorie::TYPE_SUPPLIER)    $permission = $user->rights->societe->creer;
-				if ($type == Categorie::TYPE_CUSTOMER)    $permission = $user->rights->societe->creer;
-				if ($type == Categorie::TYPE_MEMBER)      $permission = $user->rights->adherent->creer;
-				if ($type == Categorie::TYPE_PROJECT)     $permission = $user->rights->projet->creer;
+				if ($type == Categorie::TYPE_PRODUCT)     {$permission = ($user->rights->produit->creer || $user->rights->service->creer);}
+				if ($type == Categorie::TYPE_SUPPLIER)    {$permission = $user->rights->societe->creer;}
+				if ($type == Categorie::TYPE_CUSTOMER)    {$permission = $user->rights->societe->creer;}
+				if ($type == Categorie::TYPE_MEMBER)      {$permission = $user->rights->adherent->creer;}
+				if ($type == Categorie::TYPE_PROJECT)     {$permission = $user->rights->projet->creer;}
 				if ($permission)
 				{
 					print "<a href= '".$_SERVER['PHP_SELF']."?".(empty($socid) ? 'id' : 'socid')."=".$object->id."&amp;type=".$typeid."&amp;removeelem=".$member->id."'>";
@@ -663,7 +654,7 @@ if ($type == Categorie::TYPE_CONTACT)
 			foreach ($contacts as $key => $contact)
 			{
 				$i++;
-				if ($i > $limit) break;
+				if ($i > $limit) {break;}
 
 				print "\t".'<tr class="oddeven">'."\n";
 				print '<td class="nowrap" valign="top">';
@@ -672,11 +663,11 @@ if ($type == Categorie::TYPE_CONTACT)
 				// Link to delete from category
 				print '<td class="right">';
 				$permission = 0;
-				if ($type == Categorie::TYPE_PRODUCT)     $permission = ($user->rights->produit->creer || $user->rights->service->creer);
-				if ($type == Categorie::TYPE_SUPPLIER)    $permission = $user->rights->societe->creer;
-				if ($type == Categorie::TYPE_CUSTOMER)    $permission = $user->rights->societe->creer;
-				if ($type == Categorie::TYPE_MEMBER)      $permission = $user->rights->adherent->creer;
-				if ($type == Categorie::TYPE_PROJECT)     $permission = $user->rights->projet->creer;
+				if ($type == Categorie::TYPE_PRODUCT)     {$permission = ($user->rights->produit->creer || $user->rights->service->creer);}
+				if ($type == Categorie::TYPE_SUPPLIER)    {$permission = $user->rights->societe->creer;}
+				if ($type == Categorie::TYPE_CUSTOMER)    {$permission = $user->rights->societe->creer;}
+				if ($type == Categorie::TYPE_MEMBER)      {$permission = $user->rights->adherent->creer;}
+				if ($type == Categorie::TYPE_PROJECT)     {$permission = $user->rights->projet->creer;}
 				if ($permission)
 				{
 					print "<a href= '".$_SERVER['PHP_SELF']."?".(empty($socid) ? 'id' : 'socid')."=".$object->id."&amp;type=".$typeid."&amp;removeelem=".$contact->id."'>";
@@ -730,7 +721,7 @@ if ($type == Categorie::TYPE_ACCOUNT)
             foreach ($accounts as $key => $account)
             {
             	$i++;
-            	if ($i > $limit) break;
+            	if ($i > $limit) {break;}
 
                 print "\t".'<tr class="oddeven">'."\n";
                 print '<td class="nowrap" valign="top">';
@@ -741,11 +732,11 @@ if ($type == Categorie::TYPE_ACCOUNT)
                 // Link to delete from category
                 print '<td class="right">';
                 $permission = 0;
-                if ($type == Categorie::TYPE_PRODUCT)     $permission = ($user->rights->produit->creer || $user->rights->service->creer);
-                if ($type == Categorie::TYPE_SUPPLIER)    $permission = $user->rights->societe->creer;
-                if ($type == Categorie::TYPE_CUSTOMER)    $permission = $user->rights->societe->creer;
-                if ($type == Categorie::TYPE_MEMBER)      $permission = $user->rights->adherent->creer;
-                if ($type == Categorie::TYPE_PROJECT)     $permission = $user->rights->projet->creer;
+                if ($type == Categorie::TYPE_PRODUCT)     {$permission = ($user->rights->produit->creer || $user->rights->service->creer);}
+                if ($type == Categorie::TYPE_SUPPLIER)    {$permission = $user->rights->societe->creer;}
+                if ($type == Categorie::TYPE_CUSTOMER)    {$permission = $user->rights->societe->creer;}
+                if ($type == Categorie::TYPE_MEMBER)      {$permission = $user->rights->adherent->creer;}
+                if ($type == Categorie::TYPE_PROJECT)     {$permission = $user->rights->projet->creer;}
                 if ($permission)
                 {
                     print "<a href= '".$_SERVER['PHP_SELF']."?".(empty($socid) ? 'id' : 'socid')."=".$object->id."&amp;type=".$typeid."&amp;removeelem=".$account->id."'>";
@@ -798,7 +789,7 @@ if ($type == Categorie::TYPE_PROJECT)
 			foreach ($projects as $key => $project)
 			{
 				$i++;
-				if ($i > $limit) break;
+				if ($i > $limit) {break;}
 
 				print "\t".'<tr class="oddeven">'."\n";
 				print '<td class="nowrap" valign="top">';
@@ -809,11 +800,11 @@ if ($type == Categorie::TYPE_PROJECT)
 				// Link to delete from category
 				print '<td class="right">';
 				$permission = 0;
-				if ($type == Categorie::TYPE_PRODUCT)     $permission = ($user->rights->produit->creer || $user->rights->service->creer);
-				if ($type == Categorie::TYPE_SUPPLIER)    $permission = $user->rights->societe->creer;
-				if ($type == Categorie::TYPE_CUSTOMER)    $permission = $user->rights->societe->creer;
-				if ($type == Categorie::TYPE_MEMBER)      $permission = $user->rights->adherent->creer;
-				if ($type == Categorie::TYPE_PROJECT)     $permission = $user->rights->projet->creer;
+				if ($type == Categorie::TYPE_PRODUCT)     {$permission = ($user->rights->produit->creer || $user->rights->service->creer);}
+				if ($type == Categorie::TYPE_SUPPLIER)    {$permission = $user->rights->societe->creer;}
+				if ($type == Categorie::TYPE_CUSTOMER)    {$permission = $user->rights->societe->creer;}
+				if ($type == Categorie::TYPE_MEMBER)      {$permission = $user->rights->adherent->creer;}
+				if ($type == Categorie::TYPE_PROJECT)     {$permission = $user->rights->projet->creer;}
 				if ($permission)
 				{
 					print "<a href= '".$_SERVER['PHP_SELF']."?".(empty($socid) ? 'id' : 'socid')."=".$object->id."&amp;type=".$typeid."&amp;removeelem=".$project->id."'>";
