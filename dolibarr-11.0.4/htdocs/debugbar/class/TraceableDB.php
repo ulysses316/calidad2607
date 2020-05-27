@@ -333,7 +333,7 @@ class TraceableDB extends DoliDB
 			'sql'           => $sql,
 			'duration'      => $duration,
 			'memory_usage'  => $memoryDelta,
-			'is_success'    => $resql ? true : false,
+			'is_success'    => $resql ?,
 			'error_code'    => $resql ? null : $this->db->lasterrno(),
 			'error_message' => $resql ? null : $this->db->lasterror()
 		);
