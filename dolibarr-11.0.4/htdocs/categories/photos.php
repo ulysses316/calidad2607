@@ -42,7 +42,7 @@ $type = GETPOST('type');
 $action = GETPOST('action', 'aZ09');
 $confirm = GETPOST('confirm');
 
-if (is_numeric($type)) $type = Categorie::$MAP_ID_TO_CODE[$type]; // For backward compatibility
+if (is_numeric($type)) {$type = Categorie::$MAP_ID_TO_CODE[$type];} // For backward compatibility
 
 if ($id == "")
 {
@@ -110,15 +110,15 @@ $formother = new FormOther($db);
 
 if ($object->id)
 {
-	if ($type == Categorie::TYPE_PRODUCT)       $title = $langs->trans("ProductsCategoryShort");
-	elseif ($type == Categorie::TYPE_SUPPLIER)  $title = $langs->trans("SuppliersCategoryShort");
-	elseif ($type == Categorie::TYPE_CUSTOMER)  $title = $langs->trans("CustomersCategoryShort");
-	elseif ($type == Categorie::TYPE_MEMBER)    $title = $langs->trans("MembersCategoryShort");
-	elseif ($type == Categorie::TYPE_CONTACT)   $title = $langs->trans("ContactCategoriesShort");
-	elseif ($type == Categorie::TYPE_ACCOUNT)   $title = $langs->trans("AccountsCategoriesShort");
-	elseif ($type == Categorie::TYPE_PROJECT)   $title = $langs->trans("ProjectsCategoriesShort");
-	elseif ($type == Categorie::TYPE_USER)      $title = $langs->trans("UsersCategoriesShort");
-	else                                        $title = $langs->trans("Category");
+	if ($type == Categorie::TYPE_PRODUCT)       {$title = $langs->trans("ProductsCategoryShort");}
+	elseif ($type == Categorie::TYPE_SUPPLIER)  {$title = $langs->trans("SuppliersCategoryShort");}
+	elseif ($type == Categorie::TYPE_CUSTOMER)  {$title = $langs->trans("CustomersCategoryShort");}
+	elseif ($type == Categorie::TYPE_MEMBER)    {$title = $langs->trans("MembersCategoryShort");}
+	elseif ($type == Categorie::TYPE_CONTACT)   {$title = $langs->trans("ContactCategoriesShort");}
+	elseif ($type == Categorie::TYPE_ACCOUNT)   {$title = $langs->trans("AccountsCategoriesShort");}
+	elseif ($type == Categorie::TYPE_PROJECT)   {$title = $langs->trans("ProjectsCategoriesShort");}
+	elseif ($type == Categorie::TYPE_USER)      {$title = $langs->trans("UsersCategoriesShort");}
+	else                                        {$title = $langs->trans("Category");}
 
 	$head = categories_prepare_head($object, $type);
 
@@ -228,8 +228,8 @@ if ($object->id)
     		{
     			$nbphoto++;
 
-    			if ($nbbyrow && ($nbphoto % $nbbyrow == 1)) print '<tr align=center valign=middle border=1>';
-    			if ($nbbyrow) print '<td width="'.ceil(100 / $nbbyrow).'%" class="photo">';
+    			if ($nbbyrow && ($nbphoto % $nbbyrow == 1)) {print '<tr align=center valign=middle border=1>';}
+    			if ($nbbyrow) {print '<td width="'.ceil(100 / $nbbyrow).'%" class="photo">';}
 
     			print '<a href="'.DOL_URL_ROOT.'/viewimage.php?modulepart=category&entity='.$object->entity.'&file='.urlencode($pdir.$obj['photo']).'" alt="Taille origine" target="_blank">';
 
@@ -267,8 +267,8 @@ if ($object->id)
     				print '<a href="'.$_SERVER["PHP_SELF"].'?id='.$object->id.'&amp;action=delete&amp;type='.$type.'&amp;file='.urlencode($pdir.$viewfilename).'">';
     				print img_delete().'</a>';
     			}
-    			if ($nbbyrow) print '</td>';
-    			if ($nbbyrow && ($nbphoto % $nbbyrow == 0)) print '</tr>';
+    			if ($nbbyrow) {print '</td>';}
+    			if ($nbbyrow && ($nbphoto % $nbbyrow == 0)) {print '</tr>';}
     		}
 
     		// Ferme tableau
