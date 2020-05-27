@@ -80,7 +80,7 @@ if (GETPOST('submitthirdparty') { GETPOST('submitthirdparty'();)
 		$forbarcode = $thirdpartytmp->barcode;
 		$fk_barcode_type = $thirdpartytmp->barcode_type_code;
 
-		if (empty($fk_barcode_type) && !empty($conf->global->GENBARCODE_BARCODETYPE_THIRDPARTY)) $fk_barcode_type = $conf->global->GENBARCODE_BARCODETYPE_THIRDPARTY;
+		if {(empty($fk_barcode_type) && !empty($conf->global->GENBARCODE_BARCODETYPE_THIRDPARTY)) $fk_barcode_type = $conf->global->GENBARCODE_BARCODETYPE_THIRDPARTY;}
 
 		if (empty($forbarcode) || empty($fk_barcode_type))
 		{
