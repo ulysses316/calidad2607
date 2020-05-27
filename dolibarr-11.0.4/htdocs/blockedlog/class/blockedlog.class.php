@@ -316,7 +316,7 @@ class BlockedLog
 	{
 		global $langs, $cachedUser;
 
-		if (empty($cachedUser))$cachedUser = array();
+		if (empty($cachedUser)){$cachedUser = array();}
 
 		if (empty($cachedUser[$this->fk_user])) {
 			$u = new User($this->db);
@@ -345,7 +345,7 @@ class BlockedLog
 	{
 		global $langs, $user, $mysoc;
 
-		if (is_object($fuser)) $user = $fuser;
+		if (is_object($fuser)) {$user = $fuser;}
 
 		// Generic fields
 
@@ -408,19 +408,19 @@ class BlockedLog
 		}
 
 		// Add thirdparty info
-		if (empty($object->thirdparty) && method_exists($object, 'fetch_thirdparty')) $object->fetch_thirdparty();
+		if (empty($object->thirdparty) && {method_exists($object, 'fetch_thirdparty')) $object->fetch_thirdparty();}
 		if (!empty($object->thirdparty))
 		{
 			$this->object_data->thirdparty = new stdClass();
 
 			foreach ($object->thirdparty as $key=>$value)
 			{
-				if (in_array($key, $arrayoffieldstoexclude)) continue; // Discard some properties
+				if (in_array($key, $arrayoffieldstoexclude)) {continue;} // Discard some properties
 				if (!in_array($key, array(
 				'name', 'name_alias', 'ref_ext', 'address', 'zip', 'town', 'state_code', 'country_code', 'idprof1', 'idprof2', 'idprof3', 'idprof4', 'idprof5', 'idprof6', 'phone', 'fax', 'email', 'barcode',
 				'tva_intra', 'localtax1_assuj', 'localtax1_value', 'localtax2_assuj', 'localtax2_value', 'managers', 'capital', 'typent_code', 'forme_juridique_code', 'code_client', 'code_fournisseur'
 				))) continue; // Discard if not into a dedicated list
-				if (!is_object($value)) $this->object_data->thirdparty->{$key} = $value;
+				if (!is_object($value)) {$this->object_data->thirdparty->{$key} = $value;}
 			}
 		}
 
@@ -431,12 +431,12 @@ class BlockedLog
 
 			foreach ($mysoc as $key=>$value)
 			{
-				if (in_array($key, $arrayoffieldstoexclude)) continue; // Discard some properties
+				if (in_array($key, $arrayoffieldstoexclude)) {continue;} // Discard some properties
 				if (!in_array($key, array(
 				'name', 'name_alias', 'ref_ext', 'address', 'zip', 'town', 'state_code', 'country_code', 'idprof1', 'idprof2', 'idprof3', 'idprof4', 'idprof5', 'idprof6', 'phone', 'fax', 'email', 'barcode',
 				'tva_intra', 'localtax1_assuj', 'localtax1_value', 'localtax2_assuj', 'localtax2_value', 'managers', 'capital', 'typent_code', 'forme_juridique_code', 'code_client', 'code_fournisseur'
 				))) continue; // Discard if not into a dedicated list
-				if (!is_object($value)) $this->object_data->mycompany->{$key} = $value;
+				if (!is_object($value)) {$this->object_data->mycompany->{$key} = $value;}
 			}
 		}
 
@@ -452,10 +452,10 @@ class BlockedLog
 		{
 			foreach ($object as $key=>$value)
 			{
-				if (in_array($key, $arrayoffieldstoexclude)) continue; // Discard some properties
+				if (in_array($key, $arrayoffieldstoexclude)) {continue;} // Discard some properties
 				if (!in_array($key, array(
 					'ref', 'ref_client', 'ref_supplier', 'date', 'datef', 'datev', 'type', 'total_ht', 'total_tva', 'total_ttc', 'localtax1', 'localtax2', 'revenuestamp', 'datepointoftax', 'note_public', 'lines'
-				))) continue; // Discard if not into a dedicated list
+				))) {continue;} // Discard if not into a dedicated list
 				if ($key == 'lines')
 				{
 					$lineid = 0;
@@ -466,28 +466,28 @@ class BlockedLog
 						{
 							if (!in_array($keyline, array(
 								'ref', 'multicurrency_code', 'multicurrency_total_ht', 'multicurrency_total_tva', 'multicurrency_total_ttc', 'qty', 'product_type', 'vat_src_code', 'tva_tx', 'info_bits', 'localtax1_tx', 'localtax2_tx', 'total_ht', 'total_tva', 'total_ttc', 'total_localtax1', 'total_localtax2'
-							))) continue; // Discard if not into a dedicated list
+							))) {continue;} // Discard if not into a dedicated list
 
-							if (!is_object($this->object_data->invoiceline[$lineid])) $this->object_data->invoiceline[$lineid] = new stdClass();
+							if (!is_object($this->object_data->invoiceline[$lineid])) {$this->object_data->invoiceline[$lineid] = new stdClass();}
 
 							$this->object_data->invoiceline[$lineid]->{$keyline} = $valueline;
 						}
 					}
 				}
-				elseif (!is_object($value)) $this->object_data->{$key} = $value;
+				elseif (!is_object($value)) {$this->object_data->{$key} = $value;}
 			}
 
-			if (!empty($object->newref)) $this->object_data->ref = $object->newref;
+			if (!empty($object->newref)) {$this->object_data->ref = $object->newref;}
 		}
 		elseif ($this->element == 'invoice_supplier')
 		{
 			foreach ($object as $key=>$value)
 			{
-				if (in_array($key, $arrayoffieldstoexclude)) continue; // Discard some properties
+				if (in_array($key, $arrayoffieldstoexclude)) {continue;} // Discard some properties
 				if (!in_array($key, array(
 				'ref', 'ref_client', 'ref_supplier', 'date', 'datef', 'type', 'total_ht', 'total_tva', 'total_ttc', 'localtax1', 'localtax2', 'revenuestamp', 'datepointoftax', 'note_public'
-				))) continue; // Discard if not into a dedicated list
-				if (!is_object($value)) $this->object_data->{$key} = $value;
+				))) {continue;} // Discard if not into a dedicated list
+				if (!is_object($value)) {$this->object_data->{$key} = $value;}
 			}
 
 			if (!empty($object->newref)) $this->object_data->ref = $object->newref;
