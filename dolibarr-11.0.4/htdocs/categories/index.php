@@ -34,13 +34,13 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
 // Load translation files required by the page
 $langs->load("categories");
 
-if (!$user->rights->categorie->lire) accessforbidden();
+if (!$user->rights->categorie->lire) {accessforbidden();}
 
 $id = GETPOST('id', 'int');
 $type = (GETPOST('type', 'aZ09') ? GETPOST('type', 'aZ09') : Categorie::TYPE_PRODUCT);
 $catname = GETPOST('catname', 'alpha');
 
-if (is_numeric($type)) $type = Categorie::$MAP_ID_TO_CODE[$type]; // For backward compatibility
+if (is_numeric($type)) {$type = Categorie::$MAP_ID_TO_CODE[$type];} // For backward compatibility
 
 
 /*
@@ -74,9 +74,7 @@ if (! empty($user->rights->categorie->creer)) {
 
 print load_fiche_titre($title, $newcardbutton);
 
-//print '<table border="0" width="100%" class="notopnoleftnoright">';
-//print '<tr><td valign="top" width="30%" class="notopnoleft">';
-print '<div class="fichecenter"><div class="fichethirdleft">';
+
 
 
 /*
@@ -93,15 +91,7 @@ print '<td colspan="3">'.$langs->trans("Search").'</td>';
 print '</tr>';
 print '<tr class="oddeven"><td>';
 print $langs->trans("Name").':</td><td><input class="flat inputsearch" type="text" name="catname" value="'.$catname.'"/></td><td><input type="submit" class="button" value="'.$langs->trans("Search").'"></td></tr>';
-/*
-// faire une rech dans une sous categorie uniquement
-print '<tr '.$bc[0].'><td>';
-print $langs->trans("SubCatOf").':</td><td>';
 
-print $form->select_all_categories('','subcatof');
-print '</td>';
-print '<td><input type="submit" class="button" value="'.$langs->trans ("Search").'"></td></tr>';
-*/
 
 print '</table></form>';
 
@@ -140,10 +130,10 @@ if ($catname || $id > 0)
 	}
 	print "</table>";
 }
-else print '&nbsp;';
+else {print '&nbsp;';}
 
 
-//print '</td></tr></table>';
+
 print '</div></div></div>';
 
 print '<div class="fichecenter"><br>';
@@ -178,7 +168,7 @@ foreach ($fulltree as $key => $val)
 }
 
 
-//print_barre_liste('', 0, $_SERVER["PHP_SELF"], '', '', '', '', 0, 0, '', 0, $newcardbutton, '', 0, 1, 1);
+
 
 print '<table class="liste nohover" width="100%">';
 print '<tr class="liste_titre"><td>'.$langs->trans("Categories").'</td><td></td><td class="right">';
