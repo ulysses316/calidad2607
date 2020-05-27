@@ -292,7 +292,7 @@ $arrayoflabels = array();
 foreach (array_keys($_Avery_Labels) as $codecards)
 {
     $labeltoshow = $_Avery_Labels[$codecards]['name'];
-    //$labeltoshow.=' ('.$_Avery_Labels[$row['code']]['paper-size'].')';
+   
 	$arrayoflabels[$codecards] = $labeltoshow;
 }
 asort($arrayoflabels);
@@ -428,7 +428,7 @@ print '<input size="16" type="text" name="forbarcode" id="forbarcode" value="'.$
 print '</div></div>';
 
 /*
-$barcodestickersmask=GETPOST('barcodestickersmask');
+
 print '<br>'.$langs->trans("BarcodeStickersMask").':<br>';
 print '<textarea cols="40" type="text" name="barcodestickersmask" value="'.GETPOST('barcodestickersmask').'">'.$barcodestickersmask.'</textarea>';
 print '<br>';
