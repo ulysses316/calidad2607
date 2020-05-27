@@ -394,7 +394,7 @@ if (empty($reshook))
 
     			// Rebuild pdf
     			/*
-    			$object->setDocModel($user,"");
+    			
     			$resultPDF = expensereport_pdf_create($db,$id,'',"",$langs);
 
     			if($resultPDF):
@@ -515,7 +515,7 @@ if (empty($reshook))
 
    				// Rebuild pdf
 				/*
-				$object->setDocModel($user,"");
+				
 				$resultPDF = expensereport_pdf_create($db,$object,'',"",$langs);
 
    				if($resultPDF)
@@ -640,7 +640,7 @@ if (empty($reshook))
 
        			// Rebuilt pdf
     			/*
-        		$object->setDocModel($user,"");
+        		
         		$resultPDF = expensereport_pdf_create($db,$object,'',"",$langs);
 
         		if($resultPDF
@@ -760,7 +760,7 @@ if (empty($reshook))
 
        			// Rebuilt pdf
     			/*
-        		$object->setDocModel($user,"");
+        		
         		$resultPDF = expensereport_pdf_create($db,$object,'',"",$langs);
 
         		if($resultPDF
@@ -822,7 +822,7 @@ if (empty($reshook))
     	}
     }
 
-    //var_dump($user->id == $object->fk_user_validator);exit;
+    
     if ($action == "confirm_cancel" && GETPOST('confirm', 'alpha') == "yes" && $id > 0 && $user->rights->expensereport->creer)
     {
     	if (!GETPOST('detail_cancel', 'alpha'))
@@ -1405,7 +1405,7 @@ if (empty($reshook))
 
     			$result = $object->recalculer($id);
 
-    			//header("Location: ".$_SERVER["PHP_SELF"]."?id=".$id);
+    			
     			//exit;
     		}
     		else
@@ -1684,7 +1684,7 @@ else
 				}
 
 				// Other attributes
-				//$cols = 3;
+				
 				//include DOL_DOCUMENT_ROOT . '/core/tpl/extrafields_edit.tpl.php';
 
 				print '</table>';
@@ -1771,7 +1771,7 @@ else
 				$morehtmlref = '<div class="refidno">';
 				/*
 				// Ref customer
-				$morehtmlref.=$form->editfieldkey("RefCustomer", 'ref_client', $object->ref_client, $object, $user->rights->commande->creer, 'string', '', 0, 1);
+				
 				$morehtmlref.=$form->editfieldval("RefCustomer", 'ref_client', $object->ref_client, $object, $user->rights->commande->creer, 'string', '', null, null, '', 1);
 				// Thirdparty
 				$morehtmlref.='<br>'.$langs->trans('ThirdParty') . ' : ' . $soc->getNomUrl(1);
@@ -1933,19 +1933,7 @@ else
 
 				if ($object->fk_statut == 6)
 				{
-					/* TODO this fields are not yet filled
-					print '<tr>';
-					print '<td>'.$langs->trans("AUTHORPAIEMENT").'</td>';
-					print '<td>';
-					$userfee=new User($db);
-					$userfee->fetch($object->fk_user_paid);
-					print $userfee->getNomUrl(-1);
-					print '</td></tr>';
-					print '<tr>';
-					print '<td>'.$langs->trans("DATE_PAIEMENT").'</td>';
-					print '<td>'.$object->date_paiement.'</td></tr>';
-					print '</tr>';
-					*/
+					
 				}
 
 				// Other attributes
@@ -2056,7 +2044,9 @@ else
 
 							print '<td class="right">';
 							if ($bankaccountstatic->id)
+							{
 								print $bankaccountstatic->getNomUrl(1, 'transactions');
+							}
 							print '</td>';
 						}
 				        print '<td class="right">'.price($objp->amount)."</td>";
@@ -2124,7 +2114,7 @@ else
 
 					print '<tr class="liste_titre">';
 					print '<td class="center">'.$langs->trans('LineNb').'</td>';
-					//print '<td class="center">'.$langs->trans('Piece').'</td>';
+					
 					print '<td class="center">'.$langs->trans('Date').'</td>';
 					if (!empty($conf->projet->enabled)) print '<td class="minwidth100imp">'.$langs->trans('Project').'</td>';
 					if (!empty($conf->global->MAIN_USE_EXPENSE_IK)) print '<td>'.$langs->trans('CarCategory').'</td>';
@@ -2234,7 +2224,7 @@ else
                                     {
                                         $minifile = getImageFileNameForSize($fileinfo['basename'], '_mini'); // For new thumbs using same ext (in lower case howerver) than original
                                         if (!dol_is_file($conf->expensereport->dir_output.'/'.$relativepath.'/'.$minifile)) $minifile = getImageFileNameForSize($fileinfo['basename'], '_mini', '.png'); // For backward compatibility of old thumbs that were created with filename in lower case and with .png extension
-                                        //print $file['path'].'/'.$minifile.'<br>';
+                                        
                                         $urlforhref = getAdvancedPreviewUrl($modulepart, $relativepath.'/'.$fileinfo['filename'].'.'.strtolower($fileinfo['extension']), 1, '&entity='.(!empty($object->entity) ? $object->entity : $conf->entity));
                                         if (empty($urlforhref)) {
                                             $urlforhref = DOL_URL_ROOT.'/viewimage.php?modulepart='.$modulepart.'&entity='.(!empty($object->entity) ? $object->entity : $conf->entity).'&file='.urlencode($relativepath.$fileinfo['filename'].'.'.strtolower($fileinfo['extension']));
@@ -2425,12 +2415,12 @@ else
 							print '<input type="number" min="0" class="right maxwidth50" name="qty" value="'.dol_escape_htmltag($line->qty).'" />';
 							print '</td>';
 
-							//print '<td class="right">'.$langs->trans('AmountHT').'</td>';
-							//print '<td class="right">'.$langs->trans('AmountTTC').'</td>';
+							
+							
 
 							// Picture
 							print '<td class="center">';
-							//print $line->fk_ecm_files;
+							
 							print '</td>';
 
 							print '<td class="center">';
@@ -2645,10 +2635,10 @@ if ($action != 'create' && $action != 'edit')
 	// Send
 	if (empty($user->socid)) {
 		if ($object->fk_statut > ExpenseReport::STATUS_DRAFT) {
-			//if ((empty($conf->global->MAIN_USE_ADVANCED_PERMS) || $user->rights->expensereport->expensereport_advance->send)) {
+			
 				print '<div class="inline-block divButAction"><a class="butAction" href="'.$_SERVER["PHP_SELF"].'?id='.$object->id.'&action=presend&mode=init#formmailbeforetitle">'.$langs->trans('SendMail').'</a></div>';
-			//} else
-			//	print '<div class="inline-block divButAction"><a class="butActionRefused classfortooltip" href="#">' . $langs->trans('SendMail') . '</a></div>';
+			
+			
 		}
 	}
 
@@ -2685,7 +2675,7 @@ if ($action != 'create' && $action != 'edit')
 			print '<div class="inline-block divButAction"><a class="butAction" href="'.$_SERVER["PHP_SELF"].'?action=edit&id='.$object->id.'">'.$langs->trans('Modify').'</a></div>';
 
 			// setdraft (le statut refusée est identique à brouillon)
-			//print '<a class="butAction" href="'.$_SERVER["PHP_SELF"].'?action=brouillonner&id='.$id.'">'.$langs->trans('BROUILLONNER').'</a>';
+			
 			// Enregistrer depuis le statut "Refusée"
 			print '<div class="inline-block divButAction"><a class="butAction" href="'.$_SERVER["PHP_SELF"].'?action=save_from_refuse&id='.$object->id.'">'.$langs->trans('ValidateAndSubmit').'</a></div>';
 		}
@@ -2717,12 +2707,12 @@ if ($action != 'create' && $action != 'edit')
 	if ($user->rights->expensereport->approve && $object->fk_statut == ExpenseReport::STATUS_VALIDATED)
 	{
 		//if($object->fk_user_validator==$user->id)
-		//{
-			// Validate
+		
+		
 			print '<div class="inline-block divButAction"><a class="butAction" href="'.$_SERVER["PHP_SELF"].'?action=validate&id='.$object->id.'">'.$langs->trans('Approve').'</a></div>';
 			// Deny
 			print '<div class="inline-block divButAction"><a class="butAction" href="'.$_SERVER["PHP_SELF"].'?action=refuse&id='.$object->id.'">'.$langs->trans('Deny').'</a></div>';
-		//}
+		
 
 		if ($user->id == $object->fk_user_author || $user->id == $object->fk_user_valid)
 		{
@@ -2833,14 +2823,7 @@ if ($action != 'presend')
 		$somethingshown = $formfile->numoffiles;
 	}
 
-	// Disabled for expensereport, there is no thirdparty on expensereport, so nothing to define the list of other object we can suggest to link to
-	/*
-	if ($action != 'create' && $action != 'edit' && ($id || $ref))
-	{
-		$linktoelem = $form->showLinkToObjectBlock($object, null, array('expensereport'));
-		$somethingshown = $form->showLinkedObjectBlock($object, $linktoelem);
-	}
-    */
+	
 
 	print '</div><div class="fichehalfright"><div class="ficheaddleft">';
 	// List of actions on element
