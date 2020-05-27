@@ -231,7 +231,7 @@ class Categories extends DolibarrApi
         }
 
         foreach ($request_data as $field => $value) {
-            if ($field == 'id') continue;
+            if ($field == 'id') {continue;}
             $this->category->$field = $value;
         }
 
@@ -389,10 +389,8 @@ class Categories extends DolibarrApi
             $result = $object->fetch($object_id);
             if ($result > 0) {
                 $result = $this->category->add_type($object, $type);
-                if ($result < 0) {
-                    if ($this->category->error != 'DB_ERROR_RECORD_ALREADY_EXISTS') {
+                if ($result < 0) && ($this->category->error != 'DB_ERROR_RECORD_ALREADY_EXISTS') {
                         throw new RestException(500, 'Error when linking object', array_merge(array($this->category->error), $this->category->errors));
-                    }
                 }
             } else {
                 throw new RestException(500, 'Error when fetching object', array_merge(array($object->error), $object->errors));
@@ -469,10 +467,8 @@ class Categories extends DolibarrApi
             $result = $object->fetch('', $object_ref);
             if ($result > 0) {
                 $result = $this->category->add_type($object, $type);
-                if ($result < 0) {
-                    if ($this->category->error != 'DB_ERROR_RECORD_ALREADY_EXISTS') {
+                if ($result < 0) && ($this->category->error != 'DB_ERROR_RECORD_ALREADY_EXISTS') {
                         throw new RestException(500, 'Error when linking object', array_merge(array($this->category->error), $this->category->errors));
-                    }
                 }
             } else {
                 throw new RestException(500, 'Error when fetching object', array_merge(array($object->error), $object->errors));
@@ -715,7 +711,9 @@ class Categories extends DolibarrApi
         $category = array();
         foreach (Categories::$FIELDS as $field) {
             if (!isset($data[$field]))
+	    {
                 throw new RestException(400, "$field field missing");
+	    }
             $category[$field] = $data[$field];
         }
         return $category;
